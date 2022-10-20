@@ -78,7 +78,7 @@
                         <input type="text" class="form-control" v-model="name" id="exampleInputName" placeholder="Введите имя">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputSurname">Фамилия</label>
+                        <label for="exampleInputSurname">Фамилия</label>f
                         <input type="text" class="form-control" v-model="surname" id="exampleInputSurname" placeholder="Введите фамилию">
                     </div>
                     <div class="form-group">
@@ -167,6 +167,7 @@
                     </div>
                 </div>
                 <div class="form-group w-50 personal-data">
+                    <h6 v-if="errorAttributeOrder !== ''" class="error-message">{{ errorAttributeOrder }}</h6>
                     <input type="submit" @click.prevent="storeOrder()" class="btn btn-primary btn-order" value="Оформить"/>
                 </div>
             </div>
@@ -194,19 +195,20 @@ export default {
             productsInCart: [],
             products: [],
             id: null,
-            name: null,
-            email: null,
-            surname: null,
-            phone: null,
+            name: '',
+            email: '',
+            surname: '',
+            phone: '',
             regionId: 0,
-            settlement: null,
+            settlement: '',
             total: 0,
             deliveryPrice: 0,
-            token: null,
+            token: '',
             regions: [],
             deliveryCompanies: [],
-            deliveryCompanyId: null
-            
+            deliveryCompanyId: null,
+            departmentDC: null,
+            errorAttributeOrder: ''
         }
     },
     methods: {
@@ -252,18 +254,35 @@ export default {
             this.deliveryPrice = priceDC;
         },
         storeOrder(){
+            if(
+               (this.productsInCart === null) ||
+               (this.name === '') ||
+               (this.surname === '') ||
+               (this.email === '') ||
+               (this.phone.length < 19) ||
+               (this.regionId == 0) ||
+               (this.settlement === '') ||
+               (this.deliveryCompanyId === null) ||
+               (this.departmentDC === '')
+            ){
+                this.errorAttributeOrder = 'Заполните верно данные для заказа';
+                return null;
+            }
+            this.errorAttributeOrder = '';
             this.axios.post("/api/orders", {
                     products: this.productsInCart,
                     user_id: this.id,
                     name: this.name,
-                    surname: this.user.surname,
+                    surname: this.surname,
                     email: this.email,
-                    phone: this.user.phone,
-                    region_id: this.user.regionId,
-                    settlement: this.user.settlement,
+                    phone: this.phone,
+                    region_id: this.regionId,
+                    settlement: this.settlement,
                     total_price: this.total,
                     status_id: 1,
-                    payment_id: 1
+                    payment_id: 1,
+                    delivery_company_id: this.deliveryCompanyId,
+                    department_DC: this.departmentDC
                 })
                 .then(res => {
                     console.log(res.data);

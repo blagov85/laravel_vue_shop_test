@@ -20,23 +20,23 @@ class StoreController extends Controller
 {
     public function __invoke(StoreRequest $request){
         $data = $request->validated();
+        return $data;
+        // $password = Hash::make('123');
+        // $user = User::firstOrCreate([
+        //     'email' => $data['email']
+        // ],[
+        //     'name' => $data['name'],
+        //     'address' => $data['address'],
+        //     'password' => $password
+        // ]);
 
-        $password = Hash::make('123');
-        $user = User::firstOrCreate([
-            'email' => $data['email']
-        ],[
-            'name' => $data['name'],
-            'address' => $data['address'],
-            'password' => $password
-        ]);
+        // $order = Order::create([
+        //     'products' => json_encode($data['products']),
+        //     'user_id' => $user->id,
+        //     'total_price' => $data['total_price']
+        // ]);
 
-        $order = Order::create([
-            'products' => json_encode($data['products']),
-            'user_id' => $user->id,
-            'total_price' => $data['total_price']
-        ]);
-
-        return new OrderResource($order);
+        // return new OrderResource($order);
 
     }
 }
