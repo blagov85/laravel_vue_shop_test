@@ -168,6 +168,7 @@
                 </div>
                 <div class="form-group w-50 personal-data">
                     <h6 v-if="errorAttributeOrder !== ''" class="error-message">{{ errorAttributeOrder }}</h6>
+                    <h6 v-if="errorCheckOrder !== ''" class="error-message">{{ errorCheckOrder }}</h6>
                     <input type="submit" @click.prevent="storeOrder()" class="btn btn-primary btn-order" value="Оформить"/>
                 </div>
             </div>
@@ -208,7 +209,8 @@ export default {
             deliveryCompanies: [],
             deliveryCompanyId: null,
             departmentDC: null,
-            errorAttributeOrder: ''
+            errorAttributeOrder: '',
+            errorCheckOrder: ''
         }
     },
     methods: {
@@ -254,21 +256,22 @@ export default {
             this.deliveryPrice = priceDC;
         },
         storeOrder(){
-            if(
-               (this.productsInCart === null) ||
-               (this.name === '') ||
-               (this.surname === '') ||
-               (this.email === '') ||
-               (this.phone.length < 19) ||
-               (this.regionId == 0) ||
-               (this.settlement === '') ||
-               (this.deliveryCompanyId === null) ||
-               (this.departmentDC === '')
-            ){
-                this.errorAttributeOrder = 'Заполните верно данные для заказа';
-                return null;
-            }
+            // if(
+            //    (this.productsInCart === null) ||
+            //    (this.name === '') ||
+            //    (this.surname === '') ||
+            //    (this.email === '') ||
+            //    (this.phone.length < 19) ||
+            //    (this.regionId == 0) ||
+            //    (this.settlement === '') ||
+            //    (this.deliveryCompanyId === null) ||
+            //    (this.departmentDC === '')
+            // ){
+            //     this.errorAttributeOrder = 'Заполните верно данные для заказа';
+            //     return null;
+            // }
             this.errorAttributeOrder = '';
+            this.errorCheckOrder = '';
             this.axios.post("/api/orders", {
                     products: this.productsInCart,
                     user_id: this.id,
@@ -285,8 +288,14 @@ export default {
                     department_DC: this.departmentDC
                 })
                 .then(res => {
-                    console.log(res.data);
-                    this.products = res.data.data;
+                    console.log("RES");
+                    console.log(res);
+                    if(res.data.message){
+                        this.errorCheckOrder = res.data.message;
+                    }else{
+                        this.products = res.data.data;
+                    }
+                    
                 })
                 .finally(x => {
                     $(document).trigger('changed_')

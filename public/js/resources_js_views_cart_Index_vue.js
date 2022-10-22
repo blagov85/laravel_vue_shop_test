@@ -40,7 +40,8 @@ __webpack_require__.r(__webpack_exports__);
       deliveryCompanies: [],
       deliveryCompanyId: null,
       departmentDC: null,
-      errorAttributeOrder: ''
+      errorAttributeOrder: '',
+      errorCheckOrder: ''
     };
   },
   methods: {
@@ -92,12 +93,22 @@ __webpack_require__.r(__webpack_exports__);
     storeOrder: function storeOrder() {
       var _this4 = this;
 
-      if (this.productsInCart === null || this.name === '' || this.surname === '' || this.email === '' || this.phone.length < 19 || this.regionId == 0 || this.settlement === '' || this.deliveryCompanyId === null || this.departmentDC === '') {
-        this.errorAttributeOrder = 'Заполните верно данные для заказа';
-        return null;
-      }
-
+      // if(
+      //    (this.productsInCart === null) ||
+      //    (this.name === '') ||
+      //    (this.surname === '') ||
+      //    (this.email === '') ||
+      //    (this.phone.length < 19) ||
+      //    (this.regionId == 0) ||
+      //    (this.settlement === '') ||
+      //    (this.deliveryCompanyId === null) ||
+      //    (this.departmentDC === '')
+      // ){
+      //     this.errorAttributeOrder = 'Заполните верно данные для заказа';
+      //     return null;
+      // }
       this.errorAttributeOrder = '';
+      this.errorCheckOrder = '';
       this.axios.post("/api/orders", {
         products: this.productsInCart,
         user_id: this.id,
@@ -113,8 +124,14 @@ __webpack_require__.r(__webpack_exports__);
         delivery_company_id: this.deliveryCompanyId,
         department_DC: this.departmentDC
       }).then(function (res) {
-        console.log(res.data);
-        _this4.products = res.data.data;
+        console.log("RES");
+        console.log(res);
+
+        if (res.data.message) {
+          _this4.errorCheckOrder = res.data.message;
+        } else {
+          _this4.products = res.data.data;
+        }
       })["finally"](function (x) {
         $(document).trigger('changed_');
       });
@@ -517,6 +534,10 @@ var _hoisted_71 = {
   key: 0,
   "class": "error-message"
 };
+var _hoisted_72 = {
+  key: 1,
+  "class": "error-message"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -703,6 +724,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [_hoisted_68, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_69, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "$" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.total + $data.deliveryPrice), 1
   /* TEXT */
   )])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [$data.errorAttributeOrder !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_71, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errorAttributeOrder), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.errorCheckOrder !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_72, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errorCheckOrder), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "submit",

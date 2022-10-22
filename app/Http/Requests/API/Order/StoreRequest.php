@@ -24,17 +24,17 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'products' => 'required|array',
+            'products' => 'nullable|array',
             'user_id' => 'nullable|integer',
-            'name' => 'required|string',
-            'surname' => 'required|string',
-            'email' => 'required|string',
-            'phone' => 'required|string',
-            'region_id' => 'required|integer',
-            'settlement' => 'required|string',
-            'total_price' => 'required|integer',
-            'status_id' => 'required|integer',
-            'payment_id' => 'required|integer'
+            'name' => 'nullable|string',
+            'surname' => 'nullable|string',
+            'email' => 'nullable|string',
+            'phone' => 'nullable|string',
+            'region_id' => 'nullable|integer',
+            'settlement' => 'nullable|string',
+            'total_price' => 'nullable|integer',
+            'status_id' => 'nullable|integer',
+            'payment_id' => 'nullable|integer'
         ];
     }
 }
