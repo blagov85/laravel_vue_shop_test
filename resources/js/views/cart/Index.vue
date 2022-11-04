@@ -169,6 +169,7 @@
                 <div class="form-group w-50 personal-data">
                     <h6 v-if="errorAttributeOrder !== ''" class="error-message">{{ errorAttributeOrder }}</h6>
                     <h6 v-if="errorCheckOrder !== ''" class="error-message">{{ errorCheckOrder }}</h6>
+                    <h5>{{ deliveryCompanyId }} - {{ departmentDC }}</h5>
                     <input type="submit" @click.prevent="storeOrder()" class="btn btn-primary btn-order" value="Оформить"/>
                 </div>
             </div>
@@ -256,22 +257,32 @@ export default {
             this.deliveryPrice = priceDC;
         },
         storeOrder(){
-            // if(
-            //    (this.productsInCart === null) ||
-            //    (this.name === '') ||
-            //    (this.surname === '') ||
-            //    (this.email === '') ||
-            //    (this.phone.length < 19) ||
-            //    (this.regionId == 0) ||
-            //    (this.settlement === '') ||
-            //    (this.deliveryCompanyId === null) ||
-            //    (this.departmentDC === '')
-            // ){
-            //     this.errorAttributeOrder = 'Заполните верно данные для заказа';
-            //     return null;
-            // }
+            if(
+                (this.productsInCart === null) ||
+                (this.name === '') ||
+                (this.surname === '') ||
+                (this.email === '') ||
+                (this.phone.length !== 19) ||
+                (this.regionId == 0) ||
+                (this.settlement === '') ||
+                (this.deliveryCompanyId === null) ||
+                (this.departmentDC === '')
+            ){
+                this.errorAttributeOrder = 'Заполните верно данные для заказа';
+                return null;
+            }
             this.errorAttributeOrder = '';
             this.errorCheckOrder = '';
+            let imagesOrder = [];
+            this.productsInCart.forEach(item =>{
+                let imageOrder = 
+                    {
+                        'id': item.id,
+                        'image_url': item.image_url
+                    };
+                imagesOrder.push(imageOrder);
+                delete item.image_url;
+                });
             this.axios.post("/api/orders", {
                     products: this.productsInCart,
                     user_id: this.id,
@@ -285,7 +296,8 @@ export default {
                     status_id: 1,
                     payment_id: 1,
                     delivery_company_id: this.deliveryCompanyId,
-                    department_DC: this.departmentDC
+                    department_DC: this.departmentDC,
+                    delivery_cost: this.deliveryPrice
                 })
                 .then(res => {
                     console.log("RES");
@@ -293,9 +305,9 @@ export default {
                     if(res.data.message){
                         this.errorCheckOrder = res.data.message;
                     }else{
-                        this.products = res.data.data;
+                        //this.order = res.data.data;
+                        this.$router.push({name: 'order.index', params: { myOrder: JSON.stringify(res.data.data), myImagesOrder: JSON.stringify(imagesOrder)}});
                     }
-                    
                 })
                 .finally(x => {
                     $(document).trigger('changed_')

@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('/product/{product}/like', App\Http\Controllers\API\Product\Like\StoreController::class);
     Route::get('/products/like', App\Http\Controllers\API\Product\Like\IndexController::class);
     Route::post('/product/{product}/feedback', App\Http\Controllers\API\Product\Feedback\StoreController::class);
+    Route::get('/orders', App\Http\Controllers\API\Order\IndexController::class);
+    Route::get('/order/{order}', App\Http\Controllers\API\Order\ShowController::class);
 });
 Route::post('/users', App\Http\Controllers\API\User\StoreController::class);
 

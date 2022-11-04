@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -30,5 +31,9 @@ class Order extends Model
 
     public function region(){
         return $this->belongsTo(Region::class, 'region_id', 'id');
+    }
+
+    public function getDateCreateAttribute(){
+        return Carbon::parse($this->created_at)->format('d.m.Y');
     }
 }

@@ -19,6 +19,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     
     Route::get('/', App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
+    Route::group(['prefix' => 'orders'], function() {
+        Route::get('/', App\Http\Controllers\Order\IndexController::class)->name('order.index');
+        Route::post('/', App\Http\Controllers\Order\StoreController::class)->name('order.store');
+        Route::get('/{order}', App\Http\Controllers\Order\ShowController::class)->name('order.show');
+        Route::get('/{order}/edit', App\Http\Controllers\Order\EditController::class)->name('order.edit');
+        Route::patch('/{order}', App\Http\Controllers\Order\UpdateController::class)->name('order.update');
+        Route::delete('/{order}', App\Http\Controllers\Order\DeleteController::class)->name('order.delete');
+    });
+
     Route::group(['prefix' => 'categories'], function() {
         Route::get('/', App\Http\Controllers\Category\IndexController::class)->name('category.index');
         Route::get('/create', App\Http\Controllers\Category\CreateController::class)->name('category.create');

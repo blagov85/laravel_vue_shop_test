@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\API\Order;
+namespace App\Http\Requests\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'products' => 'required|array',
-            'user_id' => 'nullable|integer',
+            'user_id' => 'required|integer',
             'name' => 'required|string',
             'surname' => 'required|string',
             'email' => 'required|string',

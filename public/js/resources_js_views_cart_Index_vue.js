@@ -93,22 +93,22 @@ __webpack_require__.r(__webpack_exports__);
     storeOrder: function storeOrder() {
       var _this4 = this;
 
-      // if(
-      //    (this.productsInCart === null) ||
-      //    (this.name === '') ||
-      //    (this.surname === '') ||
-      //    (this.email === '') ||
-      //    (this.phone.length < 19) ||
-      //    (this.regionId == 0) ||
-      //    (this.settlement === '') ||
-      //    (this.deliveryCompanyId === null) ||
-      //    (this.departmentDC === '')
-      // ){
-      //     this.errorAttributeOrder = 'Заполните верно данные для заказа';
-      //     return null;
-      // }
+      if (this.productsInCart === null || this.name === '' || this.surname === '' || this.email === '' || this.phone.length !== 19 || this.regionId == 0 || this.settlement === '' || this.deliveryCompanyId === null || this.departmentDC === '') {
+        this.errorAttributeOrder = 'Заполните верно данные для заказа';
+        return null;
+      }
+
       this.errorAttributeOrder = '';
       this.errorCheckOrder = '';
+      var imagesOrder = [];
+      this.productsInCart.forEach(function (item) {
+        var imageOrder = {
+          'id': item.id,
+          'image_url': item.image_url
+        };
+        imagesOrder.push(imageOrder);
+        delete item.image_url;
+      });
       this.axios.post("/api/orders", {
         products: this.productsInCart,
         user_id: this.id,
@@ -122,7 +122,8 @@ __webpack_require__.r(__webpack_exports__);
         status_id: 1,
         payment_id: 1,
         delivery_company_id: this.deliveryCompanyId,
-        department_DC: this.departmentDC
+        department_DC: this.departmentDC,
+        delivery_cost: this.deliveryPrice
       }).then(function (res) {
         console.log("RES");
         console.log(res);
@@ -130,7 +131,14 @@ __webpack_require__.r(__webpack_exports__);
         if (res.data.message) {
           _this4.errorCheckOrder = res.data.message;
         } else {
-          _this4.products = res.data.data;
+          //this.order = res.data.data;
+          _this4.$router.push({
+            name: 'order.index',
+            params: {
+              myOrder: JSON.stringify(res.data.data),
+              myImagesOrder: JSON.stringify(imagesOrder)
+            }
+          });
         }
       })["finally"](function (x) {
         $(document).trigger('changed_');
@@ -727,7 +735,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.errorCheckOrder !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_72, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errorCheckOrder), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.deliveryCompanyId) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.departmentDC), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "submit",
     onClick: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $options.storeOrder();

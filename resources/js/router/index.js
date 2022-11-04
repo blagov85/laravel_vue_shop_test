@@ -47,6 +47,12 @@ const router = createRouter({
       path: '/search/:searchVal',
       name: 'products.search',
       component: () => import('../views/product/Search.vue')
+    },
+    { 
+      path: '/order/index',
+      name: 'order.index',
+      component: () => import('../views/order/Index.vue'),
+      props: true
     }
     // {
     //   path: '*',

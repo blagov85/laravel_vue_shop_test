@@ -67,7 +67,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           @can('order-policy', App\Models\Order::class)
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+          <a href="{{ route('order.index') }}" class="nav-link">
               <i class="nav-icon fas fa-shopping-bag"></i>
               <p>Заказы</p>
             </a>

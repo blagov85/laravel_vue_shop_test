@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->belongsTo(Region::class, 'region_id', 'id');
     }
 
+    public function orders(){
+        return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
     public function isAdmin(){
         return $this->role_id === self::ROLE_ADMIN;
     }
