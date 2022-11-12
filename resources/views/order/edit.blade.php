@@ -41,6 +41,9 @@
                           <td>
                             <div class="form-group">
                               <input type="text" class="form-control" name="surname" value="{{ old('surname') ?? $order->surname }}"/>
+                              @error('surname')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                             </div>  
                           </td>
                       </tr>
@@ -48,7 +51,10 @@
                           <td class="head">Ім'я</td>
                           <td>
                             <div class="form-group">
-                              <input type="text" class="form-control" name="surname" value="{{ old('name') ?? $order->name }}"/>
+                              <input type="text" class="form-control" name="name" value="{{ old('name') ?? $order->name }}"/>
+                              @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                             </div>  
                           </td>
                       </tr>
@@ -59,6 +65,9 @@
                               <div class="input-group">
                                 <input type="text" class="form-control" name="phone" value="{{ old('phone') ?? $order->phone }}"
                                     data-inputmask='"mask": "+380 (99) 999-99-99"' data-mask>
+                                @error('phone')
+                                  <div class="text-danger">{{ $message }}</div>
+                                @enderror
                               </div>
                               <!-- /.input group -->
                             </div>  
@@ -68,7 +77,10 @@
                           <td class="head">Email</td>
                           <td>
                             <div class="form-group">
-                              <input type="email" class="form-control" value="{{ old('phone') ?? $order->email }}">
+                              <input type="email" class="form-control" name="email" value="{{ old('email') ?? $order->email }}">
+                              @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                             </div>
                           </td>
                       </tr>
@@ -93,6 +105,9 @@
                           <td>
                             <div class="form-group">
                               <input type="text" class="form-control" name="settlement" value="{{ old('settlement') ?? $order->settlement }}"/>
+                              @error('settlement')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                             </div> 
                           </td>
                       </tr>
@@ -133,6 +148,25 @@
                           <td>
                             <div class="form-group">
                               <input type="number" class="form-control" name="department_DC" value="{{ old('department_DC') ?? $order->department_DC }}"/>
+                              @error('department_DC')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
+                            </div>  
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="head">Статус заказа</td>
+                          <td>
+                            <div class="form-group">
+                              <select name="status_id" class="form-control select2">
+                                <option selected="selected" disabled>Выберите статус заказа</option>
+                                @foreach($statuses as $status)
+                                <option {{ $order->status_id == $status->id ? ' selected' : '' }} value="{{ $status->id }}">{{ $status->title }}</option>
+                                @endforeach
+                              </select>
+                                @error('status_id')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>  
                           </td>
                       </tr>
@@ -141,8 +175,9 @@
                   <table class="order-table">
                       <thead>
                           <tr>
+                              <th width="5%">id</th>
                               <th width="10%"></th>
-                              <th width="30%">Товар</th>
+                              <th width="25%">Товар</th>
                               <th width="10%">Розмір</th>
                               <th width="15%">Ціна</th>
                               <th width="7%">Кількість</th>
@@ -154,19 +189,23 @@
                       <tbody>
                         @foreach($order->products as $product)
                           <tr>
+                          <td width="5%">{{ $product->id }}</td>
                             <td width="10%">
                                 <img width="100px" width="100px" class="image" src="{{ $product->img }}"> 
                             </td>
-                            <td width="30%">{{ $product->title }}</td>
+                            <td width="25%">{{ $product->title }}</td>
                             <td width="10%">{{ $product->size_title }}</td>
                             <td width="15%">{{ $product->price }}</td>
-                            <td width="7%">{{ $product->qty }}</td>
-                            <td width="7%">{{ $product->qty }}</td>
+                            <td width="7%" style="text-align:center">
+                                <input type="number" class="form-control" name="qtys[]" value="{{ $product->qty }}" style="width:60px"/>
+                            </td>
+                            <td width="7%">{{ $product->countSize }}</td>
                             <td width="15%">{{ $product->price * $product->qty }}</td>
                             <td width="6%" style="text-align:center">
-                              <input type="checkbox">
+                              <input type="checkbox" name="productsDelete[]" value="{{ $product->id }}:{{ $product->size_id }}">
                             </td>
                           </tr>
+                          <input type="hidden" name="idsProdIdsSizeForm[]" value="{{ $product->id }}:{{ $product->size_id }}">
                         @endforeach
                       </tbody>
                   </table>
@@ -185,10 +224,19 @@
                           <td class="info">{{ $order->total_price + $order->delivery_company->price }}</td>
                       </tr>
                   </table>
+                  @error('count_products_delete')
+                    <div class="text-danger" style="width:50%;margin:0 auto">{{ $message }}</div>
+                  @enderror
+                  @error('count_product')
+                    <div class="text-danger" style="width:50%;margin:0 auto">{{ $message }}</div>
+                  @enderror
                   <div class="form-group" style="margin: 20px auto; float:right;">
-                    <input type="submit" class="btn btn-primary" value="Редактировать"/>
+                    <input type="submit" class="btn btn-primary" value="Применить"/>
                   </div>
                 </form>
+                  <div class="form-group" style="margin: 20px auto; float:left;">
+                    <a class="btn btn-primary" href="{{ route('order.add_product.edit', $order->id) }}">Добавить товар</a>
+                  </div>
               </div>
               <!-- /.card-body -->
             </div>

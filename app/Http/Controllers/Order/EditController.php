@@ -17,7 +17,15 @@ class EditController extends Controller
         $this->authorize('order-policy', [Order::class]);
         $order->products = json_decode($order->products);
         foreach($order->products as $product){
-            $product->img = Product::find($product->id)->imageUrl;
+            $size = null;
+            $prod = Product::find($product->id);
+            $product->img = $prod->imageUrl;
+            $size = $prod->countProductsSizes->find($product->size_id);
+            if($size){
+                $product->countSize = $size->pivot->count;
+            }else{
+                $product->countSize = 0;
+            }
         }
         $regions = Region::get();
         $payments = Payment::get();
