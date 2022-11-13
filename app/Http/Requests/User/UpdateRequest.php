@@ -28,9 +28,11 @@ class UpdateRequest extends FormRequest
             'surname' => 'nullable|string',
             'patronymic' => 'nullable|string',
             'birth_date' => 'nullable|string',
-            'address' => 'nullable|string',
-            'gender' => 'nullable|integer',
-            'role_id' => 'required|integer|exists:roles,id'
+            'phone' => 'nullable|string',
+            'gender' => 'nullable|integer|exists:sex,id',
+            'role_id' => 'required|integer|exists:roles,id',
+            'region_id' => 'nullable|integer|exists:regions,id',
+            'settlement' => 'nullable|string'
         ];
     }
 }

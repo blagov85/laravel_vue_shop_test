@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         Route::delete('/{order}', App\Http\Controllers\Order\DeleteController::class)->name('order.delete');
         Route::get('/{order}/add-product/edit', App\Http\Controllers\Order\AddProductEditController::class)->name('order.add_product.edit');
         Route::patch('/{order}/add-product', App\Http\Controllers\Order\AddProductUpdateController::class)->name('order.add_product.update');
+        Route::patch('/{order}/change-status', App\Http\Controllers\Order\ChangeStatusUpdateController::class)->name('order.change_status.update');
     });
 
     Route::group(['prefix' => 'categories'], function() {

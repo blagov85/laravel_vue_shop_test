@@ -55,7 +55,10 @@
                 <div>
                 </div>
                 <div class="header-table">Інформація про замовлення</div>
-                <table class="info-order-table">
+                <form action="{{ route('order.change_status.update', $order->id) }}" method="POST">
+                  @csrf
+                  @method('patch')
+                  <table class="info-order-table">
                     <tr>
                         <td class="head">Дата</td>
                         <td>{{ $order->dateCreate }}</td>
@@ -85,10 +88,6 @@
                         <td>{{ $order->settlement }}</td>
                     </tr>
                     <tr>
-                        <td class="head">Оплата</td>
-                        <td>{{ $order->payment->title }}</td>
-                    </tr>
-                    <tr>
                         <td class="head">Служба доставки</td>
                         <td>{{ $order->delivery_company->title }}</td>
                     </tr>
@@ -96,7 +95,48 @@
                         <td class="head">Відділення</td>
                         <td>{{ $order->department_DC }}</td>
                     </tr>
-                </table>
+                    <tr>
+                        <td class="head">Оплата</td>
+                        <td>
+                          <div class="form-group">
+                            <select name="payment_id" class="form-control select2">
+                              <option selected="selected" disabled>Выберите статус оплаты</option>
+                              @foreach($payments as $payment)
+                              <option {{ $order->payment_id == $payment->id ? ' selected' : '' }} value="{{ $payment->id }}">{{ $payment->title }}</option>
+                              @endforeach
+                            </select>
+                              @error('payment_id')
+                              <div class="text-danger">{{ $message }}</div>
+                              @enderror
+                          </div>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="head">Статус заказа</td>
+                        <td>
+                          <div class="form-group">
+                            <select name="status_id" class="form-control select2">
+                              <option selected="selected" disabled>Выберите статус заказа</option>
+                              @foreach($statuses as $status)
+                              <option {{ $order->status_id == $status->id ? ' selected' : '' }} value="{{ $status->id }}">{{ $status->title }}</option>
+                              @endforeach
+                            </select>
+                              @error('status_id')
+                              <div class="text-danger">{{ $message }}</div>
+                              @enderror
+                          </div>  
+                        </td>
+                    </tr>
+                    <tr>
+                      <td class="head"></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-primary" value="Применить статусы"/>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </form>
                 <br>
                 <table class="order-table">
                     <thead>

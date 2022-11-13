@@ -45,7 +45,28 @@
                   <!-- /.input group -->
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="address" value="{{ old('address') ?? $user->address }}" placeholder="Адрес"/>
+                    <div class="input-group">
+                    <input type="text" class="form-control" name="phone" value="{{ old('phone') ?? $user->phone }}"
+                        data-inputmask='"mask": "+380 (99) 999-99-99"' data-mask>
+                    @error('phone')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    </div>
+                    <!-- /.input group -->
+                </div>
+                <div class="form-group">
+                  <select name="region_id" class="form-control select2" style="width: 100%;">
+                    <option selected="selected" disabled>Выберите регион</option>
+                    @foreach($regions as $region)
+                    <option {{ (old('region_id') ?? $user->region_id) == $region->id  ? ' selected' : '' }} value="{{ $region->id }}">{{ $region->title }}</option>
+                    @endforeach
+                  </select>
+                    @error('region_id')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div> 
+                <div class="form-group">
+                    <input type="text" class="form-control" name="settlement" value="{{ old('settlement') ?? $user->settlement }}" placeholder="Населений пункт"/>
                 </div>
                 <div class="form-group">
                     <select class="custom-select form-control-border" name="gender" id="exampleSelectBorder">

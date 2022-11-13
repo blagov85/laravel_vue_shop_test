@@ -76,12 +76,20 @@
                       <td>{{ $user->birth_date }}</a></td>
                     </tr>
                     <tr>
+                      <td>Телефон</td>
+                      <td>{{ $user->phone }}</a></td>
+                    </tr>
+                    <tr>
                       <td>Пол</td>
                       <td>{{ $user->genderTitle }}</a></td>
                     </tr>
                     <tr>
-                      <td>Адрес</td>
-                      <td>{{ $user->address }}</a></td>
+                      <td>Регион</td>
+                      <td>{{ $user->region->title }}</a></td>
+                    </tr>
+                    <tr>
+                      <td>Населенный пункт</td>
+                      <td>{{ $user->settlement }}</a></td>
                     </tr>
                     <tr>
                       <td>Роль</td>

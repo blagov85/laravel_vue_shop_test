@@ -89,7 +89,8 @@ class StoreController extends Controller
                     $user = User::create([
                         'email' => $data['email'],
                         'name' => $data['name'],
-                        'password' => $password
+                        'password' => $password,
+                        'role_id' => 5
                     ]);
                     $data['user_id'] = $user['id'];  
                 }
