@@ -224,10 +224,10 @@
                           <td class="info">{{ $order->total_price + $order->delivery_company->price }}</td>
                       </tr>
                   </table>
-                  @error('count_products_delete')
+                  @error('order_update_error')
                     <div class="text-danger" style="width:50%;margin:0 auto">{{ $message }}</div>
                   @enderror
-                  @error('count_product')
+                  @error('order_delete_error')
                     <div class="text-danger" style="width:50%;margin:0 auto">{{ $message }}</div>
                   @enderror
                   <div class="form-group" style="margin: 20px auto; float:right;">

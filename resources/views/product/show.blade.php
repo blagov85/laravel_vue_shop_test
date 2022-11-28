@@ -164,6 +164,9 @@
           </div>
             </div>
         </div><!-- /.container-fluid -->
+        @error('product_delete_error')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
         </section>
         <!-- /.content -->
 @endsection

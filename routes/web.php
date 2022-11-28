@@ -26,9 +26,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         Route::get('/{order}/edit', App\Http\Controllers\Order\EditController::class)->name('order.edit');
         Route::patch('/{order}', App\Http\Controllers\Order\UpdateController::class)->name('order.update');
         Route::delete('/{order}', App\Http\Controllers\Order\DeleteController::class)->name('order.delete');
-        Route::get('/{order}/add-product/edit', App\Http\Controllers\Order\AddProductEditController::class)->name('order.add_product.edit');
-        Route::patch('/{order}/add-product', App\Http\Controllers\Order\AddProductUpdateController::class)->name('order.add_product.update');
-        Route::patch('/{order}/change-status', App\Http\Controllers\Order\ChangeStatusUpdateController::class)->name('order.change_status.update');
+        
+        Route::group(['prefix' => 'change-status'], function(){
+            Route::patch('/{order}', App\Http\Controllers\Order\ChangeStatus\UpdateController::class)->name('order.change_status.update');
+        });
+
+        Route::group(['prefix' => 'add-product'], function(){
+            Route::get('/{order}/edit', App\Http\Controllers\Order\AddProduct\EditController::class)->name('order.add_product.edit');
+            Route::patch('/{order}', App\Http\Controllers\Order\AddProduct\UpdateController::class)->name('order.add_product.update');
+        });
+
     });
 
     Route::group(['prefix' => 'categories'], function() {

@@ -272,6 +272,9 @@
                     <input type="submit" class="btn btn-primary" value="Редактировать"/>
                 </div>
             </form>
+            @error('product_update_error')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
             </div>
         </div><!-- /.container-fluid -->
         </section>

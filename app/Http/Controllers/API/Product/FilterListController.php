@@ -2,58 +2,30 @@
 
 namespace App\Http\Controllers\API\Product;
 
-
-use App\Models\Sex;
-use App\Models\Tag;
-use App\Models\Size;
-use App\Models\Brand;
-use App\Models\Color;
-use App\Models\Season;
-use App\Models\Country;
-use App\Models\Product;
-use App\Models\Sorting;
-use App\Models\Category;
-use App\Models\Material;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\Product\BaseController;
 
 
-
-class FilterListController extends Controller
+class FilterListController extends BaseController
 {
     public function __invoke(){
-        $categories = Category::all();
-        $brands = Brand::all();
-        $sex = Sex::all();
-        $countries = Country::all();
-        $seasons = Season::all();
-        $materials = Material::all();
-        $sizes = Size::all();
-        $colors = Color::all();
-        $tags = Tag::all();
-        $sorting = Sorting::all();
-
-        $maxPrice = Product::orderBy('price', 'DESC')->first()->price;
-        $minPrice = Product::orderBy('price', 'ASC')->first()->price;
-
-        $result = [
-            'categories' => $categories,
-            'brands' => $brands,
-            'sex' => $sex,
-            'countries' => $countries,
-            'materials' => $materials,
-            'seasons' => $seasons,
-            'sizes' => $sizes,
-            'colors' => $colors,
-            'tags' => $tags,
+        $result = $this->service->filterList();
+        $resultJSON = [
+            'categories' => $result['categories'],
+            'brands' => $result['brands'],
+            'sex' => $result['sex'],
+            'countries' => $result['countries'],
+            'materials' => $result['materials'],
+            'seasons' => $result['seasons'],
+            'sizes' => $result['sizes'],
+            'colors' => $result['colors'],
+            'tags' => $result['tags'],
             'price' => [
-                'min' => $minPrice,
-                'max' => $maxPrice
+                'min' => $result['minPrice'],
+                'max' => $result['maxPrice']
             ],
-            'sorting' => $sorting
-
+            'sorting' => $result['sorting']
         ];
 
-        return response()->json($result);
+        return response()->json($resultJSON);
     }
 }

@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
     use HasFactory;
+    use Filterable;
 
     protected $table = 'orders';
     protected $guarded = false;

@@ -17,7 +17,6 @@ class ShowController extends Controller
         $birthData->month = $dt->month;
         $birthData->year = $dt->year;
         Auth::user()->birthData = $birthData;
-        //$dt->hour;
         return new UserResource(Auth::user());
     }
 }

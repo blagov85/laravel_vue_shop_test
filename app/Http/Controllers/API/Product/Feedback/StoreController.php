@@ -30,6 +30,5 @@ class StoreController extends Controller
             abort(500);
         }
         return "OK";
-        //new ProductFeedbackResource($product->feedback());
     }
 }

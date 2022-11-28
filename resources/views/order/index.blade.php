@@ -5,14 +5,122 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Заказы</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active">Главная</li>
-                </ol>
-            </div><!-- /.col -->
+              <div class="col-sm-12">
+                  <h1 class="m-0">Заказы</h1>
+              </div><!-- /.col -->
+              <div class="col-sm-12">
+                  <ol class="breadcrumb float-sm-right">
+                    <form action="{{ route('order.index') }}" method="GET" class="d-flex flex-row flex-wrap">
+                      <!-- @csrf   -->
+                      <li style="padding-right:5px">
+                        <div class="form-group">
+                          <select name="region_id" class="form-control select2">
+                            <option selected="selected" value="">Регион</option>
+                            @if(empty($data['region_id']))
+                              @foreach($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->title }}</option>
+                              @endforeach
+                            @else
+                              @foreach($regions as $region)
+                                <option {{ $data['region_id'] == $region->id ? ' selected' : '' }} value="{{ $region->id }}">{{ $region->title }}</option>
+                              @endforeach
+                            @endif
+                          </select>
+                          @error('region_id')
+                          <div class="text-danger">{{ $message }}</div>
+                          @enderror
+                        </div> 
+                      </li>
+                      <li style="padding-right:5px">
+                        <div class="form-group">
+                          <select name="delivery_company_id" class="form-control select2">
+                            <option selected="selected" value="">Компания доставки</option>
+                            @if(empty($data['delivery_company_id']))
+                              @foreach($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->title }}</option>
+                              @endforeach
+                            @else
+                              @foreach($companies as $company)
+                                <option {{ $data['delivery_company_id'] == $company->id ? ' selected' : '' }} value="{{ $company->id }}">{{ $company->title }}</option>
+                              @endforeach
+                            @endif
+                          </select>
+                          @error('delivery_company_id')
+                          <div class="text-danger">{{ $message }}</div>
+                          @enderror
+                        </div> 
+                      </li>
+                      <li style="padding-right:5px">
+                        <div class="form-group">
+                          <select name="status_id" class="form-control select2">
+                            <option selected="selected" value="">Статус заказа</option>
+                            @if(empty($data['status_id']))
+                              @foreach($statuses as $status)
+                                <option value="{{ $status->id }}">{{ $status->title }}</option>
+                              @endforeach
+                            @else
+                              @foreach($statuses as $status)
+                                <option {{ $data['status_id'] == $status->id ? ' selected' : '' }} value="{{ $status->id }}">{{ $status->title }}</option>
+                              @endforeach
+                            @endif
+                          </select>
+                          @error('status_id')
+                          <div class="text-danger">{{ $message }}</div>
+                          @enderror
+                        </div>  
+                      </li>
+                      <li style="padding-right:5px">
+                        <div class="form-group">
+                          <select name="payment_id" class="form-control select2">
+                            <option selected="selected" value="">Статус оплаты</option>
+                            @if(empty($data['payment_id']))
+                              @foreach($payments as $payment)
+                                <option value="{{ $payment->id }}">{{ $payment->title }}</option>
+                              @endforeach
+                            @else
+                              @foreach($payments as $payment)
+                                <option {{ $data['payment_id'] == $payment->id ? ' selected' : '' }} value="{{ $payment->id }}">{{ $payment->title }}</option>
+                              @endforeach
+                            @endif
+                          </select>
+                          @error('payment_id')
+                          <div class="text-danger">{{ $message }}</div>
+                          @enderror
+                        </div> 
+                      </li>
+                      <li style="padding-right:5px">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="date_from" value="{{ !empty($data['date_from']) ? $data['date_from'] : $dateFrom }}" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                          </div>
+                          @error('date_from')
+                          <div class="text-danger">{{ $message }}</div>
+                          @enderror
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group" style="padding-right:5px">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="date_to" value="{{ !empty($data['date_to']) ? $data['date_to'] : $dateFrom }}" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                          </div>
+                          @error('date_to')
+                          <div class="text-danger">{{ $message }}</div>
+                          @enderror
+                        </div>
+                      </li>
+                      <input type="hidden" name="page" value="1">
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Применить"/>
+                      </div>
+                    </form>
+                  </ol>
+              </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
@@ -70,6 +178,7 @@
           </div>
             </div>
         </div><!-- /.container-fluid -->
+        {{ $orders->withQueryString()->links() }}
         </section>
         <!-- /.content -->
 @endsection

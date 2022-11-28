@@ -3,22 +3,19 @@
 namespace App\Http\Controllers\Order;
 
 use App\Models\Order;
-use App\Models\Payment;
-use App\Models\Product;
-use App\Models\OrderStatus;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Order\BaseController;
 
-class ShowController extends Controller
+class ShowController extends BaseController
 {
     public function __invoke(Order $order){
         $this->authorize('order-policy', [Order::class]);
-        $order->products = json_decode($order->products);
-        foreach($order->products as $product){
-            $product->img = Product::find($product->id)->imageUrl;
-        }
-        $statuses = OrderStatus::get();
-        $payments = Payment::get();
+
+        $result = $this->service->show($order);
+
+        $orders = $result['orders'];
+        $payments = $result['payments'];
+        $statuses = $result['statuses'];
+
         return view('order.show', compact('order','statuses','payments'));
     }
 }

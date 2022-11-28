@@ -264,6 +264,9 @@
                     <input type="submit" class="btn btn-primary" value="Добавить"/>
                 </div>
             </form>
+            @error('product_add_error')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
             </div>
         </div><!-- /.container-fluid -->
         </section>

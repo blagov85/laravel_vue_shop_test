@@ -18,7 +18,6 @@ class UpdateController extends Controller
                 array_push($ids, $i);
             }
         }
-        //dd($ids);
         Feedback::whereIn('id', $ids)->update(['status'=>'active']);
         return redirect()->route('feedback.index');
     }

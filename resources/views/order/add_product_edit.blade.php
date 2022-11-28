@@ -51,16 +51,7 @@
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Добавить"/>
                 </div>
-                @error('product_not_found')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-                @error('product_size_not_found')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-                @error('product_count_less')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-                @error('product_size_id_exists')
+                @error('product_add_error')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </form>

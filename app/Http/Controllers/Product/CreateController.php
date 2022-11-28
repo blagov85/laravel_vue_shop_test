@@ -2,35 +2,27 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Models\Sex;
-use App\Models\Tag;
-use App\Models\Size;
-use App\Models\Brand;
-use App\Models\Color;
-use App\Models\Group;
-use App\Models\Season;
-use App\Models\Country;
 use App\Models\Product;
-use App\Models\Category;
-use App\Models\Material;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Product\BaseController;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     public function __invoke(){
         $this->authorize('product-policy', [Product::class]);
-        $categories = Category::all();
-        $groups = Group::all();
-        $tags = Tag::all();
-        $colors = Color::all();
-        $sizes = Size::all();
-        $brands = Brand::all();
-        $sex = Sex::all();
-        $materials = Material::all();
-        $percent_materials = Product::percentMaterialsFunc();
-        $seasons = Season::all();
-        $countries = Country::all();
+        
+        $result = $this->service->create();
+
+        $categories = $result['categories'];
+        $groups = $result['groups'];
+        $tags = $result['tags'];
+        $colors = $result['colors'];
+        $sizes = $result['sizes'];
+        $brands = $result['brands'];
+        $sex = $result['sex'];
+        $materials = $result['materials'];
+        $percent_materials = $result['percent_materials'];
+        $seasons = $result['seasons'];
+        $countries = $result['countries'];
 
         return view('product.create', 
             compact('categories', 'groups', 'tags', 'colors', 
