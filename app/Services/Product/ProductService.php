@@ -3,24 +3,47 @@
 namespace App\Services\Product;
 
 use Exception;
-use App\Models\Product;
-use App\Models\ProductImage;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-
 use App\Models\Sex;
 use App\Models\Tag;
 use App\Models\Size;
 use App\Models\Brand;
+
 use App\Models\Color;
 use App\Models\Group;
 use App\Models\Season;
 use App\Models\Country;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Material;
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\DB;
+use App\Http\Filters\ProductFilter;
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
+    public function index($data){
+        $result = [];
+        if($data){
+            $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
+            $products = Product::filter($filter)->orderBy('id', 'desc')->paginate(5, ['*'], 'page', $data['page']);
+        }else{
+            $products = Product::orderBy('id', 'desc')->paginate(5);
+        }
+        $result['products'] = $products;
+        $result['brands'] = Brand::all();
+        $result['categories'] = Category::all();
+        $result['sex'] = Sex::all();
+        $result['colors'] = Color::all();
+        $result['sizes'] = Size::all();
+        $result['seasons'] = Season::all();
+        $result['materials'] = Material::all();
+        $result['countries'] = Country::all();
+        $result['tags'] = Tag::all();
+
+        return $result;
+    }
+
     public function create(){
         $result = [];
         $result['categories'] = Category::all();

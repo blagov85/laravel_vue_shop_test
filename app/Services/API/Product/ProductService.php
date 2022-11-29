@@ -21,12 +21,12 @@ use App\Models\Sorting;
 
 use app;
 use App\Models\Product;
-use App\Http\Filters\ProductFilter;
+use App\Http\Filters\ProductFilterAPI;
 
 class ProductService
 {
     public function index($data){
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
+        $filter = app()->make(ProductFilterAPI::class, ['queryParams' => array_filter($data)]);
         $filterKey = $data['filterKey'];
         $products = Product::filter($filter);
         if($filterKey == Product::PRICE_ASC_KEY){
@@ -73,7 +73,7 @@ class ProductService
     }
 
     public function search($data){
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
+        $filter = app()->make(ProductFilterAPI::class, ['queryParams' => array_filter($data)]);
         $filterKey = $data['filterKey'];
         if($data['search']){
             $search = $data['search'];
