@@ -409,12 +409,12 @@ jQuery(function ($) {
   if ($(".catagory-slider").length) {
     $(".catagory-slider").not('.slick-initialized').slick({
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 300,
       slidesToShow: 4,
       slidesToScroll: 1,
       arrows: true,
-      autoplay: true,
+      autoplay: false,
       prevArrow: '<button class="arrow-back"><i class="flaticon-back"></i> </button>',
       nextArrow: '<button class="arrow-next"><i class="flaticon-next"></i></button>',
       autoplaySpeed: 2000,
@@ -871,41 +871,41 @@ jQuery(function ($) {
 
 
   /****======  Increase and decrease number by click  ======*******/
-  if ($(".increaseQty").length) {
-    var minVal = 1;
-    //maxVal = 20;
-    $(".increaseQty").on("click", function () {
-      console.log("%%%%%%%%%%");
-      console.log(this.getAttribute("maxValue"));
-      var maxVal = parseInt(this.getAttribute("maxValue"));
-      var $parentElm = $(this).parents(".qtySelector");
-      $(this).addClass("clicked");
-      setTimeout(function () {
-        $(".clicked").removeClass("clicked");
-      }, 100);
-      var value = $parentElm.find(".qtyValue").val();
-      if (value < maxVal) {
-        value++;
-        console.log("value = " + value + " maxValue = " + maxVal);
-      }
-      $parentElm.find(".qtyValue").val(value);
-    });
-  };
+  // if ($(".increaseQty").length) {
+  //   var minVal = 1;
+  //   //maxVal = 20;
+  //   $(".increaseQty").on("click", function () {
+  //     console.log("%%%%%%%%%%");
+  //     console.log(this.getAttribute("maxValue"));
+  //     var maxVal = parseInt(this.getAttribute("maxValue"));
+  //     var $parentElm = $(this).parents(".qtySelector");
+  //     $(this).addClass("clicked");
+  //     setTimeout(function () {
+  //       $(".clicked").removeClass("clicked");
+  //     }, 100);
+  //     var value = $parentElm.find(".qtyValue").val();
+  //     if (value < maxVal) {
+  //       value++;
+  //       console.log("value = " + value + " maxValue = " + maxVal);
+  //     }
+  //     $parentElm.find(".qtyValue").val(value);
+  //   });
+  // };
 
-  if ($(".decreaseQty").length) {
-    $(".decreaseQty").on("click", function () {
-      var $parentElm = $(this).parents(".qtySelector");
-      $(this).addClass("clicked");
-      setTimeout(function () {
-        $(".clicked").removeClass("clicked");
-      }, 100);
-      var value = $parentElm.find(".qtyValue").val();
-      if (value > 1) {
-        value--;
-      }
-      $parentElm.find(".qtyValue").val(value);
-    });
-  };
+  // if ($(".decreaseQty").length) {
+  //   $(".decreaseQty").on("click", function () {
+  //     var $parentElm = $(this).parents(".qtySelector");
+  //     $(this).addClass("clicked");
+  //     setTimeout(function () {
+  //       $(".clicked").removeClass("clicked");
+  //     }, 100);
+  //     var value = $parentElm.find(".qtyValue").val();
+  //     if (value > 1) {
+  //       value--;
+  //     }
+  //     $parentElm.find(".qtyValue").val(value);
+  //   });
+  // };
 
 
   /****====== banner-one TweenMax Js  ======*******/

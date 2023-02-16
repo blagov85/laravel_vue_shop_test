@@ -232,7 +232,7 @@
                                                         <div class="products-grid-one__badge-box"> <span
                                                                 class="bg_base badge new ">New</span>
                                                         </div> 
-                                                        <a @click.prevent="popupProductNull();getProduct(product.id)" :href="`#popupForSize${product.id}`" 
+                                                        <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupForSize${product.id}`" 
                                                                 class="addcart btn--primary style2 popup_link">
                                                             Add To Cart 
                                                         </a>
@@ -255,7 +255,7 @@
                                                                     </a> 
                                                                 </li>
                                                                 <li>
-                                                                    <a @click.prevent="popupProductNull();getProduct(product.id)" :href="`#popup${product.id}`" class="popup_link"> 
+                                                                    <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popup${product.id}`" class="popup_link"> 
                                                                         <i class="flaticon-visibility"></i>
                                                                         <span> quick view</span>
                                                                     </a>
@@ -264,131 +264,16 @@
                                                         </div>
                                                     </div>
                                                     <div :id="`popup${product.id}`" class="product-gird__quick-view-popup mfp-hide">
-                                                        <div v-if="popupProduct" class="container">
-                                                            <div class="row justify-content-between align-items-center">
-                                                                <div class="col-lg-6">
-                                                                    <div class="quick-view__left-content">
-                                                                        <div class="tabs">
-                                                                            <div class="popup-product-thumb-box">
-                                                                                <ul>
-                                                                                    <li v-for="productImage in popupProduct.product_images" v-bind:key="productImage.id"
-                                                                                        class="tab-nav popup-product-thumb">
-                                                                                        <a :href="`#tabb${productImage.id}`">
-                                                                                            <img :src="productImage.url" alt="" /> 
-                                                                                        </a> 
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <div class="popup-product-main-image-box">
-                                                                                <div v-for="productImage in popupProduct.product_images" v-bind:key="productImage.id"
-                                                                                    :id="`tabb${productImage.id}`"
-                                                                                    class="tab-item popup-product-image">
-                                                                                    <div class="popup-product-single-image">
-                                                                                        <img :src="productImage.url" alt="" /> 
-                                                                                    </div>
-                                                                                </div>
-                                                                                <button class="prev"> <i class="flaticon-back"></i></button> 
-                                                                                <button class="next"> <i class="flaticon-next"></i></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="popup-right-content">
-                                                                        <h3>{{ popupProduct.title }}</h3>
-                                                                        <div class="ratting">
-                                                                            <div class="stars-outer">
-                                                                                <div class="stars-inner" :style="{width: percentRatingStar() + '%'}"></div>
-                                                                            </div> 
-                                                                            <span>({{ popupProduct.count_rating }})</span> 
-                                                                        </div>
-                                                                        <p class="text"> {{ popupProduct.description }} </p>
-                                                                        <div class="price">
-                                                                            <h2> {{ popupProduct.price }} <del v-if="popupProduct.old_price"> {{ popupProduct.old_price }}</del></h2>
-                                                                            <h6> In stuck</h6>
-                                                                        </div>
-                                                                        <div class="color-varient"> 
-                                                                            <h6>Color</h6>
-                                                                            <template v-for="color in popupProduct.colors" v-bind:key="color.id">
-                                                                                <div class="d-inline-block mr-0.25" :style="`background: #${color.title}; width:20px; height:20px; margin-right:10px`"></div>
-                                                                            </template> 
-                                                                        </div>
-                                                                        <div class="color-varient"> 
-                                                                            <h6>Similar products</h6>
-                                                                            <template v-for="groupProduct in popupProduct.group_products" v-bind:key="groupProduct.id">
-                                                                                <a @click.prevent="getProduct(groupProduct.id)" href="#0" class="color-name" style="background: none"> 
-                                                                                    <img :src="groupProduct.image_url" alt=""> 
-                                                                                    <span>{{ groupProduct.title }}</span>
-                                                                                </a>
-                                                                            </template> 
-                                                                        </div>
-                                                                        <!--size-->
-                                                                        <div class="shop-details-top-size-box">
-                                                                            <h4>Size: <span v-if="countOfSizeObj">({{ countOfSizeObj.title }})</span></h4>
-                                                                            <div class="shop-details-top-size-list-box">
-                                                                                <ul class="shop-details-top-size-list">
-                                                                                    <li v-for="countOfSize in popupProduct.counts" v-bind:key="countOfSize.id">
-                                                                                        <a @click.prevent="setProductSize(countOfSize)" href="#0">{{ countOfSize.title }}</a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--endsize-->
-                                                                        <div class="add-product">
-                                                                            <h6>Qty:</h6>
-                                                                            <div class="button-group">
-                                                                                <div class="qtySelector text-center">
-                                                                                    <span class="decreaseQty"><i class="flaticon-minus"></i></span>
-                                                                                    <input type="number" class="qtyValue" value="1" />
-                                                                                    <span class="increaseQty" :maxValue="maxCountSize"> <i class="flaticon-plus"></i></span>
-                                                                                </div>
-                                                                                <button v-if="countOfSizeObj" @click.prevent = "addToCart(product, countOfSizeObj)" class="btn--primary mfp-close"> Add to Cart </button>
-                                                                                <button v-else @click.prevent = "" class="btn--primary"> Add to Cart </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <ProductPopup />
                                                     </div>
 
                                                     <div :id="`popupForSize${product.id}`" class="product-gird__quick-view-popup mfp-hide" style="width:50%">
-                                                        <div v-if="popupProduct" class="container">
-                                                            <div class="row justify-content-between align-items-center">
-                                                                <div class="col-lg-12">
-                                                                    <div class="popup-right-content">
-                                                                        <h3>{{ popupProduct.title }}</h3>
-                                                                        <!--size-->
-                                                                        <div class="shop-details-top-size-box">
-                                                                            <h4>Size: <span v-if="countOfSizeObj">({{ countOfSizeObj.title }})</span></h4>
-                                                                            <div class="shop-details-top-size-list-box">
-                                                                                <ul class="shop-details-top-size-list">
-                                                                                    <li v-for="countOfSize in popupProduct.counts" v-bind:key="countOfSize.id">
-                                                                                        <a @click.prevent="setProductSize(countOfSize)" href="#0">{{ countOfSize.title }}</a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--endsize-->
-                                                                        <div class="add-product">
-                                                                            <h6>Qty:</h6>
-                                                                            <div class="button-group">
-                                                                                <div class="qtySelector text-center">
-                                                                                    <span class="decreaseQty"><i class="flaticon-minus"></i></span>
-                                                                                    <input type="number" class="qtyValue" value="1" />
-                                                                                    <span class="increaseQty" :maxValue="maxCountSize"> <i class="flaticon-plus"></i></span>
-                                                                                </div>
-                                                                                <button v-if="countOfSizeObj" @click.prevent = "addToCart(product, countOfSizeObj)" class="btn--primary mfp-close"> Add to Cart </button>
-                                                                                <button v-else @click.prevent = "" class="btn--primary"> Add to Cart </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <ProductPopupMin />
                                                     </div>
                                                     <div class="products-three-single-content text-center"> <span>{{ product.category.title }}</span>
-                                                        <h5><router-link :to="{name: 'product.show', params: {id: product.id}}"> {{ product.title }} </router-link>
+                                                        <h5>
+                                                            <router-link :to="{name: 'product.show', params: {id: product.id}}"> {{ product.title }} 
+                                                            </router-link>
                                                         </h5>
                                                         <p><del v-if="product.old_price">{{ product.old_price }}</del> {{ product.price }}</p>
                                                     </div>
@@ -434,14 +319,22 @@
                 </div>
             </div>
         </div>
+        <input type="text" v-model="changeValue">
         <!--End product-grid-->
         </main>
     </div>
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex';
+import ProductPopup from '../../components/ProductPopup';
+import ProductPopupMin from '../../components/ProductPopupMin';
 export default {
     name: "Index",
+    components: {
+       ProductPopup,
+       ProductPopupMin 
+    },
     mounted(){
         $(document).trigger('changed_'),
         this.getProducts(),
@@ -471,43 +364,57 @@ export default {
             backgroundDeactive: "#f1f1f1",
             fontActive: "#ffffff",
             fontDeactive: "#555555",
-            border: "solid 1px #161FCA"
+            border: "solid 1px #161FCA",
+            countForCart: 1,
+            changeValue: ''
         }
     },
     methods: {
-        addToCart(product, countOfSizeObj){
-            let qty = Number($('.qtyValue').val());
-            let cart = localStorage.getItem('cart');
-            $('.qtyValue').val(1); 
+        ...mapActions('popupProductModule',[
+                'popupProductNull',
+                'getPopupProduct'
+            ]),
+        // decreaseCount(){
+        //     if(this.countForCart === 1) return;
+        //     this.countForCart--;
+        // },
+        // increaseCount(){
+        //     if(this.countForCart === this.maxCountSize) return;
+        //     this.countForCart++;
+        // },
+        // addToCart(product, countOfSizeObj){
+        //     let qty = Number(this.countForCart);
+        //     let cart = localStorage.getItem('cart');
+        //     this.countForCart = 1;
             
-            let newProduct = [
-                    {
-                        'id': product.id,
-                        'title': product.title,
-                        'price': product.price,
-                        'image_url': product.image_url,
-                        'size_id': countOfSizeObj.id,
-                        'size_title': countOfSizeObj.title,
-                        'qty': qty
-                    }
-                ];
-                console.log(newProduct);
-            if(!cart){
-                localStorage.setItem('cart', JSON.stringify(newProduct));
-            }else{
-                cart = JSON.parse(cart);
-                cart.forEach(productInCart => {
-                    if((productInCart.id === product.id) && (productInCart.size_id === countOfSizeObj.id)){
-                        productInCart.qty = Number(productInCart.qty) + Number(qty);
-                        newProduct = null;
-                    }
-                });
+        //     let newProduct = [
+        //             {
+        //                 'id': product.id,
+        //                 'title': product.title,
+        //                 'price': product.price,
+        //                 'image_url': product.image_url,
+        //                 'size_id': countOfSizeObj.id,
+        //                 'size_title': countOfSizeObj.title,
+        //                 'qty': qty
+        //             }
+        //         ];
+        //         console.log(newProduct);
+        //     if(!cart){
+        //         localStorage.setItem('cart', JSON.stringify(newProduct));
+        //     }else{
+        //         cart = JSON.parse(cart);
+        //         cart.forEach(productInCart => {
+        //             if((productInCart.id === product.id) && (productInCart.size_id === countOfSizeObj.id)){
+        //                 productInCart.qty = Number(productInCart.qty) + Number(qty);
+        //                 newProduct = null;
+        //             }
+        //         });
 
-                Array.prototype.push.apply(cart, newProduct);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                this.$emit('get-cart-products')
-            }
-        },
+        //         Array.prototype.push.apply(cart, newProduct);
+        //         localStorage.setItem('cart', JSON.stringify(cart));
+        //         this.$emit('get-cart-products')
+        //     }
+        // },
         filterProducts(){
             let prices = $('#priceRange').val();
             this.prices = prices.replace(/[\s+]|[$]/g, '').split('-');
@@ -595,9 +502,10 @@ export default {
                 });
             }
         },
-        popupProductNull(){
+        popupProductNull_1(){
             this.popupProduct = null;
             this.countOfSizeObj = null;
+            this.countForCart = 1;
             this.maxCountSize = 1;
         },
         getProducts(page = 1){
@@ -626,7 +534,7 @@ export default {
                 });
             this.$emit('set-search-empty'); 
         },
-        getProduct(id){
+        getProduct_1(id){
             this.axios.get(`/api/product/${id}`)
                 .then(res => {
                     this.popupProduct = '';
@@ -662,14 +570,13 @@ export default {
                     $(document).trigger('changed_')
                 });
         },
-        setProductSize(countOfSize){
-            this.countOfSizeObj = countOfSize;
-            this.maxCountSize = this.countOfSizeObj.count;
-            console.log(this.countOfSizeObj);
-            console.log("count - " + this.countOfSizeObj.count);
-            var el = document.querySelector(".qtyValue");
-            el.value = 1;
-        },
+        // setProductSize(countOfSize){
+        //     this.countOfSizeObj = countOfSize;
+        //     this.maxCountSize = this.countOfSizeObj.count;
+        //     console.log(this.countOfSizeObj);
+        //     console.log("count - " + this.countOfSizeObj.count);
+        //     this.countForCart = 1;
+        // },
         addToCompare(product){
             let compare = localStorage.getItem('compare');
             let compareProduct = [
@@ -715,39 +622,12 @@ export default {
                 .finally(x => {
                     $(document).trigger('changed_')
                 });
-        },
+        }
     }
 }
 
 </script>
 
 <style scoped>
-.stars-outer{
-        position: relative;
-        display: inline-block;
-    }
-    .stars-inner{
-        position: absolute;
-        top:0;
-        left:0;
-        white-space: nowrap;
-        overflow: hidden;
-        width:0;
-    }
-    .stars-inner::before{
-        content: "\f005 \f005 \f005 \f005 \f005";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #f69c63;
-    }
-    .stars-outer::before{
-        content: "\f005 \f005 \f005 \f005 \f005";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        color: #ccc;
-    }
-    .mfp-close{
-        opacity: 1;
-        border: 1px solid black;
-    }
+    
 </style>

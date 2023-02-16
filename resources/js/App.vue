@@ -88,31 +88,29 @@
                                             <div class="right d-flex align-items-center justify-content-end">
                                                 <ul class="main-menu__widge-box d-flex align-items-center ">
                                                     <li class="d-lg-block d-none">
-                                                        <template v-if="storageCategory.length > 1">
-                                                            <a class="number popup_link" href="#popupCompare">
-                                                                <i class="flaticon-left-and-right-arrows"></i> 
-                                                                <span v-if="storageProductsMinCompare" class="count">({{ storageProductsMinCompare.length }})</span> 
-                                                            </a> 
-                                                        </template>
-                                                        <template v-else>
-                                                            <router-link :to="{name: 'products.compare'}">
-                                                                <a class="number">
-                                                                    <i class="flaticon-left-and-right-arrows"></i> 
-                                                                    <span v-if="storageProductsMinCompare" class="count">({{ storageProductsMinCompare.length }})</span> 
-                                                                </a>
-                                                            </router-link> 
-                                                        </template>  
-                                                    </li>
-                                                    <li class="d-lg-block d-none">
-                                                        <a href="wishlist.html" class="number">
-                                                            <i class="flaticon-heart"></i> 
-                                                            <span class="count">(2)</span> 
+                                                        <a @click.prevent="checkCompare()" :class="[getCompareCategoryCount > 0 ? 'number popup_link' : 'number']" :href="[getCompareCategoryCount > 0 ? '#popupCompare' : '']">
+                                                            <i class="flaticon-left-and-right-arrows"></i> 
+                                                            <span v-if="getCompareCount > 0" class="count">({{ getCompareCount }})</span> 
                                                         </a> 
                                                     </li>
+                                                    <li class="d-lg-block d-none">
+                                                        <template v-if="token">
+                                                        <!-- checkLoadLike(); {name: 'user.wishlist'}"-->
+                                                            <router-link @click.prevent="setIsLikeFromMainPage(true)" :to="{name: 'user.account'}" class="number">
+                                                                <i class="flaticon-heart"></i> 
+                                                                <span v-if="getLikeCount > 0" class="count">({{ getLikeCount }})</span>
+                                                            </router-link>
+                                                        </template>
+                                                        <template v-else>
+                                                            <router-link :to="{name: 'user.login'}" class="number">
+                                                                <i class="flaticon-heart"></i> 
+                                                            </router-link>
+                                                        </template>
+                                                    </li>
                                                     <li class="cartm"> 
-                                                        <a @click.prevent="getCartProducts()" href="#0" class="number cart-icon"> 
+                                                        <a @click.prevent="getCart();getTotalCart();" href="#0" class="number cart-icon"> 
                                                             <i class="flaticon-shopping-cart"></i>
-                                                            <span v-if="productsInCart" class="count">({{ productsInCart.length }})</span> 
+                                                            <span v-if="getCartCount > 0" class="count">({{ getCartCount }})</span> 
                                                         </a> 
                                                     </li>
                                                     <li class="d-lg-block d-none"> 
@@ -133,24 +131,7 @@
         </div>
 
         <div id="popupCompare" class="product-gird__quick-view-popup mfp-hide" style="width:50%">
-            <div class="container">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-lg-12">
-                        <h3>Списки сравнения</h3>
-                        <div v-for="category in storageCategory" v-bind:key="category.id" class="compare-category">
-                                <router-link :to="{name: 'products.compareId', params: {id: category.id}}" class="category-name" :key="$route.fullPath">
-                                    <span class="mfp-close choose-category">
-                                        {{ category.title }} ({{ category.count }})  
-                                    </span>
-                                </router-link>
-
-                            <a class="category-delete" href="#" @click="removeCategoryCompare(category.id)">
-                                <span><i class="flaticon-delete"></i></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>                                       
+            <CategoryCompare />                                    
         </div>
 
 
@@ -193,108 +174,11 @@
         </div>
         <div class="side-cart-closer"></div>
         <div class="side-cart d-flex flex-column justify-content-between">
-            <div class="top">
-                <div class="content d-flex justify-content-between align-items-center">
-                    <h6 class="text-uppercase" v-if="productsInCart">Your Cart (03) {{ productsInCart.size }}</h6>
-                    <h6 class="text-uppercase" v-else>Your Cart is empty</h6> 
-                    <span class="cart-close text-uppercase">X</span>
-                </div>
-                 <div v-if="productsInCart" class="cart_items">
-                    <div v-for="productInCart in productsInCart" v-bind:key="productInCart.id" class="items d-flex justify-content-between align-items-center">
-                        <div class="left d-flex align-items-center"> 
-                            <router-link :to="{name: 'product.show', params: {id: productInCart.id}}" class="title">
-                                <div class="thumb d-flex justify-content-between align-items-center"> 
-                                    <img :src="productInCart.image_url" alt=""> 
-                                </div>
-                            </router-link>
-                            <div class="text"> 
-                                <router-link :to="{name: 'product.show', params: {id: productInCart.id}}" class="title">
-                                    <h6>{{ productInCart.title }}</h6>
-                                </router-link>
-                                <p>{{ productInCart.qty }} X <span>{{ productInCart.price }}</span> </p>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <div @click.prevent="removeProduct(productInCart.id, productInCart.size_id)" class="item-remove"> 
-                                <i class="flaticon-cross"></i> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bottom">
-                <div class="total-ammount d-flex justify-content-between align-items-center">
-                    <h6 class="text-uppercase">Total:</h6>
-                    <h6 class="ammount text-uppercase">{{ total }}</h6>
-                </div>
-                <div class="button-box d-flex justify-content-between"> 
-                    <router-link :to="{name: 'cart.index'}" class="btn_black"> View Cart</router-link> 
-                    <a href="cart.html" class="button-2 btn_theme"> Chekout </a> 
-                </div>
-            </div>
-        </div>
-        <div class="sidebar-content-closer"></div>
-        <div class="sidebar-content">
-            <div class="sidebar-widget-container">
-                <div class="widget-heading d-flex justify-content-end align-content-center"> <span
-                        class="close-side-widget">X</span> </div>
-                <div class="sidebar-textwidget">
-                    <div class="sidebar-info-contents">
-                        <div class="content-inner">
-                            <div class="logo"> <a href="index.html"><img src="/assets/images/logo/logo-2.png" alt=""></a>
-                            </div>
-                            <div class="content-box">
-                                <h4>About Us</h4>
-                                <div class="inner-text">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                                </div>
-                            </div>
-                            <div class="form_inner">
-                                <h4>Support</h4>
-                                <form action="index.html" method="post">
-                                    <div class="form-group mt-4"> <input type="text" name="name" placeholder="Name"
-                                            required=""> </div>
-                                    <div class="form-group mt-4"> <input type="email" name="email" placeholder="Email"
-                                            required=""> </div>
-                                    <div class="form-group mt-4"> <textarea name="message"
-                                            placeholder="Message..."></textarea> </div>
-                                    <div class="form-group message-btn mt-4"> <button type="submit"
-                                            class="btn--secondary"> <span class="txt">Submit Now</span> </button> </div>
-                                </form>
-                            </div>
-                            <div class="sidebar-contact-info">
-                                <h4>Contact Info</h4>
-                                <ul>
-                                    <li> <span class="flaticon-pin-1"></span> New York, United States </li>
-                                    <li> <span class="flaticon-telephone"></span> <a href="tel:+44203700001">+44 123 456
-                                            789</a> </li>
-                                    <li> <span class="flaticon-mail"></span> <a
-                                            href="mailto:info@example.com">info@example.com</a> </li>
-                                </ul>
-                            </div>
-                            <div class="thm-medio-boxx1">
-                                <ul class="social-box">
-                                    <li class="facebook"> <a href="https://www.facebook.com/" target="_blank"><i
-                                                class="flaticon-facebook-app-symbol"></i></a> </li>
-                                    <li class="twitter"> <a href="https://twitter.com/" target="_blank"><i
-                                                class="flaticon-twitter"></i></a> </li>
-                                    <li class="instagram"> <a href="https://www.instagram.com/" target="_blank"><i
-                                                class="flaticon-instagram"></i></a> </li>
-                                    <li class="youtube"> <a href="https://www.youtube.com/" target="_blank"><i
-                                                class="flaticon-youtube"></i></a> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <SideCart />
         </div>
 
     </header>
     <router-view :key="$route.fullPath" 
-        @get-compare-products="getCompareProducts"
-        @get-cart-products="getCartProducts"
         @set-search="setSearch"
         @set-search-empty="setSearchEmpty">
     </router-view>
@@ -410,22 +294,51 @@
 </template>
 
 <script>
-    
+
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+import CategoryCompare from './components/CategoryCompare';  
+import SideCart from './components/SideCart';   
   export default {
     name: "App",
-    
+    components: {
+        CategoryCompare,
+        SideCart
+    },
     mounted(){
         $(document).trigger('changed_'),
-        this.getCartProducts(),
-        this.getCompareProducts()
+        //this.getCartProducts(),
+        //this.getCompareProducts()
         this.getToken(),
+        this.loadLikeProduct(),
+        this.getCart(),
         this.getUserName()
+        this.getCompare()
+        this.getCompareCategory()
     },
     updated(){
-        this.getToken(),
-        this.getUserName(),
-        this.test()
+        //this.getToken(),
+        //this.getUserName()
+        //this.getProductsLike()
     },
+    computed: {
+            ...mapGetters('compareModule',[
+                'getCompareCount',
+                'getCompareCategoryCount'
+            ]),
+            ...mapGetters('cartModule',[
+                'getCartCount'
+            ]),
+            ...mapState('accountModule',[
+                'token',
+                'userName'
+            ]),
+            ...mapState('likeModule',[
+                'isChangeLike'
+            ]),
+            ...mapGetters('likeModule',[
+                'getLikeCount'
+            ]),
+        },
     data() {
         return {
             productsInCart: [],
@@ -433,114 +346,146 @@
             total: 0,
             storageCategory: [],
             storageProductsMinCompare: [],
-            token: null,
-            userName: null,
-            t: 0,
+            //userName: null,
+            //t: 0,
             searchValue: ''
         }
     },
     methods: {
-        getCartProducts(){
-            this.productsInCart = JSON.parse(localStorage.getItem('cart'));
-            this.getTotal();
-            console.log(this.productsInCart);
-            //console.log(this.productsInCart.length);
-            //console.log("productsInCart is: " + this.productsInCart.length)
-         },
-        getTotal(){
-            this.total = 0;
-            if(this.productsInCart){
-                this.productsInCart.forEach(product => {
-                    let productSum = product.price * product.qty;
-                    this.total += productSum;
-                });
+        ...mapActions('likeModule',[
+            'getProductsLike',
+            'checkLoadLike'
+        ]),
+        ...mapActions('compareModule',[
+            'getCompare',
+            'getCompareCategory',
+            'checkCompare'
+        ]),
+        ...mapActions('cartModule',[
+            'getCart',
+            'getTotalCart'
+        ]),
+        ...mapActions('accountModule',[
+            'getToken',
+            'getUserName'
+        ]),
+        ...mapMutations('accountModule',[
+            'setToken',
+            'setUserName'
+        ]),
+        ...mapMutations('likeModule',[
+            'setLikeProducts',
+            'setIsChangeLiked',
+            'setIsLikeFromMainPage'
+        ]),
+        loadLikeProduct(){
+            if(this.token){
+                this.getProductsLike();
             }
+        },
+        // getCartProducts_1(){
+        //     this.productsInCart = JSON.parse(localStorage.getItem('cart'));
+        //     this.getTotal();
+        //     console.log(this.productsInCart);
+        //  },
+        // getTotal(){
+        //     this.total = 0;
+        //     if(this.productsInCart){
+        //         this.productsInCart.forEach(product => {
+        //             let productSum = product.price * product.qty;
+        //             this.total += productSum;
+        //         });
+        //     }
             
-        },
-        removeProduct(id, sizeId){
-            this.productsInCart = this.productsInCart.filter(product => {
-                return ((product.id !== id) || (product.size_id !== sizeId));
-            });
-            this.updateCart();
-        },
-        updateCart(){
-            localStorage.setItem('cart', JSON.stringify(this.productsInCart));
-            this.getTotal();
-        },
-        getCompareProducts(){
-            this.storageCategory.length = 0;
-            this.storageProductsMinCompare = JSON.parse(localStorage.getItem('compare'));
-            console.log("***");
-            console.log(this.storageProductsMinCompare);
-            let category = {}; 
-            if(this.storageProductsMinCompare != null){
-                this.storageProductsMinCompare.forEach((item, index) =>{
-                    if(index == 0){
-                        category.id = item.category_id;
-                        category.title = item.category_title;
-                        category.count = 1;
-                        console.log(item);
-                        this.storageCategory.push(category);
-                    }else{
-                        let sameCategory = false;
-                        this.storageCategory.forEach(itemCategory =>{
-                            if(itemCategory.id == item.category_id){
-                                sameCategory = true;
-                                itemCategory.count += 1; 
-                            }
-                        });
-                        if(!sameCategory){
-                            category = {};
-                            category.id = item.category_id;
-                            category.title = item.category_title;
-                            category.count = 1;
-                            this.storageCategory.push(category);
-                        }
-                    }
-                });
-            }
-            console.log("tututu");
-            console.log(this.storageCategory);
-        },
-        removeCategoryCompare(id){
-            this.storageProductsMinCompare = this.storageProductsMinCompare.filter(item => {
-                return item.category_id !== id;
-            });
-            this.storageCategory = this.storageCategory.filter(item => {
-                return item.id != id;
-            });
-            this.updateCompare();
-        },
-        updateCompare(){
-            localStorage.setItem('compare', JSON.stringify(this.storageProductsMinCompare));
-            this.$emit('get-compare-products');
-        },
-        getToken(){
-            this.token = localStorage.getItem('x_xsrf_token');
-        },
+        // },
+        // removeProduct(id, sizeId){
+        //     this.productsInCart = this.productsInCart.filter(product => {
+        //         return ((product.id !== id) || (product.size_id !== sizeId));
+        //     });
+        //     this.updateCart();
+        // },
+        // updateCart(){
+        //     localStorage.setItem('cart', JSON.stringify(this.productsInCart));
+        //     //this.getTotal();
+        // },
+        // getCompareProducts(){
+        //     this.storageCategory.length = 0;
+        //     this.storageProductsMinCompare = JSON.parse(localStorage.getItem('compare'));
+        //     console.log("***");
+        //     console.log(this.storageProductsMinCompare);
+        //     let category = {
+        //         id: null,
+        //         title: null,
+        //         count: 0
+        //     }; 
+        //     if(this.storageProductsMinCompare != null){
+        //         this.storageProductsMinCompare.forEach((item, index) =>{
+        //             if(index == 0){
+        //                 category.id = item.category_id;
+        //                 category.title = item.category_title;
+        //                 category.count = 1;
+        //                 console.log(item);
+        //                 this.storageCategory.push(category);
+        //             }else{
+        //                 let sameCategory = false;
+        //                 this.storageCategory.forEach(itemCategory =>{
+        //                     if(itemCategory.id == item.category_id){
+        //                         sameCategory = true;
+        //                         itemCategory.count += 1; 
+        //                     }
+        //                 });
+        //                 if(!sameCategory){
+        //                     category = {};
+        //                     category.id = item.category_id;
+        //                     category.title = item.category_title;
+        //                     category.count = 1;
+        //                     this.storageCategory.push(category);
+        //                 }
+        //             }
+        //         });
+        //     }
+        //     console.log("tututu");
+        //     console.log(this.storageCategory);
+        // },
+        // removeCategoryCompare(id){
+        //     this.storageProductsMinCompare = this.storageProductsMinCompare.filter(item => {
+        //         return item.category_id !== id;
+        //     });
+        //     this.storageCategory = this.storageCategory.filter(item => {
+        //         return item.id != id;
+        //     });
+        //     this.updateCompare();
+        // },
+        // updateCompare(){
+        //     localStorage.setItem('compare', JSON.stringify(this.storageProductsMinCompare));
+        //     this.$emit('get-compare-products');
+        // },
+        // getToken(){
+        //     this.token = localStorage.getItem('x_xsrf_token');
+        // },
         logout(){
-            axios.post('/logout')
+            axios.post('/api/logout')
                 .then(res => {
                     localStorage.removeItem('x_xsrf_token');
+                    this.setToken(null);
+                    this.setLikeProducts([]);
+                    this.setIsChangeLiked(false);
+                    this.setIsLikeFromMainPage(false);
+                    this.setUserName(null);
                     this.$router.push({name: 'user.login'});
                 });
         },
-        test(){
-            this.t = this.t + 1;
-            console.log(this.t);
-            console.log("HIII")
-        },
-        getUserName(){
-            if(this.token){
-                axios.get('/api/user/name')
-                    .then(res => {
-                        this.userName = res.data.data.name;
-                        console.log("user_name");
-                        console.log(res.data);
-                    });
-            }
+        // getUserName(){
+        //     if(this.token){
+        //         axios.get('/api/user/name')
+        //             .then(res => {
+        //                 this.userName = res.data.data.name;
+        //                 console.log("user_name");
+        //                 console.log(res.data);
+        //             });
+        //     }
             
-        },
+        // },
         setSearch(){
             if(this.searchValue === ''){
                 this.searchValue = this.$route.params.searchVal;
@@ -555,44 +500,6 @@
 </script>
 
 <style>
-.compare-category{
-    width: 75%;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-}
-.compare-category:hover {
-    background: #e9ecef;
-    cursor: pointer; 
-}
-.compare-category .category-name{
-    color: black;
-    width:80%;
-    height:100%;
-    display: flex;
-    align-items: center;
-}
-.compare-category .category-delete{
-    color: black;
-    width:20%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.category-name .choose-category{
-    width:100%;
-    position: relative;
-    display: flex;
-    justify-content: left;
-    font-size:16px;
-    color: black;
-}
-.mfp-close{
-    opacity: 1;
-}
 .search-box.menu .search-icon{
     top:50%;
     right:11px;

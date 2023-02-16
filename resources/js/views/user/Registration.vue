@@ -57,6 +57,11 @@
                                         <label class="p-0" for="remember"> Accept the Terms and Privacy Policy </label>
                                     </div>
                                 </div> 
+                                <div class="error" v-if="errors.length > 0">
+                                    <ul v-for="(value, key) in errors" :key="key">
+                                        <li>{{ value }}</li>
+                                    </ul>
+                                </div>
                                 <button type="submit" @click.prevent="store()" class="btn--primary style2">Register </button>
                             </form>
                         </div>
@@ -78,18 +83,24 @@ export default {
     },
     data() {
         return {
-            name: null,
-            email: null,
-            password: null,
-            password_confirmation: null,
-            user: null
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            user: null,
+            errors: []
         }
     },
     methods: {
         store(){
+            this.errors = [];
+            this.errors = this.formError();
+            if (this.errors.length > 0){
+                return false;
+            }
             axios.get('/sanctum/csrf-cookie')
                 .then(response => {
-                    this.axios.post('/register', {
+                    this.axios.post('/api/regist', {
                             name: this.name, 
                             email: this.email, 
                             password: this.password, 
@@ -100,18 +111,57 @@ export default {
                             localStorage.setItem('x_xsrf_token', res.config.headers['X-XSRF-TOKEN']);
                             this.$router.push({name: 'products.index'});
                         })
-                        .catch(err => {
-                        console.log(err.response);
+                        .catch(error => {
+                            this.errors = [];
+                            console.log(error.status);
+                            this.errors = this.serverError(error);
                         })
                         .finally(x => {
                             $(document).trigger('changed_')
                         });
             })
+            
+            
+        },
+        formError(){
+            let clientErrors = [];
+            if (this.name == '' || this.email == '' || this.password == '' || this.password_confirmation == ''){
+                clientErrors.push("Все поля должны быть заполнены");
+            }else{
+                if (!this.validateEmail(this.email)){
+                    clientErrors.push("Поле email должно содержать название єлектронной почты");
+                }
+                if (this.name.length < 3){
+                    clientErrors.push("Поле name должно иметь длину не меньше 3 символов");
+                }
+                if (this.password.length < 3){
+                    clientErrors.push("Поле password должно иметь длину не меньше 3 символов");
+                }
+            }
+            return clientErrors;
+        },
+        serverError(error){
+            let serverErrors = [];
+            if(error.data.errors){
+                for (let ind in error.data.errors){
+                    serverErrors.push(error.data.errors[ind][0]);
+                }
+            }
+            return serverErrors;
+        },
+        validateEmail(email) {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                return true;
+            }
+            return false;
         }
     }
 }
 </script>
 
 <style scoped>
-
+.error{
+    color:red;
+    margin-bottom: 20px;
+}
 </style>

@@ -129,15 +129,8 @@ export default {
         console.log(this.order);
         console.log(this.imagesOrder);
     },
-    data() {
-        return {
-            order: null,
-            imagesOrder: null 
-        }
-    },
     computed: {
         order() {
-
             return JSON.parse(this.myOrder);
         },
         imagesOrder() {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -70,6 +71,20 @@ class User extends Authenticatable
 
     public function isManager(){
         return $this->role_id === self::ROLE_MANAGER;
+    }
+
+    /**
+     * Override the mail body for reset password notification mail.
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        //dd(request());
+        //$this->notify(new \App\Notifications\MailResetPasswordNotification($token));
+        if(request()->is('api/*')){
+            $this->notify(new \App\Notifications\MailResetPasswordNotification($token));
+        }else{
+            $this->notify(new \Illuminate\Auth\Notifications\ResetPassword($token));
+        }
     }
 
     /**

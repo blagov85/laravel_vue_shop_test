@@ -1,3 +1,4 @@
+import router from './router';
 window._ = require('lodash');
 
 try {
@@ -20,9 +21,14 @@ window.axios.interceptors.response.use({}, error => {
         const token = localStorage.getItem('x_xsrf_token');
         if(token){
             localStorage.removeItem('x_xsrf_token');
+            router.push({name: 'user.login'}); 
+        }else{
+            return Promise.reject(error.response);
         }
-        router.push({name: 'user.login'});
+    }else{
+        return Promise.reject(error.response);
     }
+
 })
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

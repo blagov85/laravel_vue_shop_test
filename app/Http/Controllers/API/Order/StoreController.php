@@ -10,14 +10,15 @@ use App\Http\Controllers\API\Order\BaseController;
 class StoreController extends BaseController
 {
     public function __invoke(StoreRequest $request){
+        
         $data = $request->validated();
         try{
             $order = $this->service->store($data);
             return new OrderResource($order);       
         }catch(Exception $exception){
             return response([
-                'message' => $exception->getMessage()
-            ]);
+                'error' => $exception->getMessage()
+            ], 422);
         }      
     }
 }

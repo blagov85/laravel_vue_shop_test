@@ -34,9 +34,9 @@
                                     <router-link :to="{name: 'user.registration'}">Sign up for free</router-link>
                                 </p>
                             </div>
-                            <form class="common-form">
+                            <form class="common-form" @submit.prevent="login()">
                                 <div class="form-group"> 
-                                    <input type="email" v-model="email" class="form-control" placeholder="Your Email Address"> 
+                                    <input type="text" v-model="email" class="form-control" placeholder="Your Email Address"> 
                                 </div>
                                 <div class="form-group eye">
                                     <div class="icon icon-1"><i class="flaticon-hidden"></i></div> 
@@ -45,13 +45,19 @@
                                 </div>
                                 <div class="checkk ">
                                     <div class="form-check p-0 m-0"> 
-                                        <input type="checkbox" id="remember"> 
+                                        <input type="checkbox" v-model="remember" id="remember"> 
                                         <label class="p-0" for="remember"> Remember Me</label> 
-                                    </div> 
-                                    <a href="#0" class="forgot"> Forgot Password?</a>
+                                    </div>
+                                    <router-link :to="{name: 'user.password.request'}" class="forgot">Forgot Password?</router-link> 
                                 </div> 
-                                <button type="submit" @click.prevent="login()" class="btn--primary style2">Login </button>
+                                <div class="error" v-if="errors.length > 0">
+                                    <ul v-for="(value, key) in errors" :key="key">
+                                        <li>{{ value }}</li>
+                                    </ul>
+                                </div>
+                                <button type="submit" class="btn--primary style2">Login </button>
                             </form>
+                            <div>remember is {{ remember }}</div>
                         </div>
                     </div>
                 </div>
@@ -63,45 +69,106 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
     name: "Login",
     mounted(){
         $(document).trigger('changed_')
-        this.$emit('set-search-empty')
+        //this.$emit('set-search-empty')
         
     },
     data() {
         return {
-            email: null,
-            password: null
+            email: '',
+            password: '',
+            errors: [],
+            remember: false
         }
     },
     methods: {
+         ...mapActions('likeModule',[
+            'getProductsLike'
+        ]),
+        ...mapMutations('accountModule',[
+            'setToken'
+        ]),
+        ...mapActions('accountModule',[
+            'getUserName'
+        ]),
         login(){
+            this.errors = [];
+            this.errors = this.formError();
+            if (this.errors.length > 0){
+                return false;
+            }
             axios.get('/sanctum/csrf-cookie')
                 .then(response => {
-                    axios.post('/login', {
+                    axios.post('/api/log', {
                         email: this.email, 
-                        password: this.password
+                        password: this.password,
+                        remember: this.remember
                     })
                     .then(res => {
-                        console.log(res);
-                        console.log(res.config.headers['X-XSRF-TOKEN']);
-                        localStorage.setItem('x_xsrf_token', res.config.headers['X-XSRF-TOKEN']);
-                        this.$router.push({name: 'products.index'});
+                        let token = res.config.headers['X-XSRF-TOKEN'];
+                        localStorage.setItem('x_xsrf_token', token);
+                        this.setToken(token);
+                        this.getUserName();
+                        this.getProductsLike();
+                        if(this.$route.query.pathFrom) {
+                            this.$router.push(this.$route.query.pathFrom)
+                        }else{
+                            this.$router.push({name: 'products.index'});
+                        }
                     })
-                    .catch(err => {
-                        console.log(err.response);
+                    .catch(error => {
+                        this.errors = [];
+                        console.log(error.status);
+                        this.errors = this.serverError(error);
                     })
                     .finally(x => {
                         $(document).trigger('changed_')
                     });
             }); 
+        },
+        formError(){
+            let clientErrors = [];
+            if (this.email == '' || this.password == ''){
+                clientErrors.push("Все поля должны быть заполнены");
+            }else{
+                if (!this.validateEmail(this.email)){
+                    clientErrors.push("Поле email должно содержать название электронной почты");
+                }
+                if (this.password.length < 3){
+                    clientErrors.push("Поле password должно иметь длину не меньше 3 символов");
+                }
+            }
+            return clientErrors;
+        },
+        serverError(error){
+            let serverErrors = [];
+            if(error.data.errors){
+                for (let ind in error.data.errors){
+                    serverErrors.push(error.data.errors[ind][0]);
+                }
+            }
+            if(error.data.error){
+                serverErrors.push(error.data.error);
+            }
+            return serverErrors;
+        },
+        validateEmail(email) {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                return true;
+            }
+            return false;
         }
     }
 }
 </script>
 
 <style scoped>
-
+.error{
+    color:red;
+    margin-bottom: 20px;
+}
 </style>

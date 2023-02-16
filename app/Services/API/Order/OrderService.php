@@ -3,10 +3,14 @@
 namespace App\Services\API\Order;
 
 use Exception;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Str;
+use App\Mail\User\PasswordMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class OrderService
 {
@@ -69,14 +73,16 @@ class OrderService
             }
             if($data['user_id'] === null){
                 //add new user in db
-                $password = Hash::make('123');
+                $passwordGenerate = Str::random(8);
+                $password = Hash::make($passwordGenerate);
                 $user = User::create([
                     'email' => $data['email'],
                     'name' => $data['name'],
                     'password' => $password,
                     'role_id' => 5
                 ]);
-                $data['user_id'] = $user['id'];  
+                $data['user_id'] = $user['id'];
+                Mail::to($data['email'])->send(new PasswordMail($passwordGenerate));
             }
         }
         $data['products'] = json_encode($data['products']);

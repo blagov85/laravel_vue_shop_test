@@ -43,6 +43,11 @@ const router = createRouter({
       name: 'user.account',
       component: () => import('../views/user/Account.vue')
     },
+    {
+      path: '/user/wishlist',
+      name: 'user.wishlist',
+      component: () => import('../components/LikeList.vue')
+    },
     { 
       path: '/search/:searchVal',
       name: 'products.search',
@@ -53,6 +58,16 @@ const router = createRouter({
       name: 'order.index',
       component: () => import('../views/order/Index.vue'),
       props: true
+    },
+    { 
+      path: '/user/password/forgot',
+      name: 'user.password.request',
+      component: () => import('../views/user/ForgotPassword.vue'),
+    },
+    { 
+      path: '/user/reset-password/:token',
+      name: 'user.password.request.token',
+      component: () => import('../views/user/ResetPassword.vue'),
     }
     // {
     //   path: '*',
@@ -66,25 +81,24 @@ router.beforeEach((to, from, next) => {
   console.log("YYYY");
   console.log(to.name);
   console.log(from.name);
+
+  const accessToken = localStorage.getItem('x_xsrf_token');  
+
+  if((to.name === 'user.login' || to.name === 'user.registration' || 
+      to.name === 'user.password.request' || to.name === 'user.password.request.token') && accessToken){
+    return next({
+      name:'products.index'
+    });
+  }
+
+  if((to.name === 'user.wishlist' || to.name === 'user.account') && (!accessToken)){
+    return next({
+      name:'user.login'
+    });
+  }
+  
   next();
-
-  const accessToken = localStorage.getItem('access_token');
-
-  // if(!accessToken){
-  //   if(to.name === 'user.login' || to.name === 'user.registration'){
-  //     return next();
-  //   }else{
-  //     return next({
-  //       name: 'user.login'
-  //     }); 
-  //   }
-  // }
-  // if(to.name === 'user.login' || to.name === 'user.registration' && accessToken){
-  //   return next({
-  //     name:'products.index'
-  //   });
-  // }
-
+  
 });
 
 export default router

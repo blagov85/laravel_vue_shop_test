@@ -20,12 +20,6 @@ __webpack_require__.r(__webpack_exports__);
     console.log(this.order);
     console.log(this.imagesOrder);
   },
-  data: function data() {
-    return {
-      order: null,
-      imagesOrder: null
-    };
-  },
   computed: {
     order: function order() {
       return JSON.parse(this.myOrder);

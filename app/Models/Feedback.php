@@ -30,7 +30,7 @@ class Feedback extends Model
 
 
     public function reply(){
-        return $this->hasMany(Feedback::class, 'parent_id', 'id');
+        return $this->hasMany(Feedback::class, 'parent_id', 'id')->where('status','active');
     }
 
     public function dateCreate(){

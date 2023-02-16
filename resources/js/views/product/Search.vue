@@ -338,9 +338,9 @@
                                                                             <h6>Qty:</h6>
                                                                             <div class="button-group">
                                                                                 <div class="qtySelector text-center">
-                                                                                    <span class="decreaseQty"><i class="flaticon-minus"></i></span>
-                                                                                    <input type="number" class="qtyValue" value="1" />
-                                                                                    <span class="increaseQty" :maxValue="maxCountSize"> <i class="flaticon-plus"></i></span>
+                                                                                    <span class="decreaseQty" @click.prevent="decreaseCount()"><i class="flaticon-minus"></i></span>
+                                                                                    <input type="number" class="qtyValue" v-model="countForCart" /> 
+                                                                                    <span class="increaseQty" @click.prevent="increaseCount()"> <i class="flaticon-plus"></i> </span> 
                                                                                 </div>
                                                                                 <button v-if="countOfSizeObj" @click.prevent = "addToCart(product, countOfSizeObj)" class="btn--primary mfp-close"> Add to Cart </button>
                                                                                 <button v-else @click.prevent = "" class="btn--primary"> Add to Cart </button>
@@ -374,9 +374,9 @@
                                                                             <h6>Qty:</h6>
                                                                             <div class="button-group">
                                                                                 <div class="qtySelector text-center">
-                                                                                    <span class="decreaseQty"><i class="flaticon-minus"></i></span>
-                                                                                    <input type="number" class="qtyValue" value="1" />
-                                                                                    <span class="increaseQty" :maxValue="maxCountSize"> <i class="flaticon-plus"></i></span>
+                                                                                     <span class="decreaseQty" @click.prevent="decreaseCount()"><i class="flaticon-minus"></i></span>
+                                                                                    <input type="number" class="qtyValue" v-model="countForCart" /> 
+                                                                                    <span class="increaseQty" @click.prevent="increaseCount()"> <i class="flaticon-plus"></i> </span> 
                                                                                 </div>
                                                                                 <button v-if="countOfSizeObj" @click.prevent = "addToCart(product, countOfSizeObj)" class="btn--primary mfp-close"> Add to Cart </button>
                                                                                 <button v-else @click.prevent = "" class="btn--primary"> Add to Cart </button>
@@ -477,14 +477,23 @@ export default {
             backgroundDeactive: "#f1f1f1",
             fontActive: "#ffffff",
             fontDeactive: "#555555",
-            border: "solid 1px #161FCA"
+            border: "solid 1px #161FCA",
+            countForCart: 1
         }
     },
     methods: {
+        decreaseCount(){
+            if(this.countForCart === 1) return;
+            this.countForCart--;
+        },
+        increaseCount(){
+            if(this.countForCart === this.maxCountSize) return;
+            this.countForCart++;
+        },
         addToCart(product, countOfSizeObj){
-            let qty = Number($('.qtyValue').val());
+            let qty = Number(this.countForCart);
             let cart = localStorage.getItem('cart');
-            $('.qtyValue').val(1); 
+            this.countForCart = 1; 
             
             let newProduct = [
                     {
@@ -603,6 +612,7 @@ export default {
         popupProductNull(){
             this.popupProduct = null;
             this.countOfSizeObj = null;
+            this.countForCart = 1;
             this.maxCountSize = 1;
         },
         getProducts(page = 1){
@@ -672,10 +682,7 @@ export default {
         setProductSize(countOfSize){
             this.countOfSizeObj = countOfSize;
             this.maxCountSize = this.countOfSizeObj.count;
-            console.log(this.countOfSizeObj);
-            console.log("count - " + this.countOfSizeObj.count);
-            var el = document.querySelector(".qtyValue");
-            el.value = 1;
+            this.countForCart = 1;
         },
         addToCompare(product){
             let compare = localStorage.getItem('compare');

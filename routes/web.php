@@ -19,6 +19,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     
     Route::get('/', App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
+    Route::post('/change-password', [App\Http\Controllers\Auth\ChangePasswordController::class, 'updatePassword'])->name('update-password');
+    Route::get('/change-password', [App\Http\Controllers\Auth\ChangePasswordController::class, 'changePassword'])->name('change-password');
+    
     Route::group(['prefix' => 'orders'], function() {
         Route::get('/', App\Http\Controllers\Order\IndexController::class)->name('order.index');
         Route::post('/', App\Http\Controllers\Order\StoreController::class)->name('order.store');

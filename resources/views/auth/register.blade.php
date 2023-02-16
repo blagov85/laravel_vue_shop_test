@@ -61,6 +61,8 @@
                             </div>
                         </div>
 
+                        <input name="role_id" type="hidden" value="3">
+                        
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

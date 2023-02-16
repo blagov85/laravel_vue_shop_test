@@ -42,6 +42,11 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav">
+      <li>
+        <div class="form-group" style="text-align: center;margin-right:10px">
+          <a href="{{ route('change-password') }}">Изменить пароль</a>
+        </div>
+      </li>
       <li class="nav-item">
         <form action="{{ route('logout') }}" method="post">
           @csrf

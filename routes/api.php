@@ -18,7 +18,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/log', [App\Http\Controllers\API\AuthController::class, 'login']);
+Route::post('/regist', [App\Http\Controllers\API\AuthController::class, 'register']);
+
+// Send reset password mail
+Route::post('/reset-password', [App\Http\Controllers\API\AuthController::class, 'sendPasswordResetLink']);   
+// handle reset password form process
+Route::post('/reset/password', [App\Http\Controllers\API\AuthController::class, 'callResetPassword']);
+
 Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
+    Route::post('/change-password', [App\Http\Controllers\API\ChangePasswordController::class, 'updatePassword']);
     Route::get('/user/name', App\Http\Controllers\API\User\ShowNameController::class);
     Route::get('/user', App\Http\Controllers\API\User\ShowController::class);
     Route::post('/user/update', App\Http\Controllers\API\User\UpdateController::class);
@@ -40,5 +50,5 @@ Route::get('/products/search/filters', App\Http\Controllers\API\Product\SearchFi
 Route::post('/products/search', App\Http\Controllers\API\Product\SearchController::class);
 Route::get('/regions', App\Http\Controllers\API\User\IndexRegionController::class);
 Route::get('/delivery_companies', App\Http\Controllers\API\Order\DeliveryCompany\IndexController::class);
-
+Auth::routes();
 
