@@ -51,7 +51,6 @@
                     new_password_confirmation: this.confirmNewPassword
                 })
                 .then(res => {
-                    console.log(res);
                     this.oldPassword = null;
                     this.newPassword = null;
                     this.confirmNewPassword = null;

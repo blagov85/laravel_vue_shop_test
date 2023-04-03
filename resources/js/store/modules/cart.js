@@ -2,8 +2,8 @@ const cart = ({
     namespaced: true,
     state () {
         return {
-            cart: [],
-            totalSumCart: 0
+            cart: [], //list products in cart
+            totalSumCart: 0 //sum of products in order
         }
       },
     mutations: {
@@ -14,17 +14,18 @@ const cart = ({
             state.totalSumCart = totalSumCart;
         }
     },
-    getters: {
+    getters: { //count products in order
         getCartCount(state){
             return state.cart.length;
         }
     },
     actions: {
-        getCart({ commit }){
+        getCart({ commit }){ //from localStorage
             let cart = JSON.parse(localStorage.getItem('cart'));
             commit('setCart', cart);
         },
-        addToCart({ commit }, payload){
+        //add product in cart or increase count of product in cart
+        addToCart({ commit }, payload){ 
             let qty = Number(payload.countForCart);
             let cart = localStorage.getItem('cart');
             
@@ -44,18 +45,19 @@ const cart = ({
             }else{
                 cart = JSON.parse(cart);
                 cart.forEach(productInCart => {
+                    //id product and id size of product exists in cart, then +1 count
                     if((productInCart.id === payload.product.id) && (productInCart.size_id === payload.countOfSizeObj.id)){
                         productInCart.qty = Number(productInCart.qty) + Number(qty);
                         newProduct = null;
                     }
                 });
-                Array.prototype.push.apply(cart, newProduct);
-                localStorage.setItem('cart', JSON.stringify(cart));
+                Array.prototype.push.apply(cart, newProduct); //add product in cart list
+                localStorage.setItem('cart', JSON.stringify(cart)); //update cart list to localStorage 
             }
             commit('setCart', cart);
             commit('setTotalSumCart', 0);
         },
-        removeFromCart({state, commit, dispatch}, payload){
+        removeFromCart({state, commit, dispatch}, payload){//delete product with size from cart list
             let cart = state.cart;
             cart = cart.filter(product => {
                 return ((product.id !== payload.id) || (product.size_id !== payload.sizeId));
@@ -64,7 +66,7 @@ const cart = ({
             commit('setCart', cart);
             dispatch('getTotalCart');
         },
-        getTotalCart({ state, getters, commit }){
+        getTotalCart({ state, getters, commit }){ //sum all products in cart 
             let total = 0;
             if(getters.getCartCount > 0){
                 state.cart.forEach(product => {
@@ -74,13 +76,13 @@ const cart = ({
             }
             commit('setTotalSumCart', total);
         },
-        decreaseQty({ state, dispatch }, product){
+        decreaseQty({ state, dispatch }, product){//increase count of product in cart
             if(product.qty === 1) return;
             product.qty--;
             localStorage.setItem('cart', JSON.stringify(state.cart));
             dispatch('getTotalCart');
         },
-        increaseQty({ state, dispatch }, product){
+        increaseQty({ state, dispatch }, product){//decrease count of product in cart
             product.qty++;
             localStorage.setItem('cart', JSON.stringify(state.cart));
             dispatch('getTotalCart');

@@ -46,16 +46,12 @@
 
     export default {
         name: "FeedbackNew",
-        mounted() {
-            console.log('Component mounted.')
-        },
-        data(){
-            return{
-                // feedbackParentId: null,
-                // changeRating: [false,false,false,false,false],
-                // chooseRating: [false,false,false,false,false],
-                // textFeedback: ''
-            }
+        beforeUnmount(){
+            this.setFeedbackParentId(null);
+            this.setTextFeedback('');
+            this.setRating(null);
+            this.setChooseRating([false, false, false, false, false]);
+            this.setChangeRating([false, false, false, false, false]);
         },
         computed: {
             ...mapState('productOneModule',[
@@ -83,45 +79,13 @@
                 'clickRating',
                 'feedbackProduct'
             ]),
-            // feedbackProductNull(){
-            //     this.textFeedback = '';
-            //     this.rating = null;
-            //     this.chooseRating = [false, false, false, false, false];
-            //     this.changeRating = [false, false, false, false, false];
-            // },
-            // ...mapMutations('feedbackModule',[
-            //     'setTextFeedback'
-            // ]),
-            // fixStars(){
-            //     this.changeRating = this.chooseRating.slice(0);
-            // },
-            // focusRating(itemStar){
-            //     let i;
-            //     for(i = 0; i < itemStar; i++){
-            //         this.changeRating[i] = true;
-            //     }
-            //     for(i = itemStar; i < 5; i++){
-            //         this.changeRating[i] = false;
-            //     }
-            // },
-            // clickRating(itemStar){
-            //     this.chooseRating = this.changeRating.slice(0);
-            //     this.rating = itemStar;
-            // },
-            // feedbackProduct(){
-            //     this.axios.post(`/api/product/${this.$route.params.id}/feedback`,{
-            //         message: this.textFeedback,
-            //         rating: this.rating,
-            //         status: 'new',
-            //         parent_id: this.feedbackParentId
-            //     })
-            //         .then(res => {
-            //             console.log("OK");
-            //         })
-            //         .finally(x => {
-            //             $(document).trigger('changed_')
-            //         });
-            // }
+            ...mapMutations('feedbackModule',[
+                'setFeedbackParentId',
+                'setTextFeedback',
+                'setRating',
+                'setChooseRating',
+                'setChangeRating'
+            ])
         }
     }
 </script>

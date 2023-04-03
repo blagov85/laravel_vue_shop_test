@@ -3,20 +3,20 @@ const compare = ({
     namespaced: true,
     state () {
         return {
-            compare: [],
-            compareCategory: [],
-            compareProduct: [],
-            idCategoryActive: null
+            compare: [], //list of product in compare
+            compareCategory: [], //category of product in compare
+            compareProduct: [], //list of product selected category in compare
+            idCategoryActive: null //selected category id
         }
     },
     getters: {
-        getCompareCount(state){
+        getCompareCount(state){ //count in compare
             return state.compare.length;
         },
-        getCompareCategoryCount(state){
+        getCompareCategoryCount(state){ //count category in compare 
             return state.compareCategory.length;
         },
-        getCompareProductCount(state){
+        getCompareProductCount(state){ //count products in selected category
             return state.compareProduct.length;
         }
     },
@@ -35,11 +35,11 @@ const compare = ({
         }
     },
     actions: {
-        getCompare({ commit }){
+        getCompare({ commit }){ //from localStorage
             let compare = JSON.parse(localStorage.getItem('compare'));
             commit('setCompare', compare);
         },
-        addToCompare({ state, commit }, product){
+        addToCompare({ state, commit }, product){ //add or delete from compare
             let compare = localStorage.getItem('compare');;
             let compareProduct = [
                     {
@@ -101,11 +101,13 @@ const compare = ({
             commit('setCompareCategory', compareCategory);
         },
         checkCompare({ state, dispatch, getters }){
+            //compare in localStorage == compare in Vuex variable
             let compare = JSON.parse(localStorage.getItem('compare'));
             if (state.compare != compare){
                 dispatch('getCompare');
                 dispatch('getCompareCategory');
             }
+            //count category of product == 0
             if(getters.getCompareCategoryCount == 0){
                 router.push({name: 'products.compare'});
             }
@@ -113,6 +115,7 @@ const compare = ({
         removeCompareCategory({ state, commit }, id){
             let compare = state.compare;
             let compareCategory = state.compareCategory;
+            //delete category and all products in this category
             compare = compare.filter(item => {
                 return item.category_id !== id;
             });
@@ -122,6 +125,7 @@ const compare = ({
             localStorage.setItem('compare', JSON.stringify(compare));
             commit('setCompare', compare);
             commit('setCompareCategory', compareCategory);
+            //in deleted category is active, redirect to first category in list or empty page
             if (state.idCategoryActive == id){
                 commit('setIdCategoryActive', null);
                 if(compareCategory.length > 0){
@@ -136,6 +140,7 @@ const compare = ({
             let idCompare = [];
             let productsCompareFullInfo = [];
             let compare = state.compare;
+            //get id of products in slected category
             if(idCategory == null){
                 compare.forEach(item =>{
                     idCompare.push(item.id);
@@ -147,6 +152,7 @@ const compare = ({
                     }
                 });
             }
+            //get products data about ids list of products
             axios.post("/api/compare",{
                 ids: idCompare
                 }).then(res => {
@@ -162,6 +168,7 @@ const compare = ({
             let compare = state.compare;
             let compareProduct = state.compareProduct;
             let compareCategory = state.compareCategory;
+            //delete product from compare list and category list
             compare = compare.filter(item => {
                 return item.id !== id;
             });
@@ -169,21 +176,26 @@ const compare = ({
                 return item.id !== id;
             });
             if(compareProduct.length > 0){
+                //count of products in category = count in compareProduct
                 compareCategory.forEach(item => {
                     if(item.id !== state.idCategoryActive){
                         item.count = compareProduct.length;
                     }
                 });
             }else{
+                //no products in category, delete category
                 compareCategory = compareCategory.filter(item => {
                     return item.id != state.idCategoryActive;
                 });
                 if(compareCategory.length > 0){
+                    //count in active category > 0, reload page with active category - first in category list
                     router.push({name: 'products.compareId', params: { id: compareCategory[0].id }});
                 }else{
+                    //count in active category = 0, reload default page
                     router.push({name: 'products.compare'});
                 }
             }
+            //change localStorage
             localStorage.setItem('compare', JSON.stringify(compare));
             commit('setCompare', compare);
             commit('setCompareProduct', compareProduct);

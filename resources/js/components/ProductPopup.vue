@@ -66,22 +66,19 @@
 
 <script>
     import CounterProductSize from './CounterProductSize';
-    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+    import { mapState, mapGetters, mapActions } from 'vuex';
 
     export default {
         name: "ProductPopup",
         components: {
-            CounterProductSize 
-        },
-        mounted() {
-            console.log('Component mounted.')
+            CounterProductSize //contains size and add to cart
         },
         computed: {
             ...mapState('popupProductModule',[
                 'popupProduct'
             ]),
             ...mapGetters('popupProductModule',[
-                'percentRatingStarPopup'
+                'percentRatingStarPopup' //get percent from rating
             ])
         },
         methods: {

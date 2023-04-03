@@ -21,14 +21,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CounterProductSize",
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  data: function data() {
-    return {};
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('popupProductModule', ['popupProduct', 'popupCountForCart', 'popupCountOfSizeObj'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)([])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
 });
 
 /***/ }),
@@ -58,9 +52,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     CounterProductSize: _CounterProductSize__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('popupProductModule', ['popupProduct']))
 });
 
@@ -89,13 +80,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Compare",
   components: {
-    ProductPopupMin: _components_ProductPopupMin__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ProductPopupMin: _components_ProductPopupMin__WEBPACK_IMPORTED_MODULE_0__["default"] //get data popup one product (nested CounterProductSize)
+
   },
   mounted: function mounted() {
-    $(document).trigger('changed_'), this.getCompareProducts(this.$route.params.id);
+    $(document).trigger('changed_'), this.getCompareProducts(this.$route.params.id); //get product for compare about its category id
+
+    this.setSearchText('');
   },
   beforeUnmount: function beforeUnmount() {
     this.setIdCategoryActive(null);
+    this.setCompareProduct([]);
+    this.setPopupProduct(null);
+    this.setPopupCountForCart(1);
+    this.setPopupCountOfSizeObj(null);
+    this.setPopupMaxCountSize(1);
   },
   data: function data() {
     return {
@@ -108,8 +107,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       countForCart: 1
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('compareModule', ['compareProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('compareModule', ['getCompareProductCount'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('compareModule', ['getCompareProducts', 'removeProductCompare'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('compareModule', ['setIdCategoryActive'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct']))
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('compareModule', ['compareProduct' //products for compare
+  ])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('compareModule', ['getCompareProductCount' //count of products in category
+  ])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('compareModule', ['getCompareProducts', 'removeProductCompare'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('compareModule', ['setIdCategoryActive', 'setCompareProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('indexProductsModule', ['setSearchText'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('popupProductModule', ['setPopupProduct', 'setPopupCountForCart', 'setPopupCountOfSizeObj', 'setPopupMaxCountSize']))
 });
 
 /***/ }),
@@ -599,7 +600,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , _hoisted_46), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       id: "popupCompare".concat(product.id),
-      "class": "product-gird__quick-view-popup mfp-hide",
+      "class": "product-gird__quick-view-popup mfp-hide popup-width",
       style: {
         "width": "50%"
       }

@@ -73,7 +73,7 @@
 </template>
 
 <script>
-    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+    import { mapState, mapMutations, mapActions } from 'vuex';
 
     export default {
         name: "UserData",
@@ -83,11 +83,6 @@
         },
         data(){
             return{
-                //user: null,
-                // arrayBirthDay: [],
-                // arrayBirthMonth: [],
-                // arrayBirthYear: [],
-                // regions: [],
                 changeDataUser: '',
                 phoneError: '',
                 errors: [],
@@ -114,7 +109,7 @@
                 'getBirth',
                 'getRegions'
             ]),
-            loadUserData(){
+            loadUserData(){//get user data,  birthday list , region list
                 if(!this.user){
                     this.getUser();
                     this.getBirth();
@@ -164,12 +159,6 @@
                     setTimeout(() => this.changeDataUser = '', 2000);
                 })
             },
-            // getRegions(){
-            //     this.axios.get('/api/regions')
-            //         .then(res => {
-            //             this.regions = res.data.data;
-            //         });
-            // },
             maskPhone(){
                 var phoneInput = document.getElementById('phone');
                 let keyCode;

@@ -26,7 +26,7 @@
                         <td style="width:30%" class="add-to-cart-btn">  
                             <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupLike${product.id}`" 
                                 class="addcart btn--primary style2 popup_link">Add To Cart</a>
-                            <div :id="`popupLike${product.id}`" class="product-gird__quick-view-popup mfp-hide" style="width:50%">
+                            <div :id="`popupLike${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width">
                                 <ProductPopupMin />
                             </div>
                         </td>
@@ -52,24 +52,21 @@
         },
         mounted() {
             this.loadLike()
-            console.log('LikeList')
         },
         unmounted() {
-            console.log('unLikeList')
-            this.setIsLikeFromMainPage(false)
-        },
-        data(){
-            return{
-
-            }
+            this.setIsLikeFromMainPage(false);
+            this.setPopupProduct(null);
+            this.setPopupCountForCart(1);
+            this.setPopupCountOfSizeObj(null);
+            this.setPopupMaxCountSize(1); 
         },
         computed: {
             ...mapState('likeModule',[
                 'likeProducts',
-                'isLikeFromMainPage'
+                'isLikeFromMainPage' //pressed link in main page
             ]),
             ...mapGetters('likeModule',[
-                'getLikeCount'
+                'getLikeCount' //count of likes
             ])
         },
         methods: {
@@ -84,9 +81,15 @@
                 'deleteProductLike',
                 'checkLoadLike'
             ]),
+            ...mapMutations('popupProductModule',[
+                'setPopupProduct',
+                'setPopupCountForCart',
+                'setPopupCountOfSizeObj',
+                'setPopupMaxCountSize'
+            ]),
             loadLike(){
                 if(this.isLikeFromMainPage){
-                    this.checkLoadLike();
+                    this.checkLoadLike(); //if button like was pressed anywhere, then get new data about Like
                 }
             }
         }

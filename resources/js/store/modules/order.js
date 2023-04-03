@@ -2,8 +2,8 @@ const order = ({
     namespaced: true,
         state () {
             return {
-                order: null,
-                orders: []
+                order: null, //made order
+                orders: [] //list of orders, made by user
             }
     },
     getters: {
@@ -20,6 +20,7 @@ const order = ({
         },
     },
     actions: {
+        //get made order 
         getOrder({ commit }, id){
             commit('setOrder', null);
             axios.get(`/api/order/${id}`)
@@ -31,6 +32,7 @@ const order = ({
                     $(document).trigger('changed_')
                 });
         },
+        //get list of orders
         getOrders({ commit }){
             commit('setOrders', []);
             axios.get('/api/orders')

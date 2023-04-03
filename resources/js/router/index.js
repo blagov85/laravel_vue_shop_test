@@ -51,7 +51,7 @@ const router = createRouter({
     { 
       path: '/search/:searchVal',
       name: 'products.search',
-      component: () => import('../views/product/Search.vue')
+      component: () => import('../views/product/Index.vue')
     },
     { 
       path: '/order/index',

@@ -69,13 +69,11 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapMutations, mapActions } from 'vuex';
 export default {
     name: "Login",
     mounted(){
-        $(document).trigger('changed_')
-        //this.$emit('set-search-empty')
-        
+        $(document).trigger('changed_')  
     },
     data() {
         return {

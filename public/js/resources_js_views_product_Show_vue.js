@@ -21,14 +21,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CounterProductSize",
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  data: function data() {
-    return {};
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('popupProductModule', ['popupProduct', 'popupCountForCart', 'popupCountOfSizeObj'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)([])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
 });
 
 /***/ }),
@@ -58,20 +52,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "FeedbackList",
   components: {
-    FeedbackNew: _FeedbackNew__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  data: function data() {
-    return {// feedbackParentId: null,
-      // changeRating: [false,false,false,false,false],
-      // chooseRating: [false,false,false,false,false],
-      // textFeedback: '',
-    };
+    FeedbackNew: _FeedbackNew__WEBPACK_IMPORTED_MODULE_0__["default"] //form for add new feedback
+
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)('productOneModule', ['product'])), {}, {
     percentRating: function percentRating() {
+      //get %
       return _utils__WEBPACK_IMPORTED_MODULE_1__["default"].percentRatingStar(this.product.rating);
     }
   }),
@@ -100,15 +86,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "FeedbackNew",
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  data: function data() {
-    return {// feedbackParentId: null,
-      // changeRating: [false,false,false,false,false],
-      // chooseRating: [false,false,false,false,false],
-      // textFeedback: ''
-    };
+  beforeUnmount: function beforeUnmount() {
+    this.setFeedbackParentId(null);
+    this.setTextFeedback('');
+    this.setRating(null);
+    this.setChooseRating([false, false, false, false, false]);
+    this.setChangeRating([false, false, false, false, false]);
   },
   computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('productOneModule', ['product'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('feedbackModule', ['feedbackParentId', 'rating', 'chooseRating', 'changeRating'])), {}, {
     textFeedback: {
@@ -120,7 +103,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   }),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('feedbackModule', ['fixStars', 'focusRating', 'clickRating', 'feedbackProduct']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('feedbackModule', ['fixStars', 'focusRating', 'clickRating', 'feedbackProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('feedbackModule', ['setFeedbackParentId', 'setTextFeedback', 'setRating', 'setChooseRating', 'setChangeRating']))
 });
 
 /***/ }),
@@ -151,16 +134,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "ProductForSlider",
   components: {
     ProductPopup: _ProductPopup__WEBPACK_IMPORTED_MODULE_0__["default"],
+    //data popup product
     ProductPopupMin: _ProductPopupMin__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: ['product'],
   mounted: function mounted() {
-    this.getToken(), console.log('Component mounted.');
-    console.log(this.product);
+    this.getToken();
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)('accountModule', ['token'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)('productsModule', ['likedProduct'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('accountModule', ['getToken'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('likeModule', ['likeProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('compareModule', ['addToCompare', 'getCompareCategory'])), {}, {
+  beforeUnmount: function beforeUnmount() {
+    this.setPopupProduct(null);
+    this.setPopupCountForCart(1);
+    this.setPopupCountOfSizeObj(null);
+    this.setPopupMaxCountSize(1);
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)('accountModule', ['token'])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('accountModule', ['getToken'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('likeModule', ['likeProduct' //add to array or delete from array product for Like
+  ])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('compareModule', ['addToCompare', //add to array or delete from array product for Compare
+  'getCompareCategory' //get all category all products in Compare
+  ])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('popupProductModule', ['setPopupProduct', 'setPopupCountForCart', 'setPopupCountOfSizeObj', 'setPopupMaxCountSize'])), {}, {
     percentRatingStar: function percentRatingStar(product) {
+      //get %
       return Math.round(product.rating / 5 * 100);
     }
   })
@@ -191,12 +184,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductPopup",
   components: {
-    CounterProductSize: _CounterProductSize__WEBPACK_IMPORTED_MODULE_0__["default"]
+    CounterProductSize: _CounterProductSize__WEBPACK_IMPORTED_MODULE_0__["default"] //contains size and add to cart
+
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('popupProductModule', ['popupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('popupProductModule', ['percentRatingStarPopup'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('popupProductModule', ['popupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('popupProductModule', ['percentRatingStarPopup' //get percent from rating
+  ])),
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct']))
 });
 
@@ -227,9 +219,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     CounterProductSize: _CounterProductSize__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('popupProductModule', ['popupProduct']))
 });
 
@@ -246,8 +235,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "SizeTable",
-  props: ['cat']
+  name: "SizeTable"
 });
 
 /***/ }),
@@ -267,7 +255,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SliderProduct",
   components: {
-    ProductForSlider: _ProductForSlider__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ProductForSlider: _ProductForSlider__WEBPACK_IMPORTED_MODULE_0__["default"] //block of one product (nested ProductPopup, ProductPopupMin)
+
   },
   props: ['title', 'products'],
   mounted: function mounted() {
@@ -307,17 +296,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Show",
   components: {
     FeedbackList: _components_FeedbackList__WEBPACK_IMPORTED_MODULE_0__["default"],
+    //list of feedbacks of product (nested FeedbackNew)
     SliderProduct: _components_SliderProduct__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SizeTable: _components_SizeTable__WEBPACK_IMPORTED_MODULE_2__["default"]
+    //container-slider for products (nested ProductForSlider)
+    SizeTable: _components_SizeTable__WEBPACK_IMPORTED_MODULE_2__["default"] //table of sizes
+
   },
   mounted: function mounted() {
-    $(document).trigger('changed_'), this.getProduct(this.$route.params.id), this.getRecentProducts(this.$route.params.id);
+    $(document).trigger('changed_'), this.getProduct(this.$route.params.id), //get data of product about its id
+    this.getRecentProducts(this.$route.params.id), //get list recent products about product's category id
+    this.setSearchText('');
   },
   beforeUnmount: function beforeUnmount() {
     this.setRecentProducts([]);
     this.setProduct(null);
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)('accountModule', ['token'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)('productOneModule', ['product'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)('productsModule', ['recentProducts'])), {}, {
+    //list options to string options (through coma)
     materials: function materials() {
       return _utils__WEBPACK_IMPORTED_MODULE_3__["default"].getProductDataToString(this.product.materials);
     },
@@ -330,30 +325,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     percentRating: function percentRating() {
       return _utils__WEBPACK_IMPORTED_MODULE_3__["default"].percentRatingStar(this.product.rating);
     },
+    //get percent of discount
     percentDiscount: function percentDiscount() {
       return _utils__WEBPACK_IMPORTED_MODULE_3__["default"].percentDiscountProduct(this.product.price, this.product.old_price);
     }
   }),
   data: function data() {
     return {
-      //product: null,
-      //materials: null,
-      //seasons: null,
-      //tags: null,
       maxCountSize: 1,
       countOfSizeObj: null,
-      //rating: null,
-      // changeRating: [false,false,false,false,false],
-      // chooseRating: [false,false,false,false,false],
-      // textFeedback: '',
-      // feedbackParentId: null,
-      //popupProduct: null,
-      //countOfSizeObjPopup: null, //object size of popupProduct
-      //maxCountSizePopup: null, //max count of size popupProduct
       countForCart: 1
     };
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('accountModule', ['getToken'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('productOneModule', ['getProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('productOneModule', ['setProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('productsModule', ['setRecentProducts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('productsModule', ['getRecentProducts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('compareModule', ['addToCompare', 'getCompareCategory'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('likeModule', ['likeProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('cartModule', ['addToCart'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('accountModule', ['getToken'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('productOneModule', ['getProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('productOneModule', ['setProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('productsModule', ['setRecentProducts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('indexProductsModule', ['setSearchText'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('productsModule', ['getRecentProducts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('compareModule', ['addToCompare', //add or delete product in array compare
+  'getCompareCategory'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('likeModule', ['likeProduct' //add or delete product in array like
+  ])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('cartModule', ['addToCart'])), {}, {
+    //change count of product for purchase
     decreaseCount: function decreaseCount() {
       if (this.countForCart === 1) return;
       this.countForCart--;
@@ -371,229 +358,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.countOfSizeObj = countOfSize;
       this.maxCountSize = this.countOfSizeObj.count;
       this.countForCart = 1;
-    } // focusRating(itemStar){
-    //     let i;
-    //     for(i = 0; i < itemStar; i++){
-    //         this.changeRating[i] = true;
-    //     }
-    //     for(i = itemStar; i < 5; i++){
-    //         this.changeRating[i] = false;
-    //     }
-    // },
-    // clickRating(itemStar){
-    //     this.chooseRating = this.changeRating.slice(0);
-    //     this.rating = itemStar;
-    // },
-    // fixStars(){
-    //     this.changeRating = this.chooseRating.slice(0);
-    // },
-    // getProduct(){
-    //     this.axios.get(`/api/product/${this.$route.params.id}`)
-    //         .then(res => {
-    //             console.log(res.data.data);
-    //             this.product = res.data.data;
-    //             this.materials = this.getProductDataToString(this.product.materials);
-    //             this.seasons = this.getProductDataToString(this.product.seasons);
-    //             this.tags = this.getProductDataToString(this.product.tags);
-    //             console.log(res);
-    //         })
-    //         .finally(x => {
-    //             $(document).trigger('changed_')
-    //         });
-    //     this.$emit('set-search-empty');    
-    // },
-
-    /*
-    getProductDataToString(arrayObjectData){
-        if (arrayObjectData !== null){
-            let arrayData = [];
-            arrayObjectData.forEach((el,i) => {
-                arrayData[i] = el.title;
-            });
-            let stringData = arrayData.join();
-            stringData = stringData.replaceAll(',', ', ');
-        return stringData;
-        }
-        else{
-            return '';
-        }
-    },
-    */
-    // addToCart(product, countOfSizeObj){
-    //     let qty = Number(this.countForCart);
-    //     let cart = localStorage.getItem('cart');
-    //     this.countForCart = 1;
-    //     let newProduct = [
-    //             {
-    //                 'id': product.id,
-    //                 'title': product.title,
-    //                 'price': product.price,
-    //                 'image_url': product.image_url,
-    //                 'size_id': countOfSizeObj.id,
-    //                 'size_title': countOfSizeObj.title,
-    //                 'qty': qty
-    //             }
-    //         ];
-    //     if(!cart){
-    //         localStorage.setItem('cart', JSON.stringify(newProduct));
-    //     }else{
-    //         cart = JSON.parse(cart);
-    //         cart.forEach(productInCart => {
-    //             if((productInCart.id === product.id) && (productInCart.size_id === countOfSizeObj.id)){
-    //                 productInCart.qty = Number(productInCart.qty) + Number(qty);
-    //                 newProduct = null;
-    //             }
-    //         });
-    //         Array.prototype.push.apply(cart, newProduct);
-    //         localStorage.setItem('cart', JSON.stringify(cart));
-    //         //this.$emit('get-cart-products')
-    //     }
-    // },
-    // addToCompare(product){
-    //     let compare = localStorage.getItem('compare');
-    //     let compareProduct = [
-    //             {
-    //                 'id': product.id,
-    //                 'category_id': product.category.id,
-    //                 'category_title': product.category.title,
-    //                 'title': product.title
-    //             }
-    //         ];
-    //     if(!compare){
-    //         localStorage.setItem('compare', JSON.stringify(compareProduct));
-    //     }else{
-    //         compare = JSON.parse(compare);
-    //         compare.forEach((productInCompare, index, arr) => {
-    //             if(productInCompare.id === product.id){
-    //                 compareProduct = null;
-    //                 arr.splice(index,1);
-    //             }
-    //         });
-    //         Array.prototype.push.apply(compare, compareProduct);
-    //         localStorage.setItem('compare', JSON.stringify(compare));
-    //         this.$emit('get-compare-products');
-    //     }
-    // },
-    // likeProduct(){
-    //     this.axios.get(`/api/product/${this.$route.params.id}/like`)
-    //         .then(res => {
-    //             let likeInfo = res.data.data;
-    //             this.product.count_likes = likeInfo.count_likes;
-    //             this.product.like = likeInfo.like;
-    //             console.log(res.data.data);
-    //             console.log(this.product);
-    //         })
-    //         .finally(x => {
-    //             $(document).trigger('changed_')
-    //         });
-    // },
-    // likeRecentProduct(id){
-    //     this.axios.get(`/api/product/${id}/like`)
-    //         .then(res => {
-    //             let likeInfo = res.data.data;
-    //             this.recentProducts.forEach(el => {
-    //                 if(el.id === id){
-    //                     el.count_likes = likeInfo.count_likes;
-    //                     el.like = likeInfo.like;
-    //                 }
-    //             })
-    //         })
-    //         .finally(x => {
-    //             $(document).trigger('changed_')
-    //     });
-    // },
-    // feedbackProduct(){
-    //     this.axios.post(`/api/product/${this.$route.params.id}/feedback`,{
-    //         message: this.textFeedback,
-    //         rating: this.rating,
-    //         status: 'new',
-    //         parent_id: this.feedbackParentId
-    //     })
-    //         .then(res => {
-    //             console.log("OK");
-    //         })
-    //         .finally(x => {
-    //             $(document).trigger('changed_')
-    //         });
-    // },
-    // feedbackProductNull(){
-    //     this.textFeedback = '';
-    //     this.rating = null;
-    //     this.chooseRating = [false, false, false, false, false];
-    //     this.changeRating = [false, false, false, false, false];
-    // },
-    // getToken(){
-    //     return localStorage.getItem('x_xsrf_token');
-    // },
-    //percentRatingStar(){
-    //    return Math.round((this.product.rating / 5) * 100);
-    //},
-    // setFeedbackId(feedbackParentId){
-    //     this.feedbackParentId = feedbackParentId;
-    // },
-    // getRecentProducts_1(){
-    //     this.axios.get(`/api/products/recent/${this.$route.params.id}`)
-    //         .then(res => {
-    //             this.recentProducts = res.data.data;
-    //             console.log('this.recentProducts');
-    //             console.log(this.recentProducts);
-    //         })
-    //         .finally(x => {
-    //             $(document).trigger('changed_')
-    //         });
-    // },
-    // popupProductNull_1(){
-    //     this.popupProduct = null;
-    //     this.countOfSizeObjPopup = null;
-    //     this.countForCart = 1;
-    //     this.maxCountSizePopup = 1;
-    //     console.log(this.countForCart);
-    //     console.log(this.maxCountSizePopup);
-    // },
-    // getRecentProduct(id){
-    //     this.axios.get(`/api/product/${id}`)
-    //         .then(res => {
-    //             this.popupProduct = res.data.data;
-    //             console.log(res.data.data);
-    //         })
-    //         .finally(x => {
-    //             $(document).trigger('changed_')
-    //         });
-    // },
-    // setProductSizePopup(countOfSize){
-    //     this.countOfSizeObjPopup = countOfSize;
-    //     this.maxCountSizePopup = this.countOfSizeObjPopup.count;
-    //     console.log(this.countOfSizeObjPopup);
-    //     console.log("count - " + this.countOfSizeObjPopup.count);
-    //     // var el = document.querySelector(".qtyValue");
-    //     // el.value = 1;
-    //     this.countForCart = 1;
-    // }
-
-    /*
-    getProduct(){
-        const reqProduct = this.axios.get(`/api/product/${this.$route.params.id}`);
-        const reqRecentProducts = this.axios.get(`/api/products/recent/${this.$route.params.id}`);
-        this.axios
-            .all([reqProduct, reqRecentProducts])
-            .then(
-                axios.spread((...res) => {
-                    const resProduct = res[0];
-                    const resRecentProducts = res[1];
-                    this.product = resProduct.data.data;
-                    this.materials = this.getProductDataToString(this.product.materials);
-                    this.seasons = this.getProductDataToString(this.product.seasons);
-                    this.tags = this.getProductDataToString(this.product.tags);
-                    
-                    this.recentProducts = resRecentProducts.data.data;
-                })
-            )
-            .finally(x => {
-                $(document).trigger('changed_')
-            });     
-    },
-    */
-
+    }
   })
 });
 
@@ -768,10 +533,7 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_9 = {
   id: "popupReview",
-  "class": "product-gird__quick-view-popup mfp-hide",
-  style: {
-    "width": "50%"
-  }
+  "class": "product-gird__quick-view-popup mfp-hide popup-width"
 };
 var _hoisted_10 = {
   "class": "review-single"
@@ -1275,7 +1037,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: "popupForSize".concat($props.product.id),
-    "class": "product-gird__quick-view-popup mfp-hide",
+    "class": "product-gird__quick-view-popup mfp-hide popup-width",
     style: {
       "width": "50%"
     }
@@ -1814,22 +1576,11 @@ var _hoisted_53 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_54 = [_hoisted_53];
-
-var _hoisted_55 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "product-quantity-check"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "flaticon-select"
-  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "In Stock")], -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_56 = {
+var _hoisted_55 = {
   "class": "shop-details-top-order-now"
 };
 
-var _hoisted_57 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_56 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "flaticon-point"
   }, null, -1
@@ -1837,25 +1588,25 @@ var _hoisted_57 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_58 = {
+var _hoisted_57 = {
   key: 0
 };
-var _hoisted_59 = {
+var _hoisted_58 = {
   key: 1
 };
-var _hoisted_60 = {
+var _hoisted_59 = {
   key: 0,
   "class": "shop-details-top-cart-box-btn"
 };
-var _hoisted_61 = {
+var _hoisted_60 = {
   key: 1,
   "class": "shop-details-top-cart-box-btn"
 };
-var _hoisted_62 = {
+var _hoisted_61 = {
   "class": "compare-product"
 };
 
-var _hoisted_63 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_62 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "icon"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -1865,7 +1616,7 @@ var _hoisted_63 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_64 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_63 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "text"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Add to Compare")], -1
@@ -1873,27 +1624,27 @@ var _hoisted_64 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_65 = [_hoisted_63, _hoisted_64];
-var _hoisted_66 = {
+var _hoisted_64 = [_hoisted_62, _hoisted_63];
+var _hoisted_65 = {
   key: 2,
   "class": "shop-details-top-product-sale"
 };
 
-var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Persons looking for this product ");
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Persons looking for this product ");
 
-var _hoisted_68 = {
+var _hoisted_67 = {
   id: "popupSizeInfo",
-  "class": "product-gird__quick-view-popup mfp-hide"
+  "class": "product-gird__quick-view-popup mfp-hide popup-width"
 };
-var _hoisted_69 = {
+var _hoisted_68 = {
   key: 1,
   "class": "product pt-60 pb-60 wow fadeInUp overflow-hidden"
 };
-var _hoisted_70 = {
+var _hoisted_69 = {
   "class": "container"
 };
 
-var _hoisted_71 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_70 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "row wow fadeInUp animated"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -1943,46 +1694,46 @@ var _hoisted_71 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_72 = {
+var _hoisted_71 = {
   "class": "row wow fadeInUp animated"
 };
-var _hoisted_73 = {
+var _hoisted_72 = {
   "class": "tab-content",
   id: "pills-tabContent-two"
 };
-var _hoisted_74 = {
+var _hoisted_73 = {
   "class": "tab-pane fade show active",
   id: "pills-description",
   role: "tabpanel",
   "aria-labelledby": "pills-description-tab"
 };
-var _hoisted_75 = {
+var _hoisted_74 = {
   "class": "product-drescription"
 };
 
-var _hoisted_76 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_75 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, " Product Details:", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_77 = {
+var _hoisted_76 = {
   "class": "tab-pane fade",
   id: "pills-additional",
   role: "tabpanel",
   "aria-labelledby": "pills-additional-tab"
 };
-var _hoisted_78 = {
+var _hoisted_77 = {
   "class": "product-drescription"
 };
-var _hoisted_79 = ["innerHTML"];
-var _hoisted_80 = {
+var _hoisted_78 = ["innerHTML"];
+var _hoisted_79 = {
   "class": "tab-pane fade",
   id: "pills-review",
   role: "tabpanel",
   "aria-labelledby": "pills-review-tab"
 };
-var _hoisted_81 = {
+var _hoisted_80 = {
   "class": "product-drescription"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2121,9 +1872,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $options.increaseCount();
     }, ["prevent"]))
-  }, _hoisted_54)])]), _hoisted_55])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [_hoisted_57, $data.countOfSizeObj ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_58, "Order Now, Only " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.countOfSizeObj.count) + " Left !", 1
+  }, _hoisted_54)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [_hoisted_56, $data.countOfSizeObj ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_57, "Order Now, Only " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.countOfSizeObj.count) + " Left !", 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_59, "Choose size"))]), $data.countOfSizeObj ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_60, [$data.countOfSizeObj ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_58, "Choose size"))]), $data.countOfSizeObj ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_59, [$data.countOfSizeObj ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     onClick: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       _ctx.addToCart({
@@ -2139,29 +1890,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 1,
     onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"])),
     "class": "btn--primary"
-  }, " Add to Cart ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button @click.prevent = \"addToCart(product, countOfSizeObj)\" class=\"btn--primary style2 \" \r\n                                            type=\"submit\">Add to Cart</button>  ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Add to Cart ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button @click.prevent = \"addToCart(product, countOfSizeObj)\" class=\"btn--primary style2 \" \r\n                                            type=\"submit\">Add to Cart</button>  ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"])),
     "class": "btn--primary style2",
     type: "submit"
-  }, "Add to Cart")])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  }, "Add to Cart")])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#0",
     onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       _ctx.addToCompare(_ctx.product);
 
       _ctx.getCompareCategory();
     }, ["prevent"]))
-  }, _hoisted_65)]), _ctx.product.count_likes > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.product.count_likes), 1
+  }, _hoisted_64)]), _ctx.product.count_likes > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.product.count_likes), 1
   /* TEXT */
-  ), _hoisted_67])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End Shop Details Top"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("PopupSizeInfo"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SizeTable, {
-    cat: "my cat"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("EndPopupSizeInfo"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" productdrescription-tabStart "), _ctx.product ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_69, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [_hoisted_71, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_74, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, [_hoisted_76, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.product.description), 1
+  ), _hoisted_66])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End Shop Details Top"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("PopupSizeInfo"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SizeTable)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("EndPopupSizeInfo"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" productdrescription-tabStart "), _ctx.product ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_69, [_hoisted_70, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_74, [_hoisted_75, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.product.description), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_77, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_78, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_76, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_77, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "pt-0",
     innerHTML: _ctx.product.content
   }, null, 8
   /* PROPS */
-  , _hoisted_79)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FeedbackList)])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" productdrescription-tab End "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" recent-products Start "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SliderProduct, {
+  , _hoisted_78)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_79, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FeedbackList)])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" productdrescription-tab End "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" recent-products Start "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SliderProduct, {
     title: "Recent Products",
     products: _ctx.recentProducts
   }, null, 8
@@ -2339,7 +2088,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn--primary[data-v-049a6388]{\r\n        background:black;\r\n        color:white;\r\n        border: none;\n}\n.color-product[data-v-049a6388]{\r\n        width:20px; \r\n        height:20px; \r\n        margin-right:10px;\r\n        border-radius: 3px;\r\n        border: 1px solid grey;\n}\n.compare-product a[data-v-049a6388]{\r\n        display: flex;\r\n        margin-top: 10px;\r\n        color: grey;\n}\n.compare-product a .icon[data-v-049a6388]{\r\n        margin-right: 5px;\n}\r\n    /* .head_review{\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-items: center;\r\n    }\r\n    .head_review{\r\n        margin-bottom:20px\r\n    } */\n.stars-outer[data-v-049a6388]{\r\n        position: relative;\r\n        display: inline-block;\n}\n.stars-inner[data-v-049a6388]{\r\n        position: absolute;\r\n        top:0;\r\n        left:0;\r\n        white-space: nowrap;\r\n        overflow: hidden;\r\n        width:0;\n}\n.stars-inner[data-v-049a6388]::before{\r\n        content: \"\\f005 \\f005 \\f005 \\f005 \\f005\";\r\n        font-family: \"Font Awesome 5 Free\";\r\n        font-weight: 900;\r\n        color: #f69c63;\n}\n.stars-outer[data-v-049a6388]::before{\r\n        content: \"\\f005 \\f005 \\f005 \\f005 \\f005\";\r\n        font-family: \"Font Awesome 5 Free\";\r\n        font-weight: 900;\r\n        color: #ccc;\n}\r\n    /* .icon-star, .icon-star-like{\r\n        display:inline-block;\r\n        padding-right:5px;\r\n    }\r\n    .icon-star::before, .icon-star-like::before{\r\n        content: \"\\f005\";\r\n        font-family: \"Font Awesome 5 Free\";\r\n        font-weight: 900;\r\n        font-size: 20px;\r\n    }\r\n    .icon-star::before{\r\n        color: #ccc;\r\n    }\r\n    .icon-star-like::before{\r\n        color: #f69c63;\r\n    } */\r\n    /* .star-choose{\r\n        display:block;\r\n        float:left;\r\n    }\r\n    .review-single{\r\n        border: 1px solid #EBE9E9;\r\n        padding:10px;\r\n        margin-bottom:15px;\r\n        border-radius:10px;\r\n    }\r\n    .review-single-reply{\r\n        border: 1px solid #EBE9E9;\r\n        padding:10px;\r\n        margin-bottom:15px;\r\n        margin-left:30px;\r\n        border-radius:10px;\r\n    }\r\n    .reply{\r\n        border-left: 1px solid #EBE9E9;\r\n    }\r\n    .review-single-reply h6 {\r\n        padding-top: 6px;\r\n        font-weight: 600;\r\n    }\r\n    .review-single-reply h6 span {\r\n        display: block;\r\n        font-size: 14px;\r\n        padding-top: 3px;\r\n    }\r\n    \r\n    .flaticon-star::before{\r\n        color: #ccc;\r\n    } */\r\n    /* .mfp-close{\r\n        opacity: 1;\r\n        border: 1px solid black;\r\n        width: 170px;\r\n    } */\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn--primary[data-v-049a6388]{\r\n        background:black;\r\n        color:white;\r\n        border: none;\n}\n.color-product[data-v-049a6388]{\r\n        width:20px; \r\n        height:20px; \r\n        margin-right:10px;\r\n        border-radius: 3px;\r\n        border: 1px solid grey;\n}\n.compare-product a[data-v-049a6388]{\r\n        display: flex;\r\n        margin-top: 10px;\r\n        color: grey;\n}\n.compare-product a .icon[data-v-049a6388]{\r\n        margin-right: 5px;\n}\n.stars-outer[data-v-049a6388]{\r\n        position: relative;\r\n        display: inline-block;\n}\n.stars-inner[data-v-049a6388]{\r\n        position: absolute;\r\n        top:0;\r\n        left:0;\r\n        white-space: nowrap;\r\n        overflow: hidden;\r\n        width:0;\n}\n.stars-inner[data-v-049a6388]::before{\r\n        content: \"\\f005 \\f005 \\f005 \\f005 \\f005\";\r\n        font-family: \"Font Awesome 5 Free\";\r\n        font-weight: 900;\r\n        color: #f69c63;\n}\n.stars-outer[data-v-049a6388]::before{\r\n        content: \"\\f005 \\f005 \\f005 \\f005 \\f005\";\r\n        font-family: \"Font Awesome 5 Free\";\r\n        font-weight: 900;\r\n        color: #ccc;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

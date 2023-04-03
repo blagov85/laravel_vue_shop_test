@@ -56,35 +56,36 @@
             <p><del v-if="product.old_price"> {{ product.old_price }}</del> {{ product.price }}</p> 
         </div>
     </div>
-    <div :id="`popupForSize${product.id}`" class="product-gird__quick-view-popup mfp-hide" style="width:50%">
+    <div :id="`popupForSize${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width" style="width:50%">
         <ProductPopupMin />
     </div>
 </template>
 
 <script>
 
-    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+    import { mapState, mapMutations, mapActions } from 'vuex';
     import ProductPopup from './ProductPopup';
     import ProductPopupMin from './ProductPopupMin';
 
     export default {
         name: "ProductForSlider",
         components: {
-            ProductPopup,
+            ProductPopup, //data popup product
             ProductPopupMin
         },
         props: ['product'],
         mounted() {
-            this.getToken(),
-            console.log('Component mounted.')
-            console.log(this.product)
+            this.getToken()
+        },
+        beforeUnmount(){
+            this.setPopupProduct(null);
+            this.setPopupCountForCart(1);
+            this.setPopupCountOfSizeObj(null);
+            this.setPopupMaxCountSize(1); 
         },
         computed: {
             ...mapState('accountModule',[
                 'token'
-            ]),
-            ...mapState('productsModule',[
-                'likedProduct'
             ])
         },
         methods: {
@@ -96,13 +97,19 @@
                 'getToken'
             ]),
             ...mapActions('likeModule',[
-                'likeProduct'
+                'likeProduct' //add to array or delete from array product for Like
             ]),
             ...mapActions('compareModule',[
-                'addToCompare',
-                'getCompareCategory'
+                'addToCompare', //add to array or delete from array product for Compare
+                'getCompareCategory' //get all category all products in Compare
             ]),
-            percentRatingStar(product){
+            ...mapMutations('popupProductModule',[
+                'setPopupProduct',
+                'setPopupCountForCart',
+                'setPopupCountOfSizeObj',
+                'setPopupMaxCountSize'
+            ]),
+            percentRatingStar(product){ //get %
                 return Math.round((product.rating / 5) * 100);
             }
         }

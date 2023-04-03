@@ -2,7 +2,7 @@ const productOne = ({
     namespaced: true,
     state () {
         return {
-            product: null
+            product: null //product in show page
         }
       },
     mutations: {
@@ -11,6 +11,7 @@ const productOne = ({
         }
     },
     actions: {
+        //get data for product in Show page
         getProduct({ commit }, id){
             axios.get(`/api/product/${id}`)
                 .then(res => {
@@ -19,8 +20,7 @@ const productOne = ({
                 })
                 .finally(x => {
                     $(document).trigger('changed_')
-                });
-            //this.$emit('set-search-empty');    
+                }); 
         },
     }
 })

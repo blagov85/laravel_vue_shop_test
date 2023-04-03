@@ -93,18 +93,10 @@
 </template>
 
 <script>
-    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+    import { mapState } from 'vuex';
 
     export default {
         name: "OrderInfo",
-        mounted() {
-
-        },
-        data(){
-            return{
-
-            }
-        },
         computed: {
             ...mapState('orderModule',[
                 'order'

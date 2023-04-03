@@ -17,7 +17,7 @@
                 Написать отзыв
             </router-link>            
         </div>
-        <div id="popupReview" class="product-gird__quick-view-popup mfp-hide" style="width:50%">
+        <div id="popupReview" class="product-gird__quick-view-popup mfp-hide popup-width">
             <FeedbackNew />
         </div>
         <div v-for="feedback in product.feedback" :key="feedback.id">
@@ -53,30 +53,19 @@
 
 <script>
     import FeedbackNew from './FeedbackNew';
-    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+    import { mapState, mapMutations, mapActions } from 'vuex';
     import utils from '../utils';
 
     export default {
         name: "FeedbackList",
         components: {
-            FeedbackNew 
-        },
-        mounted() {
-            console.log('Component mounted.')
-        },
-        data(){
-            return {
-                // feedbackParentId: null,
-                // changeRating: [false,false,false,false,false],
-                // chooseRating: [false,false,false,false,false],
-                // textFeedback: '',
-            }
+            FeedbackNew //form for add new feedback
         },
         computed: {
             ...mapState('productOneModule',[
                 'product'
             ]),
-            percentRating(){
+            percentRating(){ //get %
                 return utils.percentRatingStar(this.product.rating)
             }
         },
@@ -89,52 +78,7 @@
             ]),
             ...mapMutations('feedbackModule',[
                 'setFeedbackParentId'
-            ]),
-            // percentRatingStar(){
-            //     return Math.round((this.product.rating / 5) * 100);
-            // },
-            // feedbackProductNull(){
-            //     this.textFeedback = '';
-            //     this.rating = null;
-            //     this.chooseRating = [false, false, false, false, false];
-            //     this.changeRating = [false, false, false, false, false];
-            // },
-            // setFeedbackId(feedbackParentId){
-            //     this.feedbackParentId = feedbackParentId;
-            // },
-            // getToken(){
-            //     return localStorage.getItem('x_xsrf_token');
-            // },
-            // fixStars(){
-            //     this.changeRating = this.chooseRating.slice(0);
-            // },
-            // focusRating(itemStar){
-            //     let i;
-            //     for(i = 0; i < itemStar; i++){
-            //         this.changeRating[i] = true;
-            //     }
-            //     for(i = itemStar; i < 5; i++){
-            //         this.changeRating[i] = false;
-            //     }
-            // },
-            // clickRating(itemStar){
-            //     this.chooseRating = this.changeRating.slice(0);
-            //     this.rating = itemStar;
-            // },
-            // feedbackProduct(){
-            //     this.axios.post(`/api/product/${this.$route.params.id}/feedback`,{
-            //         message: this.textFeedback,
-            //         rating: this.rating,
-            //         status: 'new',
-            //         parent_id: this.feedbackParentId
-            //     })
-            //         .then(res => {
-            //             console.log("OK");
-            //         })
-            //         .finally(x => {
-            //             $(document).trigger('changed_')
-            //         });
-            // }
+            ])
         }
     }
 </script>

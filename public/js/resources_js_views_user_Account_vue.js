@@ -38,7 +38,6 @@ __webpack_require__.r(__webpack_exports__);
         new_password: this.newPassword,
         new_password_confirmation: this.confirmNewPassword
       }).then(function (res) {
-        console.log(res);
         _this.oldPassword = null;
         _this.newPassword = null;
         _this.confirmNewPassword = null;
@@ -115,14 +114,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CounterProductSize",
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  data: function data() {
-    return {};
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('popupProductModule', ['popupProduct', 'popupCountForCart', 'popupCountOfSizeObj'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)([])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
 });
 
 /***/ }),
@@ -154,20 +147,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.loadLike();
-    console.log('LikeList');
   },
   unmounted: function unmounted() {
-    console.log('unLikeList');
     this.setIsLikeFromMainPage(false);
+    this.setPopupProduct(null);
+    this.setPopupCountForCart(1);
+    this.setPopupCountOfSizeObj(null);
+    this.setPopupMaxCountSize(1);
   },
-  data: function data() {
-    return {};
-  },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('likeModule', ['likeProducts', 'isLikeFromMainPage'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('likeModule', ['getLikeCount'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('likeModule', ['setIsLikeFromMainPage'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('likeModule', ['deleteProductLike', 'checkLoadLike'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('likeModule', ['likeProducts', 'isLikeFromMainPage' //pressed link in main page
+  ])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('likeModule', ['getLikeCount' //count of likes
+  ])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('likeModule', ['setIsLikeFromMainPage'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('likeModule', ['deleteProductLike', 'checkLoadLike'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('popupProductModule', ['setPopupProduct', 'setPopupCountForCart', 'setPopupCountOfSizeObj', 'setPopupMaxCountSize'])), {}, {
     loadLike: function loadLike() {
       if (this.isLikeFromMainPage) {
-        this.checkLoadLike();
+        this.checkLoadLike(); //if button like was pressed anywhere, then get new data about Like
       }
     }
   })
@@ -195,10 +189,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "OrderInfo",
-  mounted: function mounted() {},
-  data: function data() {
-    return {};
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('orderModule', ['order']))
 });
 
@@ -229,12 +219,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     OrderInfo: _OrderInfo__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {},
-  data: function data() {
-    return {};
+  beforeUnmount: function beforeUnmount() {
+    this.setOrder(null);
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('orderModule', ['orders'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('orderModule', ['getOrderCount'])),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('orderModule', ['getOrder']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('orderModule', ['getOrder'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('orderModule', ['setOrder']))
 });
 
 /***/ }),
@@ -263,9 +252,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "ProductPopupMin",
   components: {
     CounterProductSize: _CounterProductSize__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('popupProductModule', ['popupProduct']))
 });
@@ -297,11 +283,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      //user: null,
-      // arrayBirthDay: [],
-      // arrayBirthMonth: [],
-      // arrayBirthYear: [],
-      // regions: [],
       changeDataUser: '',
       phoneError: '',
       errors: []
@@ -314,6 +295,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('accountModule', ['setUser'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('accountModule', ['getBirth', 'getRegions'])), {}, {
     loadUserData: function loadUserData() {
+      //get user data,  birthday list , region list
       if (!this.user) {
         this.getUser();
         this.getBirth();
@@ -373,12 +355,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, 2000);
       });
     },
-    // getRegions(){
-    //     this.axios.get('/api/regions')
-    //         .then(res => {
-    //             this.regions = res.data.data;
-    //         });
-    // },
     maskPhone: function maskPhone() {
       var phoneInput = document.getElementById('phone');
       var keyCode;
@@ -449,36 +425,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Account",
   components: {
     LikeList: _components_LikeList__WEBPACK_IMPORTED_MODULE_1__["default"],
+    //list of like products of user (nested ProductPopupMin)
     OrderList: _components_OrderList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    //list of orders of user (nested OrderInfo)
     UserData: _components_UserData__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ChangePassword: _components_ChangePassword__WEBPACK_IMPORTED_MODULE_3__["default"]
+    //personal data of user
+    ChangePassword: _components_ChangePassword__WEBPACK_IMPORTED_MODULE_3__["default"] //form for change password
+
   },
   mounted: function mounted() {
-    $(document).trigger('changed_'); // this.getUser(),
-    // this.getBirth(),
-    //this.getProductsLike()
-    // this.getRegions()
-    //this.getOrders()
+    $(document).trigger('changed_');
   },
-  data: function data() {
-    return {//popupProduct: null,
-      //countOfSizeObj: null,
-      //maxCountSize: 1,
-      //productsLike: [],
-      // changeDataUser: '',
-      // phoneError: '',
-      //orders: [],
-      //popupOrder: null,
-      // oldPassword: '',
-      // newPassword: '',
-      // confirmNewPassword: '',
-      // changePasswordText: '',
-      // errors: []
-      //countForCart: 1
-    };
-  },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)('accountModule', ['userName'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)('likeModule', ['isLikeFromMainPage'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('likeModule', ['checkLoadLike'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('orderModule', ['getOrders']))
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)('accountModule', ['userName'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)('likeModule', ['isLikeFromMainPage' //press link in main page
+  ])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('likeModule', ['checkLoadLike'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)('orderModule', ['getOrders'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('accountModule', ['setToken', 'setUserName', 'setUser', 'setDayList', 'setMonthList', 'setYearList', 'setRegionList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('likeModule', ['setLikeProducts', 'setIsChangeLiked', 'setIsLikeFromMainPage'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('orderModule', ['setOrder', 'setOrders'])), {}, {
+    logout: function logout() {
+      var _this = this;
+
+      axios.post('/api/logout').then(function (res) {
+        localStorage.removeItem('x_xsrf_token');
+
+        _this.setToken(null);
+
+        _this.setLikeProducts([]);
+
+        _this.setIsChangeLiked(false);
+
+        _this.setIsLikeFromMainPage(false);
+
+        _this.setUserName(null);
+
+        _this.setUser(null);
+
+        _this.setDayList([]);
+
+        _this.setMonthList([]);
+
+        _this.setYearList([]);
+
+        _this.setRegionList([]);
+
+        _this.setOrders([]);
+
+        _this.setOrder(null);
+
+        _this.$router.push({
+          name: 'products.index'
+        });
+      });
+    }
+  })
 });
 
 /***/ }),
@@ -857,10 +853,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       id: "popupLike".concat(product.id),
-      "class": "product-gird__quick-view-popup mfp-hide",
-      style: {
-        "width": "50%"
-      }
+      "class": "product-gird__quick-view-popup mfp-hide popup-width"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProductPopupMin)], 8
     /* PROPS */
     , _hoisted_15)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -1229,7 +1222,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT, PROPS */
     , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       id: "popupOrder".concat(order.id),
-      "class": "product-gird__quick-view-popup mfp-hide"
+      "class": "product-gird__quick-view-popup mfp-hide popup-width"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OrderInfo)], 8
     /* PROPS */
     , _hoisted_8)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.date_create), 1
@@ -1671,50 +1664,49 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "nav-link"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Logout ")], -1
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Вийти ", -1
 /* HOISTED */
 );
 
-var _hoisted_17 = {
+var _hoisted_17 = [_hoisted_16];
+var _hoisted_18 = {
   "class": "col-lg-7"
 };
-var _hoisted_18 = {
+var _hoisted_19 = {
   "class": "tab-content",
   id: "v-pills-tabContent"
 };
-var _hoisted_19 = {
+var _hoisted_20 = {
   "class": "tabs-content__single"
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "tab-pane fade",
   id: "v-pills-orders",
   role: "tabpanel",
   "aria-labelledby": "v-pills-orders-tab"
 };
-var _hoisted_21 = {
-  "class": "tabs-content__single"
-};
 var _hoisted_22 = {
-  "class": "col-xl-12 wow fadeInUp animated"
+  "class": "tabs-content__single"
 };
 var _hoisted_23 = {
-  "class": "tabs-content__single"
-};
-var _hoisted_24 = {
   "class": "col-xl-12 wow fadeInUp animated"
 };
+var _hoisted_24 = {
+  "class": "tabs-content__single"
+};
 var _hoisted_25 = {
+  "class": "col-xl-12 wow fadeInUp animated"
+};
+var _hoisted_26 = {
   "class": "tab-pane fade",
   id: "v-pills-change-password",
   role: "tabpanel",
   "aria-labelledby": "v-pills-change-password-tab"
 };
-var _hoisted_26 = {
+var _hoisted_27 = {
   "class": "tabs-content__single"
 };
-var _hoisted_27 = {
+var _hoisted_28 = {
   "class": "col-xl-12 wow fadeInUp animated"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1763,21 +1755,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-selected": "false"
   }, _hoisted_14, 2
   /* CLASS */
-  ), _hoisted_15, _hoisted_16])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  ), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $options.logout();
+    }, ["prevent"])),
+    "class": "nav-link"
+  }, _hoisted_17)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([!_ctx.isLikeFromMainPage ? 'tab-pane fade show active' : 'tab-pane fade']),
     id: "v-pills-personal",
     role: "tabpanel",
     "aria-labelledby": "v-pills-personal-tab"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserData)])], 2
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserData)])], 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OrderList)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OrderList)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([_ctx.isLikeFromMainPage ? 'tab-pane fade show active' : 'tab-pane fade']),
     id: "v-pills-likes",
     role: "tabpanel",
     "aria-labelledby": "v-pills-likes-tab"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LikeList)])])], 2
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LikeList)])])], 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ChangePassword)])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End My Account Page")])]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ChangePassword)])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End My Account Page")])]);
 }
 
 /***/ }),

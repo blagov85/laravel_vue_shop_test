@@ -16,9 +16,6 @@ __webpack_require__.r(__webpack_exports__);
   props: ['myOrder', 'myImagesOrder'],
   mounted: function mounted() {
     $(document).trigger('changed_');
-    console.log("ORDER");
-    console.log(this.order);
-    console.log(this.imagesOrder);
   },
   computed: {
     order: function order() {

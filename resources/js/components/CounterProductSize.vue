@@ -30,14 +30,6 @@
 
     export default {
         name: "CounterProductSize",
-        mounted() {
-            console.log('Component mounted.')
-        },
-        data(){
-            return{
-
-            }
-        },
         computed: {
             ...mapState('popupProductModule',[
                 'popupProduct',
@@ -46,9 +38,6 @@
             ])
         },
         methods: {
-            ...mapMutations([
-
-            ]),
             ...mapActions('popupProductModule',[
                 'decreaseCountPopup',
                 'increaseCountPopup',

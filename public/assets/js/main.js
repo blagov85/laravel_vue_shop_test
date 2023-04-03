@@ -39,7 +39,7 @@ jQuery(function ($) {
     $(".search-box-popup").removeClass("active");
   });
 
-  $(".menu-closer").on("click", function () {
+  $(".menu-closer, .menu-closer-item").on("click", function () {
     $(".mobile-menu__sidebar-menu ").removeClass("active");
     $(".menu-closer").removeClass("active");
   });
@@ -85,8 +85,13 @@ jQuery(function ($) {
     $(".side-cart-closer").removeClass("active");
   });
 
-  $(".slidebarfilter, .remove-sidebar").on("click", function () {
+  $(".slidebarfilter, .remove-sidebar").unbind().on("click", function () {
     $(".shop-grid-sidebar").toggleClass("active");
+    $(".sidebar-closer").toggleClass("active");
+  });
+  $(".sidebar-closer, .filterbtn").on("click", function () {
+    $(".shop-grid-sidebar").removeClass("active");
+    $(".sidebar-closer").removeClass("active");
   });
 
   $(".varients li a").on("click", function () {

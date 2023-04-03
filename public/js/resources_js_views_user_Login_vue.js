@@ -22,7 +22,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Login",
   mounted: function mounted() {
-    $(document).trigger('changed_'); //this.$emit('set-search-empty')
+    $(document).trigger('changed_');
   },
   data: function data() {
     return {

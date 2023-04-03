@@ -20,9 +20,6 @@
         components: {
             CounterProductSize 
         },
-        mounted() {
-            console.log('Component mounted.')
-        },
         computed: {
             ...mapState('popupProductModule',[
                 'popupProduct'

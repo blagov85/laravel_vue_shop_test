@@ -2,10 +2,10 @@ const popupProduct = ({
     namespaced: true,
     state () {
         return {
-            popupProduct: null,
-            popupCountForCart: 1,
-            popupCountOfSizeObj: null,
-            popupMaxCountSize: 1
+            popupProduct: null, //product in popup
+            popupCountForCart: 1, //count products in cart
+            popupCountOfSizeObj: null, //object of size of product
+            popupMaxCountSize: 1 //max count of size of product
         }
       },
     mutations: {
@@ -38,6 +38,7 @@ const popupProduct = ({
             commit('setPopupCountOfSizeObj', null);
             commit('setPopupMaxCountSize', 1);
         },
+        //get popup product
         getPopupProduct({commit},id){
             axios.get(`/api/product/${id}`)
                 .then(res => {
@@ -47,6 +48,7 @@ const popupProduct = ({
                     $(document).trigger('changed_')
                 });
         },
+        //set data from count size
         setProductSize({state,commit},sizeObj){
             commit('setPopupCountForCart', 1);
             commit('setPopupCountOfSizeObj', sizeObj);
@@ -54,14 +56,17 @@ const popupProduct = ({
         },
         decreaseCountPopup ({state, commit}) {
             if(state.popupCountForCart === 1) return;
+                //+1
                 commit('setDecreaseCountPopup');
         },
         increaseCountPopup ({state, commit}) {
             if(state.popupCountForCart === state.popupMaxCountSize) return;
+                //-1
                 commit('setIncreaseCountPopup');
         }
     },
     getters: {
+        //get percent from 1..5 degree
         percentRatingStarPopup(state){
             if(!state.popupProduct){
                 return 0;

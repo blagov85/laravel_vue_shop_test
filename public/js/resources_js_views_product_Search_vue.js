@@ -16,6 +16,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     $(document).trigger('changed_');
     this.getProducts(), this.getFilterList();
+    console.log("Privet!!!");
   },
   beforeDestroy: function beforeDestroy() {
     this.setSearchEmpty();
@@ -90,6 +91,7 @@ __webpack_require__.r(__webpack_exports__);
     filterProducts: function filterProducts() {
       var prices = $('#priceRange').val();
       this.prices = prices.replace(/[\s+]|[$]/g, '').split('-');
+      this.getProducts();
     },
     addSize: function addSize(id) {
       var element = document.getElementById("size".concat(id));
@@ -229,8 +231,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.axios.get("/api/products/search/filters?search=".concat(this.$route.params.searchVal)).then(function (res) {
-        _this3.filterList = res.data;
-        console.log(res.data); //  Price Filter 
+        _this3.filterList = res.data.data;
+        console.log("my list and data");
+        console.log(_this3.filterList); //  Price Filter 
 
         if ($("#price-range").length) {
           $("#price-range").slider({

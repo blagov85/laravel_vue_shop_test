@@ -108,7 +108,7 @@
 </template>
 
 <script>
-    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+    import { mapState, mapMutations, mapActions } from 'vuex';
 
     export default {
         name: "OrderMetaData",
@@ -188,7 +188,6 @@
                 this.axios.get('/api/delivery_companies')
                     .then(res => {
                         this.deliveryCompanies = res.data.data;
-                        console.log(this.deliveryCompanies);
                     });
             },
             setDeliveryPrice(priceDC){
@@ -207,7 +206,7 @@
                 this.errorCheckOrder = '';
                 let imagesOrder = [];
                 let listOrder = JSON.parse(JSON.stringify(this.cart));
-                listOrder.forEach(item =>{
+                listOrder.forEach(item =>{ //get image from orders products
                     let imageOrder = 
                         {
                             'id': item.id,
@@ -233,16 +232,14 @@
                         delivery_cost: this.deliveryPrice
                     })
                     .then(res => {
-                        console.log("RES");
-                        console.log(res);
                         listOrder = [];
-                        this.setCart([]);
+                        this.setCart([]);//reset cart
                         this.updateCart();
-                        this.order = res.data.data;
+                        this.order = res.data.data; //get order data from server
+                        //redirect to order info page (params: order data and orders products' image)
                         this.$router.push({name: 'order.index', params: { myOrder: JSON.stringify(res.data.data), myImagesOrder: JSON.stringify(imagesOrder)}});
                     })
                     .catch(error => {
-                        console.log("ERR");
                         this.errors = [];
                         if(this.serverError(error).length > 0){
                             this.errors = this.serverError(error);

@@ -128,9 +128,6 @@
 
 <script>
     export default {
-        name: "SizeTable",
-        props: [
-            'cat'
-        ]
+        name: "SizeTable"
     }
 </script>

@@ -125,9 +125,6 @@ export default {
     props: ['myOrder','myImagesOrder'],
     mounted(){
         $(document).trigger('changed_')
-        console.log("ORDER");
-        console.log(this.order);
-        console.log(this.imagesOrder);
     },
     computed: {
         order() {

@@ -17,7 +17,7 @@
                             <td style="width:25%">  
                                 <a @click.prevent="getOrder(order.id)" :href="`#popupOrder${order.id}`" 
                                     class="popup_link">#{{ order.id }}</a>
-                                <div :id="`popupOrder${order.id}`" class="product-gird__quick-view-popup mfp-hide">
+                                <div :id="`popupOrder${order.id}`" class="product-gird__quick-view-popup mfp-hide popup-width">
                                     <OrderInfo />
                                 </div>
                             </td>
@@ -48,13 +48,8 @@
         components: {
             OrderInfo
         },
-        mounted() {
-
-        },
-        data(){
-            return{
-
-            }
+        beforeUnmount(){
+            this.setOrder(null);
         },
         computed: {
             ...mapState('orderModule',[
@@ -67,6 +62,9 @@
         methods: {
             ...mapActions('orderModule',[
                 'getOrder'
+            ]),
+            ...mapMutations('orderModule',[
+                'setOrder'
             ])
         }
     }

@@ -139,7 +139,7 @@
                                                 <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupCompare${product.id}`" 
                                                     class="addcart btn--primary style2 popup_link">Add To Cart</a>
                                                 
-                                                <div :id="`popupCompare${product.id}`" class="product-gird__quick-view-popup mfp-hide" style="width:50%">
+                                                <div :id="`popupCompare${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width" style="width:50%">
                                                     <ProductPopupMin />
                                                 </div>
                                             </td>
@@ -189,15 +189,21 @@ import ProductPopupMin from '../../components/ProductPopupMin';
 export default {
     name: "Compare",
     components: {
-            ProductPopupMin
+            ProductPopupMin //get data popup one product (nested CounterProductSize)
         },
     mounted(){
         $(document).trigger('changed_'),
-        this.getCompareProducts(this.$route.params.id)
+        this.getCompareProducts(this.$route.params.id) //get product for compare about its category id
+        this.setSearchText('')
         
     },
     beforeUnmount(){
         this.setIdCategoryActive(null);
+        this.setCompareProduct([]);
+        this.setPopupProduct(null);
+        this.setPopupCountForCart(1);
+        this.setPopupCountOfSizeObj(null);
+        this.setPopupMaxCountSize(1); 
     },
     data() {
         return {
@@ -212,10 +218,10 @@ export default {
     },
     computed: {
         ...mapState('compareModule',[
-            'compareProduct'
+            'compareProduct' //products for compare
         ]),
         ...mapGetters('compareModule',[
-                'getCompareProductCount'
+                'getCompareProductCount' //count of products in category
         ])
     },
     methods: {
@@ -224,115 +230,22 @@ export default {
             'removeProductCompare'
         ]),
         ...mapMutations('compareModule',[
-            'setIdCategoryActive'
+            'setIdCategoryActive',
+            'setCompareProduct'
+        ]),
+        ...mapMutations('indexProductsModule',[
+            'setSearchText'
         ]),
         ...mapActions('popupProductModule',[
                 'popupProductNull',
-                'getPopupProduct'
+                'getPopupProduct',
         ]),
-        // decreaseCount(){
-        //     if(this.countForCart === 1) return;
-        //     this.countForCart--;
-        // },
-        // increaseCount(){
-        //     if(this.countForCart === this.maxCountSize) return;
-        //     this.countForCart++;
-        // },
-        // getCompareProducts(){
-        //     let idCompare = [];
-        //     this.storageProductsMinCompare = JSON.parse(localStorage.getItem('compare'));
-        //     if(this.$route.params.id == null){
-        //         this.storageProductsMinCompare.forEach(item =>{
-        //             idCompare.push(item.id);
-        //         });
-        //     }else{
-        //         this.storageProductsMinCompare.forEach(item =>{
-        //             if(item.category_id == this.$route.params.id){
-        //                 idCompare.push(item.id);
-        //             }
-        //         });
-        //     }
-        //     this.countProductCompare = idCompare.length;
-        //     this.axios.post("/api/compare",{
-        //         ids: idCompare
-        //         }).then(res => {
-        //             this.productsCompare = res.data.data;
-        //             console.log(res.data.data); 
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        //     this.$emit('set-search-empty'); 
-        // },
-        // removeProductCompare(id){
-        //     this.productsCompare = this.productsCompare.filter(productCompare => {
-        //         return productCompare.id !== id;
-        //     });
-        //     this.storageProductsMinCompare = this.storageProductsMinCompare.filter(productCompare => {
-        //         return productCompare.id !== id;
-        //     });
-        //     if(this.countProductCompare > 1){
-        //         this.countProductCompare -= 1;
-        //     }
-        //     this.updateCompare();
-        // },
-        // updateCompare(){
-        //     localStorage.setItem('compare', JSON.stringify(this.storageProductsMinCompare));
-        //     this.$emit('get-compare-products');
-        // },
-        // popupProductNull(){
-        //     this.popupProduct = null;
-        //     this.countOfSizeObj = null;
-        //     this.countForCart = 1; 
-        //     this.maxCountSize = 1;
-        // },
-        // getProduct(id){
-        //     this.axios.get(`/api/product/${id}`)
-        //         .then(res => {
-        //             this.popupProduct = res.data.data;
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        // },
-        // setProductSize(countOfSize){
-        //     this.countOfSizeObj = countOfSize;
-        //     this.maxCountSize = this.countOfSizeObj.count;
-        //     this.countForCart = 1;
-        // },
-        // addToCart(product, countOfSizeObj){
-        //     let qty = Number(this.countForCart);
-        //     let cart = localStorage.getItem('cart');
-        //     this.countForCart = 1; 
-        //     let newProduct = [
-        //             {
-        //                 'id': product.id,
-        //                 'title': product.title,
-        //                 'price': product.price,
-        //                 'image_url': product.image_url,
-        //                 'size_id': countOfSizeObj.id,
-        //                 'size_title': countOfSizeObj.title,
-        //                 'qty': qty
-        //             }
-        //         ];
-
-        //     if(!cart){
-        //         localStorage.setItem('cart', JSON.stringify(newProduct));
-        //     }else{
-        //         cart = JSON.parse(cart);
-        //         cart.forEach(productInCart => {
-        //             if((productInCart.id === product.id) && (productInCart.size_id === countOfSizeObj.id)){
-        //                 productInCart.qty = Number(productInCart.qty) + Number(qty);
-        //                 newProduct = null;
-        //             }
-        //         });
-
-        //         Array.prototype.push.apply(cart, newProduct);
-        //         localStorage.setItem('cart', JSON.stringify(cart));
-        //         this.$emit('get-cart-products')
-        //     }
-            
-        // },
+        ...mapMutations('popupProductModule',[
+            'setPopupProduct',
+            'setPopupCountForCart',
+            'setPopupCountOfSizeObj',
+            'setPopupMaxCountSize'
+        ])
     }
 }
 </script>

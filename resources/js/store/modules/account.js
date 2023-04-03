@@ -2,13 +2,13 @@ const account = ({
     namespaced: true,
     state () {
         return {
-            userName: null,
+            userName: null, //only name of user
             token: null,
             user: null,
-            dayList: [],
-            monthList: [],
-            yearList: [],
-            regionList: []
+            dayList: [], //1-31
+            monthList: [], //1-12
+            yearList: [], //1940-2025
+            regionList: [] //regions of Ukraine
         }
       },
     mutations: {
@@ -35,7 +35,7 @@ const account = ({
         }
     },
     actions: {
-        getToken({ commit }){
+        getToken({ commit }){ //from localStorage
             commit('setToken', localStorage.getItem('x_xsrf_token'));
         },
         getUserName({ state, commit }){
@@ -46,7 +46,7 @@ const account = ({
                     });
             }
         },
-        getBirth({ commit }){
+        getBirth({ commit }){ //data lists
             let dayList = [];
             let monthList = [];
             let yearList = [];
@@ -63,7 +63,7 @@ const account = ({
             commit('setMonthList', monthList);
             commit('setYearList', yearList);
         },
-        getRegions({ commit }){
+        getRegions({ commit }){ //region list
             axios.get('/api/regions')
                 .then(res => {
                     let regionList = res.data.data;

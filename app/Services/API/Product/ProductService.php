@@ -28,7 +28,7 @@ class ProductService
     public function index($data){
         $filter = app()->make(ProductFilterAPI::class, ['queryParams' => array_filter($data)]);
         $filterKey = $data['filterKey'];
-        $products = Product::filter($filter);
+        $products = Product::filter($filter)->has('countProductsSizes');
         if($filterKey == Product::PRICE_ASC_KEY){
             $products = $products->orderBy('price', 'asc'); 
         }elseif($filterKey == Product::PRICE_DESC_KEY){
@@ -74,14 +74,14 @@ class ProductService
 
     public function search($data){
         $filter = app()->make(ProductFilterAPI::class, ['queryParams' => array_filter($data)]);
-        $filterKey = $data['filterKey'];
-        if($data['search']){
-            $search = $data['search'];
-        }else{
-            $search = '';
-        }
         
-        $products = Product::where('title', 'like', '%' . $search . '%')->filter($filter);
+        if($data['search']){
+            $products = Product::where('title', 'like', '%' . $data['search'] . '%')->filter($filter)->has('countProductsSizes');
+        }else{
+            $products = Product::filter($filter)->has('countProductsSizes');
+        }
+
+        $filterKey = $data['filterKey'];
         if($filterKey == Product::PRICE_ASC_KEY){
             $products = $products->orderBy('price', 'asc'); 
         }elseif($filterKey == Product::PRICE_DESC_KEY){
@@ -95,11 +95,26 @@ class ProductService
     }
 
     public function searchFilter($search){
-        $sorting = Sorting::all();
-        $products = Product::with('category','brand','sex','country','materials','seasons','countProductsSizes','colors','tags')->where('title','like','%' . $search . '%')->get();
+        if($search){
+            $products = Product::with('category','brand','sex','country','materials','seasons','countProductsSizes','colors','tags')->where('title','like','%' . $search . '%')->has('countProductsSizes')->get();
+        }else{
+            $products = Product::with('category','brand','sex','country','materials','seasons','countProductsSizes','colors','tags')->has('countProductsSizes')->get();
+        }
+        if($products->isEmpty()){
+            return null;
+        }
         $price = $products->sortBy('price')->pluck('price');
         $minPrice = $price->first();
         $maxPrice = $price->last();
+        $categoriesProd = [];
+        $brandsProd = [];
+        $sexProd = [];
+        $countriesProd = [];
+        $materialsProd = [];
+        $seasonsProd = [];
+        $sizesProd = [];
+        $colorsProd = [];
+        $tagsProd = [];
         foreach($products as $product){
             $categoriesProd[$product->category->id] = $product->category; 
             $brandsProd[$product->brand->id] = $product->brand; 
@@ -109,7 +124,7 @@ class ProductService
                 $materialsProd[$materialOne->id] = $materialOne; 
             }
             foreach($product->seasons as $seasonOne){
-                $seasonsProd[$tagOne->id] = $seasonOne; 
+                $seasonsProd[$seasonOne->id] = $seasonOne; 
             }
             foreach($product->countProductsSizes as $sizeOne){
                 $sizesProd[$sizeOne->id] = $sizeOne; 
@@ -158,19 +173,31 @@ class ProductService
         usort($colors, fn($a, $b) => $a->id <=> $b->id);
         usort($tags, fn($a, $b) => $a->id <=> $b->id);
 
-        $result['categories'] = $categories;
-        $result['brands'] = $brands;
-        $result['sex'] = $sex;
-        $result['countries'] = $countries;
-        $result['materials'] = $materials;
-        $result['seasons'] = $seasons;
-        $result['sizes'] = $sizes;
-        $result['colors'] = $colors;
-        $result['tags'] = $tags;
-        $result['sorting'] = $sorting;
-        $result['minPrice'] = $minPrice;
-        $result['maxPrice'] = $maxPrice;
+        // $result['categories'] = $categories;
+        // $result['brands'] = $brands;
+        // $result['sex'] = $sex;
+        // $result['countries'] = $countries;
+        // $result['materials'] = $materials;
+        // $result['seasons'] = $seasons;
+        // $result['sizes'] = $sizes;
+        // $result['colors'] = $colors;
+        // $result['tags'] = $tags;
+        // $result['sorting'] = $sorting;
+        // $result['minPrice'] = $minPrice;
+        // $result['maxPrice'] = $maxPrice;
 
+        $result = collect();
+        $result->categories = $categories;
+        $result->brands = $brands;
+        $result->sex = $sex;
+        $result->countries = $countries;
+        $result->materials = $materials;
+        $result->seasons = $seasons;
+        $result->sizes = $sizes;
+        $result->colors = $colors;
+        $result->tags = $tags;
+        $result->minPrice = $minPrice;
+        $result->maxPrice = $maxPrice;
         return $result;
     }
 

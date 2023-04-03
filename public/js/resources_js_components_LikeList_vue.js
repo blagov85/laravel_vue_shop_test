@@ -21,14 +21,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CounterProductSize",
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  data: function data() {
-    return {};
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('popupProductModule', ['popupProduct', 'popupCountForCart', 'popupCountOfSizeObj'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)([])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('popupProductModule', ['decreaseCountPopup', 'increaseCountPopup', 'setProductSize', 'popupProductSizeNull'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('cartModule', ['addToCart']))
 });
 
 /***/ }),
@@ -60,20 +54,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.loadLike();
-    console.log('LikeList');
   },
   unmounted: function unmounted() {
-    console.log('unLikeList');
     this.setIsLikeFromMainPage(false);
+    this.setPopupProduct(null);
+    this.setPopupCountForCart(1);
+    this.setPopupCountOfSizeObj(null);
+    this.setPopupMaxCountSize(1);
   },
-  data: function data() {
-    return {};
-  },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('likeModule', ['likeProducts', 'isLikeFromMainPage'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('likeModule', ['getLikeCount'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('likeModule', ['setIsLikeFromMainPage'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('likeModule', ['deleteProductLike', 'checkLoadLike'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('likeModule', ['likeProducts', 'isLikeFromMainPage' //pressed link in main page
+  ])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('likeModule', ['getLikeCount' //count of likes
+  ])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('likeModule', ['setIsLikeFromMainPage'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('popupProductModule', ['popupProductNull', 'getPopupProduct'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('likeModule', ['deleteProductLike', 'checkLoadLike'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('popupProductModule', ['setPopupProduct', 'setPopupCountForCart', 'setPopupCountOfSizeObj', 'setPopupMaxCountSize'])), {}, {
     loadLike: function loadLike() {
       if (this.isLikeFromMainPage) {
-        this.checkLoadLike();
+        this.checkLoadLike(); //if button like was pressed anywhere, then get new data about Like
       }
     }
   })
@@ -105,9 +100,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "ProductPopupMin",
   components: {
     CounterProductSize: _CounterProductSize__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('popupProductModule', ['popupProduct']))
 });
@@ -362,10 +354,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       id: "popupLike".concat(product.id),
-      "class": "product-gird__quick-view-popup mfp-hide",
-      style: {
-        "width": "50%"
-      }
+      "class": "product-gird__quick-view-popup mfp-hide popup-width"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProductPopupMin)], 8
     /* PROPS */
     , _hoisted_15)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {

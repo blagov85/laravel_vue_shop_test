@@ -25,7 +25,7 @@
     export default {
         name: "SliderProduct",
         components: {
-            ProductForSlider 
+            ProductForSlider //block of one product (nested ProductPopup, ProductPopupMin)
         },
         props: ['title', 'products'],
 

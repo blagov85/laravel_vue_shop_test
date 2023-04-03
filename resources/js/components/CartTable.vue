@@ -50,7 +50,7 @@
 </template>
 
 <script>
-    import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+    import { mapState, mapGetters, mapActions } from 'vuex';
 
     export default {
         name: "CartTable",
@@ -65,19 +65,16 @@
                 'totalSumCart'
             ]),
             ...mapGetters('cartModule',[
-                'getCartCount'
+                'getCartCount' //sum of all products in order
             ])
         },
         methods: {
-            ...mapMutations([
-
-            ]),
             ...mapActions('cartModule',[
                 'getCart',
                 'addToCart',
                 'removeFromCart',
                 'getTotalCart',
-                'decreaseQty',
+                'decreaseQty', //change count in order
                 'increaseQty'
             ])
         }

@@ -15,16 +15,16 @@ use Illuminate\Support\Facades\Mail;
 class OrderService
 {
     public function store($data){
-    //return $data;
-    $products = $data['products'];
-    //sort products about id of product
-    usort($products, function($a, $b) { //Sort the array using a user defined function
-        return $a['id'] < $b['id'] ? -1 : 1; //Compare the scores
-    });
-    //define id all products and add to array
-    foreach($products as $product){
-        $ids[] = $product['id'];
-    }
+        //return $data;
+        $products = $data['products'];
+        //sort products about id of product
+        usort($products, function($a, $b) { //Sort the array using a user defined function
+            return $a['id'] < $b['id'] ? -1 : 1; //Compare the scores
+        });
+        //define id all products and add to array
+        foreach($products as $product){
+            $ids[] = $product['id'];
+        }
     
         DB::beginTransaction();
         //find these products and their sizes and counts sizes

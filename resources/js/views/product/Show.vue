@@ -104,9 +104,6 @@
                                                     <span class="increaseQty" @click.prevent="increaseCount()"> <i class="flaticon-plus"></i> </span> 
                                                 </div>
                                             </div>
-                                            <div class="product-quantity-check"> <i class="flaticon-select"></i>
-                                                <p>In Stock</p>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="shop-details-top-order-now"> <i class="flaticon-point"></i>
@@ -140,8 +137,8 @@
             </section>
             <!--End Shop Details Top-->
             <!--PopupSizeInfo-->
-            <div id="popupSizeInfo" class="product-gird__quick-view-popup mfp-hide">
-                <SizeTable cat="my cat"/>
+            <div id="popupSizeInfo" class="product-gird__quick-view-popup mfp-hide popup-width">
+                <SizeTable/>
             </div>
             <!--EndPopupSizeInfo-->
             <!-- productdrescription-tabStart -->
@@ -206,14 +203,15 @@ import utils from '../../utils';
 export default {
     name: "Show",
     components: {
-        FeedbackList,
-        SliderProduct, 
-        SizeTable 
+        FeedbackList, //list of feedbacks of product (nested FeedbackNew)
+        SliderProduct, //container-slider for products (nested ProductForSlider)
+        SizeTable //table of sizes
     },
     mounted(){
         $(document).trigger('changed_'),
-        this.getProduct(this.$route.params.id),
-        this.getRecentProducts(this.$route.params.id)
+        this.getProduct(this.$route.params.id), //get data of product about its id
+        this.getRecentProducts(this.$route.params.id), //get list recent products about product's category id
+        this.setSearchText('')
     },
     beforeUnmount(){
         this.setRecentProducts([]);
@@ -229,6 +227,7 @@ export default {
         ...mapState('productsModule',[
             'recentProducts'
         ]),
+        //list options to string options (through coma)
         materials() {
             return utils.getProductDataToString(this.product.materials);
         },
@@ -241,26 +240,15 @@ export default {
         percentRating(){
             return utils.percentRatingStar(this.product.rating)
         },
+        //get percent of discount
         percentDiscount(){
             return utils.percentDiscountProduct(this.product.price, this.product.old_price)
         }
     },
     data() {
-        return {
-            //product: null,
-            //materials: null,
-            //seasons: null,
-            //tags: null,
+        return {  
             maxCountSize: 1,
             countOfSizeObj: null,
-            //rating: null,
-            // changeRating: [false,false,false,false,false],
-            // chooseRating: [false,false,false,false,false],
-            // textFeedback: '',
-            // feedbackParentId: null,
-            //popupProduct: null,
-            //countOfSizeObjPopup: null, //object size of popupProduct
-            //maxCountSizePopup: null, //max count of size popupProduct
             countForCart: 1
         }
     },
@@ -277,6 +265,9 @@ export default {
         ...mapMutations('productsModule',[
             'setRecentProducts'
         ]),
+        ...mapMutations('indexProductsModule',[
+            'setSearchText'
+        ]),
         ...mapActions('popupProductModule',[
             'popupProductNull',
             'getPopupProduct'
@@ -285,15 +276,16 @@ export default {
             'getRecentProducts'
         ]),
         ...mapActions('compareModule',[
-            'addToCompare',
+            'addToCompare', //add or delete product in array compare
             'getCompareCategory'
         ]),
         ...mapActions('likeModule',[
-            'likeProduct'
+            'likeProduct' //add or delete product in array like
         ]),
         ...mapActions('cartModule',[
             'addToCart'
         ]),
+        //change count of product for purchase
         decreaseCount(){
             if(this.countForCart === 1) return;
             this.countForCart--;
@@ -312,231 +304,6 @@ export default {
             this.maxCountSize = this.countOfSizeObj.count;
             this.countForCart = 1;
         }
-        // focusRating(itemStar){
-        //     let i;
-        //     for(i = 0; i < itemStar; i++){
-        //         this.changeRating[i] = true;
-        //     }
-        //     for(i = itemStar; i < 5; i++){
-        //         this.changeRating[i] = false;
-        //     }
-        // },
-        // clickRating(itemStar){
-        //     this.chooseRating = this.changeRating.slice(0);
-        //     this.rating = itemStar;
-        // },
-        // fixStars(){
-        //     this.changeRating = this.chooseRating.slice(0);
-        // },
-        // getProduct(){
-        //     this.axios.get(`/api/product/${this.$route.params.id}`)
-        //         .then(res => {
-        //             console.log(res.data.data);
-        //             this.product = res.data.data;
-        //             this.materials = this.getProductDataToString(this.product.materials);
-        //             this.seasons = this.getProductDataToString(this.product.seasons);
-        //             this.tags = this.getProductDataToString(this.product.tags);
-        //             console.log(res);
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        //     this.$emit('set-search-empty');    
-        // },
-        /*
-        getProductDataToString(arrayObjectData){
-            if (arrayObjectData !== null){
-                let arrayData = [];
-                arrayObjectData.forEach((el,i) => {
-                    arrayData[i] = el.title;
-                });
-                let stringData = arrayData.join();
-                stringData = stringData.replaceAll(',', ', ');
-            return stringData;
-            }
-            else{
-                return '';
-            }
-        },
-        */
-        
-        // addToCart(product, countOfSizeObj){
-        //     let qty = Number(this.countForCart);
-        //     let cart = localStorage.getItem('cart');
-        //     this.countForCart = 1;
-        //     let newProduct = [
-        //             {
-        //                 'id': product.id,
-        //                 'title': product.title,
-        //                 'price': product.price,
-        //                 'image_url': product.image_url,
-        //                 'size_id': countOfSizeObj.id,
-        //                 'size_title': countOfSizeObj.title,
-        //                 'qty': qty
-        //             }
-        //         ];
-
-        //     if(!cart){
-        //         localStorage.setItem('cart', JSON.stringify(newProduct));
-        //     }else{
-        //         cart = JSON.parse(cart);
-        //         cart.forEach(productInCart => {
-        //             if((productInCart.id === product.id) && (productInCart.size_id === countOfSizeObj.id)){
-        //                 productInCart.qty = Number(productInCart.qty) + Number(qty);
-        //                 newProduct = null;
-        //             }
-        //         });
-
-        //         Array.prototype.push.apply(cart, newProduct);
-        //         localStorage.setItem('cart', JSON.stringify(cart));
-        //         //this.$emit('get-cart-products')
-        //     }
-            
-        // },
-        // addToCompare(product){
-        //     let compare = localStorage.getItem('compare');
-        //     let compareProduct = [
-        //             {
-        //                 'id': product.id,
-        //                 'category_id': product.category.id,
-        //                 'category_title': product.category.title,
-        //                 'title': product.title
-        //             }
-        //         ];
-        //     if(!compare){
-        //         localStorage.setItem('compare', JSON.stringify(compareProduct));
-        //     }else{
-        //         compare = JSON.parse(compare);
-        //         compare.forEach((productInCompare, index, arr) => {
-        //             if(productInCompare.id === product.id){
-        //                 compareProduct = null;
-        //                 arr.splice(index,1);
-        //             }
-        //         });
-        //         Array.prototype.push.apply(compare, compareProduct);
-        //         localStorage.setItem('compare', JSON.stringify(compare));
-        //         this.$emit('get-compare-products');
-        //     }
-        // },
-        // likeProduct(){
-        //     this.axios.get(`/api/product/${this.$route.params.id}/like`)
-        //         .then(res => {
-        //             let likeInfo = res.data.data;
-        //             this.product.count_likes = likeInfo.count_likes;
-        //             this.product.like = likeInfo.like;
-        //             console.log(res.data.data);
-        //             console.log(this.product);
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        // },
-        // likeRecentProduct(id){
-        //     this.axios.get(`/api/product/${id}/like`)
-        //         .then(res => {
-        //             let likeInfo = res.data.data;
-        //             this.recentProducts.forEach(el => {
-        //                 if(el.id === id){
-        //                     el.count_likes = likeInfo.count_likes;
-        //                     el.like = likeInfo.like;
-        //                 }
-        //             })
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //     });
-        // },
-        // feedbackProduct(){
-        //     this.axios.post(`/api/product/${this.$route.params.id}/feedback`,{
-        //         message: this.textFeedback,
-        //         rating: this.rating,
-        //         status: 'new',
-        //         parent_id: this.feedbackParentId
-        //     })
-        //         .then(res => {
-        //             console.log("OK");
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        // },
-        // feedbackProductNull(){
-        //     this.textFeedback = '';
-        //     this.rating = null;
-        //     this.chooseRating = [false, false, false, false, false];
-        //     this.changeRating = [false, false, false, false, false];
-        // },
-        // getToken(){
-        //     return localStorage.getItem('x_xsrf_token');
-        // },
-        //percentRatingStar(){
-        //    return Math.round((this.product.rating / 5) * 100);
-        //},
-        // setFeedbackId(feedbackParentId){
-        //     this.feedbackParentId = feedbackParentId;
-        // },
-
-        // getRecentProducts_1(){
-        //     this.axios.get(`/api/products/recent/${this.$route.params.id}`)
-        //         .then(res => {
-        //             this.recentProducts = res.data.data;
-        //             console.log('this.recentProducts');
-        //             console.log(this.recentProducts);
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        // },
-        // popupProductNull_1(){
-        //     this.popupProduct = null;
-        //     this.countOfSizeObjPopup = null;
-        //     this.countForCart = 1;
-        //     this.maxCountSizePopup = 1;
-        //     console.log(this.countForCart);
-        //     console.log(this.maxCountSizePopup);
-        // },
-        // getRecentProduct(id){
-        //     this.axios.get(`/api/product/${id}`)
-        //         .then(res => {
-        //             this.popupProduct = res.data.data;
-        //             console.log(res.data.data);
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        // },
-        // setProductSizePopup(countOfSize){
-        //     this.countOfSizeObjPopup = countOfSize;
-        //     this.maxCountSizePopup = this.countOfSizeObjPopup.count;
-        //     console.log(this.countOfSizeObjPopup);
-        //     console.log("count - " + this.countOfSizeObjPopup.count);
-        //     // var el = document.querySelector(".qtyValue");
-        //     // el.value = 1;
-        //     this.countForCart = 1;
-        // }
-        /*
-        getProduct(){
-            const reqProduct = this.axios.get(`/api/product/${this.$route.params.id}`);
-            const reqRecentProducts = this.axios.get(`/api/products/recent/${this.$route.params.id}`);
-            this.axios
-                .all([reqProduct, reqRecentProducts])
-                .then(
-                    axios.spread((...res) => {
-                        const resProduct = res[0];
-                        const resRecentProducts = res[1];
-                        this.product = resProduct.data.data;
-                        this.materials = this.getProductDataToString(this.product.materials);
-                        this.seasons = this.getProductDataToString(this.product.seasons);
-                        this.tags = this.getProductDataToString(this.product.tags);
-                        
-                        this.recentProducts = resRecentProducts.data.data;
-                    })
-                )
-                .finally(x => {
-                    $(document).trigger('changed_')
-                });     
-        },
-        */
     }
 }
 </script>
@@ -562,14 +329,6 @@ export default {
     .compare-product a .icon{
         margin-right: 5px;
     }
-    /* .head_review{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .head_review{
-        margin-bottom:20px
-    } */
     .stars-outer{
         position: relative;
         display: inline-block;
@@ -594,59 +353,4 @@ export default {
         font-weight: 900;
         color: #ccc;
     }
-    /* .icon-star, .icon-star-like{
-        display:inline-block;
-        padding-right:5px;
-    }
-    .icon-star::before, .icon-star-like::before{
-        content: "\f005";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        font-size: 20px;
-    }
-    .icon-star::before{
-        color: #ccc;
-    }
-    .icon-star-like::before{
-        color: #f69c63;
-    } */
-    /* .star-choose{
-        display:block;
-        float:left;
-    }
-    .review-single{
-        border: 1px solid #EBE9E9;
-        padding:10px;
-        margin-bottom:15px;
-        border-radius:10px;
-    }
-    .review-single-reply{
-        border: 1px solid #EBE9E9;
-        padding:10px;
-        margin-bottom:15px;
-        margin-left:30px;
-        border-radius:10px;
-    }
-    .reply{
-        border-left: 1px solid #EBE9E9;
-    }
-    .review-single-reply h6 {
-        padding-top: 6px;
-        font-weight: 600;
-    }
-    .review-single-reply h6 span {
-        display: block;
-        font-size: 14px;
-        padding-top: 3px;
-    }
-    
-    .flaticon-star::before{
-        color: #ccc;
-    } */
-    /* .mfp-close{
-        opacity: 1;
-        border: 1px solid black;
-        width: 170px;
-    } */
-
 </style>

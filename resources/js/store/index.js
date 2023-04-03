@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { createStore } from 'vuex'
 
+import indexProductsModule from './modules/indexProducts';
 import productOneModule from './modules/productOne';
 import popupProductModule from './modules/popupProduct';
 import productsModule from './modules/products';
@@ -14,6 +15,7 @@ import feedbackModule from './modules/feedback';
 
 const store = createStore({
   modules: {
+    indexProductsModule,
     productOneModule,
     popupProductModule,
     accountModule,

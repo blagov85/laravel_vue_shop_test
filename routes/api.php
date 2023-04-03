@@ -44,6 +44,7 @@ Route::post('/products', App\Http\Controllers\API\Product\IndexController::class
 Route::post('/orders', App\Http\Controllers\API\Order\StoreController::class);
 Route::post('/compare', App\Http\Controllers\API\Product\CompareController::class);
 Route::get('/products/filters', App\Http\Controllers\API\Product\FilterListController::class);
+Route::get('/products/sorting', App\Http\Controllers\API\Product\SortProductsController::class);
 Route::get('/product/{product}', App\Http\Controllers\API\Product\ShowController::class);
 Route::get('/products/recent/{product}', App\Http\Controllers\API\Product\IndexRecentController::class);
 Route::get('/products/search/filters', App\Http\Controllers\API\Product\SearchFilterListController::class);
