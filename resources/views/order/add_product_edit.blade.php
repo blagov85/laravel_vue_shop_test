@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Добавить товар к заказу #{{ $order->id }}</h1>
+                <h1 class="m-0">Додати товар до замовлення #{{ $order->id }}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -33,7 +33,7 @@
                 @enderror
                 <div class="form-group">
                     <select name="size_id" class="form-control select2">
-                        <option selected="selected" disabled>Выберите размер товара</option>
+                        <option selected="selected" disabled>Выберіть розмір товара</option>
                         @foreach($sizes as $size)
                             <option {{ old('size_id') == $size->id ? ' selected' : '' }} value="{{ $size->id }}">{{ $size->title }}</option>
                         @endforeach
@@ -43,13 +43,13 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
-                    <input type="number" class="form-control" name="count_product" value="{{ old('count_product') }}" placeholder="количество"/>
+                    <input type="number" class="form-control" name="count_product" value="{{ old('count_product') }}" placeholder="Кількість"/>
                 </div>
                 @error('count_product')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror  
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Добавить"/>
+                    <input type="submit" class="btn btn-primary" value="Додати"/>
                 </div>
                 @error('product_add_error')
                     <div class="text-danger">{{ $message }}</div>

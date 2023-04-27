@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('settlement');
+            $table->string('phone');
         });
     }
 
@@ -25,9 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreignId('payment_status')->default(1)->index()->constrained('payments')->change();
-            //$table->foreignId('brand_id')->default(1)->index()->constrained('brands')->after('preview_image');
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 };

@@ -6,12 +6,12 @@
       <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Редактировать заказ</h1>
+                <h1 class="m-0">Редагувати замовлення</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
           </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -89,7 +89,7 @@
                           <td>
                             <div class="form-group">
                               <select name="region_id" class="form-control select2">
-                                <option selected="selected" disabled>Выберите регион</option>
+                                <option selected="selected" disabled>Виберіть регіон</option>
                                 @foreach($regions as $region)
                                 <option {{ $order->region_id == $region->id ? ' selected' : '' }} value="{{ $region->id }}">{{ $region->title }}</option>
                                 @endforeach
@@ -116,7 +116,7 @@
                           <td>
                             <div class="form-group">
                               <select name="payment_id" class="form-control select2">
-                                <option selected="selected" disabled>Выберите статус оплаты</option>
+                                <option selected="selected" disabled>Выберіть статус оплати</option>
                                 @foreach($payments as $payment)
                                 <option {{ $order->payment_id == $payment->id ? ' selected' : '' }} value="{{ $payment->id }}">{{ $payment->title }}</option>
                                 @endforeach
@@ -132,7 +132,7 @@
                           <td>
                             <div class="form-group">
                               <select name="delivery_company_id" class="form-control select2">
-                                <option selected="selected" disabled>Выберите компанию доставки</option>
+                                <option selected="selected" disabled>Выберіть компанію доставки</option>
                                 @foreach($companies as $company)
                                 <option {{ $order->delivery_company_id == $company->id ? ' selected' : '' }} value="{{ $company->id }}">{{ $company->title }}</option>
                                 @endforeach
@@ -155,11 +155,11 @@
                           </td>
                       </tr>
                       <tr>
-                          <td class="head">Статус заказа</td>
+                          <td class="head">Статус замовлення</td>
                           <td>
                             <div class="form-group">
                               <select name="status_id" class="form-control select2">
-                                <option selected="selected" disabled>Выберите статус заказа</option>
+                                <option selected="selected" disabled>Выберіть статус замовлення</option>
                                 @foreach($statuses as $status)
                                 <option {{ $order->status_id == $status->id ? ' selected' : '' }} value="{{ $status->id }}">{{ $status->title }}</option>
                                 @endforeach
@@ -231,11 +231,11 @@
                     <div class="text-danger" style="width:50%;margin:0 auto">{{ $message }}</div>
                   @enderror
                   <div class="form-group" style="margin: 20px auto; float:right;">
-                    <input type="submit" class="btn btn-primary" value="Применить"/>
+                    <input type="submit" class="btn btn-primary" value="Редагувати"/>
                   </div>
                 </form>
                   <div class="form-group" style="margin: 20px auto; float:left;">
-                    <a class="btn btn-primary" href="{{ route('order.add_product.edit', $order->id) }}">Добавить товар</a>
+                    <a class="btn btn-primary" href="{{ route('order.add_product.edit', $order->id) }}">Додати товар</a>
                   </div>
               </div>
               <!-- /.card-body -->

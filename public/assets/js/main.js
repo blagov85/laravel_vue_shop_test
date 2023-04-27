@@ -1,6 +1,7 @@
 jQuery(function ($) {
   'use strict';
   $(document).on('changed_', function (){
+    console.log("MY CHANGE");
   /****======  Sticky Header ======*******/
   var scrollPosition = window.scrollY;
   if (scrollPosition >= 400) {
@@ -952,31 +953,44 @@ jQuery(function ($) {
     }
   };
 
-
   /* password show hide on form field  */
   if ($(".eye .icon-2").length) {
     $(".eye .icon-2").click(function () {
-      var x = document.getElementById("password-field");
+      var x = null;
+      var pf = $(this).siblings("#password-field");
+      var pfc = $(this).siblings("#password-field-confirm");
+      if(pf.length) 
+        x = document.getElementById("password-field");
+      else if (pfc.length)
+        x = document.getElementById("password-field-confirm");
       if (x.type === "password") {
         x.type = "text";
       } else {
         x.type = "password";
       }
       $(this).hide();
-      $(".eye .icon-1").css("display", "block");
+      $(this).siblings(".icon-1").css("display", "block");
+      // $(".eye .icon-1").css("display", "block");
     });
   };
 
   if ($(".eye .icon-1").length) {
     $(".eye .icon-1").click(function () {
-      var x = document.getElementById("password-field");
+      var x = null;
+      var pf = $(this).siblings("#password-field");
+      var pfc = $(this).siblings("#password-field-confirm");
+      if(pf.length) 
+        x = document.getElementById("password-field");
+      else if (pfc.length)
+        x = document.getElementById("password-field-confirm");
       if (x.type === "text") {
         x.type = "password";
       } else {
         x.type = "text";
       }
       $(this).hide();
-      $(".eye .icon-2").css("display", "block");
+      $(this).siblings(".icon-2").css("display", "block");
+      // $(".eye .icon-2").css("display", "block");
     });
   };
 

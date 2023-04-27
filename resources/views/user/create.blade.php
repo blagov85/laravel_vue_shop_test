@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Создать пользователя</h1>
+                <h1 class="m-0">Додати користувача</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -25,7 +25,7 @@
             <form action="{{ route('user.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Имя"/>
+                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Ім'я"/>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email"/>
@@ -34,16 +34,16 @@
                     <input type="text" class="form-control" name="password" placeholder="Пароль"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="password_confirmation" placeholder="Подтвердить пароль"/>
+                    <input type="text" class="form-control" name="password_confirmation" placeholder="Підтвердити пароль"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="surname" value="{{ old('surname') }}" placeholder="Фамилия"/>
+                    <input type="text" class="form-control" name="surname" value="{{ old('surname') }}" placeholder="Прізвище"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="patronymic" value="{{ old('patronymic') }}" placeholder="Отчество"/>
+                    <input type="text" class="form-control" name="patronymic" value="{{ old('patronymic') }}" placeholder="По-батькові"/>
                 </div>
                 <div class="form-group">
-                    <label>Дата рождения</label>
+                    <label>Дата нарождення</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="form-group">
                   <select name="region_id" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Выберите регион</option>
+                    <option selected="selected" disabled>Выберіть регіон</option>
                     @foreach($regions as $region)
                     <option {{ old('region_id') == $region->id ? ' selected' : '' }} value="{{ $region->id }}">{{ $region->title }}</option>
                     @endforeach
@@ -79,13 +79,13 @@
                 <div class="form-group">
                     <select class="custom-select form-control-border" name="gender" id="exampleSelectBorder">
                         <option disabled selected>Пол</option>
-                        <option {{ old('gender') == 1 ? ' selected' : '' }} value="1">Мужской</option>
-                        <option {{ old('gender') == 2 ? ' selected' : '' }} value="2">Женский</option>
+                        <option {{ old('gender') == 1 ? ' selected' : '' }} value="1">Чоловік</option>
+                        <option {{ old('gender') == 2 ? ' selected' : '' }} value="2">Жінка</option>
                     </select>
                 </div>
                 <div class="form-group">
                   <select name="role_id" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Выберите роль</option>
+                    <option selected="selected" disabled>Выберіть роль</option>
                     @foreach($roles as $role)
                     <option {{ old('role_id') == $role->id ? ' selected' : '' }} value="{{ $role->id }}">{{ $role->title }}</option>
                     @endforeach
@@ -95,7 +95,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Добавить"/>
+                    <input type="submit" class="btn btn-primary" value="Додати"/>
                 </div>
             </form>
             </div>

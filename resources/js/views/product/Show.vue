@@ -2,26 +2,14 @@
     <div>
         <main>
             <!--Start Shop Details Breadcrumb-->
-            <div class="shop-details-breadcrumb wow fadeInUp animated overflow-hidden ">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="shop-details-inner">
-                                <ul class="shop-details-menu">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li class="active">Shop Details</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Breadcrumb />
+            
             <!--End Shop Details Breadcrumb-->
             <!--Start Shop Details Top-->
             <section v-if="product" class="shop-details-top two ">
                 <div class="container">
                     <div class="row mt--30">
-                        <div v-if="product.product_images" class="col-xl-6 col-lg-6 mt-30 wow fadeInUp animated">
+                        <div v-if="product.product_images" class="col-xl-6 col-lg-6 mt-30 fadeInUp">
                             <div  class="single-product-box one">
                                 <div class="big-product single-product-one slider-for">
                                     <div v-for="image in product.product_images" v-bind:key="image.id">
@@ -46,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-6 mt-30 wow fadeInUp animated">
+                        <div class="col-xl-6 col-lg-6 mt-30 fadeInUp">
                             <div class="shop-details-top-right ">
                                 <div class="shop-details-top-right-content-box">
                                     <div class="shop-details-top-review-box">
@@ -54,7 +42,7 @@
                                             <div class="stars-outer">
                                                 <div class="stars-inner" :style="{width: percentRating + '%'}"></div>
                                             </div>
-                                            <p>({{ product.count_rating }} Reviews)</p>
+                                            <p>({{ product.count_rating }} Відгуків)</p>
                                         </div>
                                     </div>
                                     <div class="shop-details-top-title">
@@ -65,22 +53,25 @@
                                     </ul>
                                     <div class="shop-details-top-price-box">
                                         <!--<h3>100<del >50</del></h3>-->
-                                        <h3>${{ product.price }}<del v-if="product.old_price">{{ product.old_price }}</del></h3>
+                                        <h3>{{ product.price }} грн<del v-if="product.old_price">{{ product.old_price }}</del></h3>
                                     </div>
                                     <ul class="shop-details-top-category-tags">
-                                        <li>Brand: <span>{{ product.brand.title }}</span></li>
-                                        <li>Sex: <span>{{ product.sex.title }}</span></li>
-                                        <li>Category: <span>{{ product.category.title }}</span></li>
-                                        <li>Tags: <span>{{ tags }}</span></li>
-                                        <li>Material: <span>{{ materials }}</span></li>
-                                        <li>Season: <span>{{ seasons }}</span></li>
-                                        <li>Country: <span>{{ product.country.title }}</span></li>
-                                        <li>Color: 
-                                            <span>
+                                        <li>Бренд: <span>{{ product.brand.title }}</span></li>
+                                        <li>Пол: <span>{{ product.sex.title }}</span></li>
+                                        <li>Категорія: <span>{{ product.category.title }}</span></li>
+                                        <li>Тег: <span>{{ tags }}</span></li>
+                                        <li>Матеріал: <span>{{ materials }}</span></li>
+                                        <li>Сезон: <span>{{ seasons }}</span></li>
+                                        <li>Країна: <span>{{ product.country.title }}</span></li>
+                                        <li>Колір: 
+                                            <div>
                                                 <template v-for="color in product.colors" v-bind:key="color.id">
-                                                    <div class="d-inline-block mr-0.25 color-product" :style="`background: #${color.title}`"></div>
+                                                    <div class="d-inline-block mr-0.25 color-product" :style="`background: #${color.value}`"></div>
                                                 </template>
-                                            </span>
+                                            </div>
+                                            <div>
+                                                <span>{{ colors }}</span>
+                                            </div>
                                         </li>
                                     </ul>
                                     <div class="shop-details-top-size-box">
@@ -91,11 +82,11 @@
                                                     <a @click.prevent="setProductSize(countSize)" href="#0">{{ countSize.title }}</a>
                                                 </li>
                                             </ul>
-                                            <p class="shop-details-top-size-guide"><a href="#popupSizeInfo" class="popup_link">Size Guide</a></p>
+                                            <p class="shop-details-top-size-guide"><a href="#popupSizeInfo" class="popup_link">Таблиця розмірів</a></p>
                                         </div>
                                     </div>
                                     <div class="product-quantity">
-                                        <h4>Quantity</h4>
+                                        <h4>Кількість</h4>
                                         <div class="product-quantity-box d-flex align-items-center flex-wrap">
                                             <div class="qty mr-2">
                                                 <div class="qtySelector text-center"> 
@@ -108,26 +99,26 @@
                                     </div>
                                     <div class="shop-details-top-order-now"> <i class="flaticon-point"></i>
                                         <p v-if="countOfSizeObj">Order Now, Only {{ countOfSizeObj.count }} Left !</p>
-                                        <p v-else>Choose size</p>
+                                        <p v-else>Виберіть розмір</p>
                                     </div>
                                     <div v-if="countOfSizeObj" class="shop-details-top-cart-box-btn"> 
-                                        <button v-if="countOfSizeObj" @click.prevent = "addToCart({'product': product, 'countOfSizeObj': countOfSizeObj, 'countForCart': countForCart});productSizeNull()" class="btn--primary"> Add to Cart </button>
+                                        <button v-if="countOfSizeObj" @click.prevent = "addToCart({'product': product, 'countOfSizeObj': countOfSizeObj, 'countForCart': countForCart});productSizeNull()" class="btn--primary"> Додати у кошик </button>
                                         <button v-else @click.prevent = "" class="btn--primary"> Add to Cart </button>
                                         <!-- <button @click.prevent = "addToCart(product, countOfSizeObj)" class="btn--primary style2 " 
-                                            type="submit">Add to Cart</button>  -->
+                                            type="submit">Додати у кошик</button>  -->
                                     </div>
                                     <div v-else class="shop-details-top-cart-box-btn"> 
                                         <button @click.prevent = "" class="btn--primary style2 " 
-                                            type="submit">Add to Cart</button> 
+                                            type="submit">Додати у кошик</button> 
                                     </div>
                                     <div class="compare-product"> 
                                         <a href="#0" @click.prevent="addToCompare(product);getCompareCategory()">
                                             <div class="icon"> <i class="flaticon-left-and-right-arrows"></i> </div>
-                                            <div class="text"><p>Add to Compare</p></div>
+                                            <div class="text"><p>Додати до порівняння</p></div>
                                         </a> 
                                     </div>
                                     <p v-if="product.count_likes > 0" class="shop-details-top-product-sale">
-                                        <span>{{ this.product.count_likes }}</span> Persons looking for this product
+                                        <span>{{ this.product.count_likes }}</span> Кількість людей, що слідкують за товаром
                                     </p>
                                 </div>
                             </div>
@@ -142,31 +133,41 @@
             </div>
             <!--EndPopupSizeInfo-->
             <!-- productdrescription-tabStart -->
-            <section v-if="product" class="product pt-60 pb-60 wow fadeInUp overflow-hidden ">
+            <section v-if="product" class="product pt-60 pb-60 fadeInUp overflow-hidden ">
                 <div class="container">
-                    <div class="row wow fadeInUp animated">
+                    <div class="row fadeInUp">
                         <div class="col-12">
                             <ul class="nav product-details-nav nav-one nav-pills justify-content-center" id="pills-tab-two"
                                 role="tablist">
-                                <li class="nav-item" role="presentation"> <button class="nav-link active"
+                                <li class="nav-item" role="presentation"> 
+                                    <button class="nav-link active"
                                         id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description"
                                         type="button" role="tab" aria-controls="pills-description" aria-selected="true">
-                                        Description </button> </li>
-                                <li class="nav-item" role="presentation"> <button class="nav-link" id="pills-additional-tab"
+                                        Опис 
+                                    </button> 
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-additional-tab"
                                         data-bs-toggle="pill" data-bs-target="#pills-additional" type="button" role="tab"
-                                        aria-controls="pills-additional" aria-selected="false"> Additional </button> </li>
-                                <li class="nav-item" role="presentation"> <button class="nav-link" id="pills-review-tab"
+                                        aria-controls="pills-additional" aria-selected="false"> 
+                                        Додатково 
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-review-tab"
                                         data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab"
-                                        aria-controls="pills-review" aria-selected="false"> Review </button> </li>
+                                        aria-controls="pills-review" aria-selected="false"> 
+                                        Відгуки
+                                    </button>
+                                </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row wow fadeInUp animated">
+                    <div class="row fadeInUp">
                         <div class="tab-content" id="pills-tabContent-two">
                             <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
                                 aria-labelledby="pills-description-tab">
                                 <div class="product-drescription">
-                                    <h4> Product Details:</h4>
                                     <p>{{ product.description }}</p>
                                 </div>
                             </div>
@@ -187,7 +188,7 @@
             </section> 
             <!-- productdrescription-tab End -->
             <!-- recent-products Start -->
-            <SliderProduct title="Recent Products" :products="recentProducts" />
+            <SliderProduct title="Нещодавно додані" :products="recentProducts" />
         </main>
     </div>
 </template>
@@ -195,6 +196,7 @@
 <script>
 
 import { mapState, mapMutations, mapActions } from 'vuex';
+import Breadcrumb from '../../components/Breadcrumb';
 import FeedbackList from '../../components/FeedbackList';
 import SliderProduct from '../../components/SliderProduct';
 import SizeTable from '../../components/SizeTable';
@@ -203,15 +205,16 @@ import utils from '../../utils';
 export default {
     name: "Show",
     components: {
+        Breadcrumb,
         FeedbackList, //list of feedbacks of product (nested FeedbackNew)
         SliderProduct, //container-slider for products (nested ProductForSlider)
         SizeTable //table of sizes
     },
+
     mounted(){
-        $(document).trigger('changed_'),
         this.getProduct(this.$route.params.id), //get data of product about its id
         this.getRecentProducts(this.$route.params.id), //get list recent products about product's category id
-        this.setSearchText('')
+        this.setSearchText('') 
     },
     beforeUnmount(){
         this.setRecentProducts([]);
@@ -236,6 +239,9 @@ export default {
         },
         tags() {
             return utils.getProductDataToString(this.product.tags);
+        },
+        colors() {
+            return utils.getProductDataToString(this.product.colors);
         },
         percentRating(){
             return utils.percentRatingStar(this.product.rating)
@@ -352,5 +358,11 @@ export default {
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         color: #ccc;
+    }
+    .inactive-link {
+        cursor: default;
+    }
+    .border-color{
+        border: 1px solid #161FCA;
     }
 </style>

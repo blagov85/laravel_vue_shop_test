@@ -19,7 +19,7 @@ const productOne = ({
                     commit('setProduct', product);
                 })
                 .finally(x => {
-                    $(document).trigger('changed_')
+                    //$(document).trigger('changed_')
                 }); 
         },
     }

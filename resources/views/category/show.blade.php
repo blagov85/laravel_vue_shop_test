@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Показать категорию</h1>
+                <h1 class="m-0">Інформація про категорію</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,13 +26,13 @@
             <div class="card">
               <div class="card-header d-flex p-3">
                 <div class="mr-3">
-                  <a href="{{ route('category.edit', $category->id) }}" class="btn btn-primary">Редактировать</a>
+                  <a href="{{ route('category.edit', $category->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
                 <form action="{{ route('category.delete', $category->id) }}" method="post">
                   @csrf
                   @method('delete')
                   <div class="form-group">
-                    <input type="submit" class="btn btn-danger" value="Удалить"/>
+                    <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
                  <!--<div class="card-tools">
@@ -56,7 +56,7 @@
                       <td>{{ $category->id }}</td>
                     </tr>
                     <tr>
-                      <td>Наименование</td>
+                      <td>Назва</td>
                       <td>{{ $category->title }}</a></td>
                     </tr>
                    </tbody>

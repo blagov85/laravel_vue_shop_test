@@ -69,7 +69,7 @@ const feedback = ({
                     
                 })
                 .finally(x => {
-                    $(document).trigger('changed_')
+
                 });
         }
     }

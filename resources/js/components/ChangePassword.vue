@@ -1,17 +1,17 @@
 <template>
     <div class="card-body">
-        <h4>Изменить пароль</h4>
+        <h4>Змінити пароль</h4>
         <div class="form-group">
-            <label for="exampleInputOldPassword">Старый пароль</label>
-            <input type="text" class="form-control" v-model="oldPassword" id="exampleInputOldPassword" placeholder="Введите старый пароль">
+            <label for="exampleInputOldPassword">Старий пароль</label>
+            <input type="text" class="form-control" v-model="oldPassword" id="exampleInputOldPassword">
         </div>
         <div class="form-group">
-            <label for="exampleInputNewPassword">Новый пароль</label>
-            <input type="text" class="form-control" v-model="newPassword" id="exampleInputNewPassword" placeholder="Введите новый пароль">
+            <label for="exampleInputNewPassword">Новий пароль</label>
+            <input type="text" class="form-control" v-model="newPassword" id="exampleInputNewPassword">
         </div>
         <div class="form-group">
-            <label for="exampleInputConfirmPassword">Подтвердите новый пароль</label>
-            <input type="text" class="form-control" v-model="confirmNewPassword" id="exampleInputConfirmPassword" placeholder="Подтвердите новый пароль">
+            <label for="exampleInputConfirmPassword">Подтвердіть новий пароль</label>
+            <input type="text" class="form-control" v-model="confirmNewPassword" id="exampleInputConfirmPassword">
         </div>
         <div class="error" v-if="errors.length > 0">
             <ul v-for="(value, key) in errors" :key="key">
@@ -19,7 +19,7 @@
             </ul>
         </div>
         <div class="form-group">
-            <input type="submit" @click.prevent="changePassword()" class="btn btn-primary" value="Изменить пароль"/>
+            <input type="submit" @click.prevent="changePassword()" class="btn btn-primary" value="Змінити пароль"/>
         </div>
         <h6 v-if="changePasswordText != ''">{{ this.changePasswordText }}</h6>
     </div>
@@ -75,10 +75,10 @@
             formError(){
                 let clientErrors = [];
                 if (this.oldPassword == '' || this.newPassword == '' || this.confirmNewPassword == ''){
-                    clientErrors.push("Все поля должны быть заполнены");
+                    clientErrors.push("Всі поля мають буди заповнені");
                 }else{
                     if (this.oldPassword.length < 3 || this.newPassword.length < 3 || this.confirmNewPassword.length < 3){
-                        clientErrors.push("Все поля должны иметь длину не меньше 3 символов");
+                        clientErrors.push("Все поля повинні мати не менше 3 символів");
                     }
                 }
                 return clientErrors;

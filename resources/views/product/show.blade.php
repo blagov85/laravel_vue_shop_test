@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Показать продукт</h1>
+                <h1 class="m-0">Інформація про товар</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,13 +26,13 @@
             <div class="card">
               <div class="card-header d-flex p-3">
                 <div class="mr-3">
-                  <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Редактировать</a>
+                  <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
                 <form action="{{ route('product.delete', $product->id) }}" method="post">
                   @csrf
                   @method('delete')
                   <div class="form-group">
-                    <input type="submit" class="btn btn-danger" value="Удалить"/>
+                    <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
                  <!--<div class="card-tools">
@@ -56,7 +56,7 @@
                       <td>{{ $product->id }}</td>
                     </tr>
                     <tr>
-                      <td>Наименование</td>
+                      <td>Назва</td>
                       <td>{{ $product->title }}</td>
                     </tr>
                     <tr>
@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                     <tr>
-                      <td>Пол</td>
+                      <td>Стать</td>
                       <td>{{ $product->sex->title }}</td>
                     </tr>
                     <tr>
@@ -74,7 +74,7 @@
                       <td>{{ implode(', ',$seasons) }}</td>
                     </tr>
                     <tr>
-                      <td>Описание</td>
+                      <td>Опис</td>
                       <td>{{ $product->description }}</td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@
                       <td>{!! $product->content !!}</td>
                     </tr>
                     <tr>
-                      <td>Главное фото</td>
+                      <td>Головне зображення</td>
                       <td>
                         <div class="р-10 mb-2">
                           <img style="width:50%; height:50%;" src="{{ asset('storage/'.$product->preview_image) }}" alt="preview_image">
@@ -90,7 +90,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Фото продукта</td>
+                      <td>Зображення товара</td>
                       <td>
                         <div style="display: flex; flex-direction: row; justify-content: space-around;">
                           @foreach($product->productImages as $image)  
@@ -100,7 +100,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Материал</td>
+                      <td>Матеріал</td>
                       <td>
                         @foreach($materialsPercent as $key=> $materialPercent)
                           <div>
@@ -110,15 +110,15 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Цена</td>
+                      <td>Вартість</td>
                       <td>{{ $product->price }}</td>
                     </tr>
                     <tr>
-                      <td>Старая цена</td>
+                      <td>Стара вартість</td>
                       <td>{{ $product->old_price }}</td>
                     </tr>
                     <tr>
-                      <td>Количество на складе</td>
+                      <td>Кількість на складі</td>
                       <td>
                         @foreach($sizesCount as $key=> $sizesCount)
                           <div>
@@ -128,15 +128,15 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Категория</td>
+                      <td>Категорія</td>
                       <td>{{ $product->category->title }}</td>
                     </tr>
                     <tr>
-                      <td>Страна</td>
+                      <td>Країна</td>
                       <td>{{ $product->country->title }}</td>
                     </tr>
                     <tr>
-                      <td>Группи</td>
+                      <td>Група</td>
                       <td>
                         @if($product->group_id)  
                         {{ $product->group->title }}
@@ -148,7 +148,7 @@
                       <td>{{ implode(', ',$tags) }}</td>
                     </tr>
                     <tr>
-                      <td>Цвета</td>
+                      <td>Кольори</td>
                       <td style="display: flex">
                         @foreach($colors as $color)  
                           <div style="width: 16px; height: 16px; background: #{{ $color }}; margin-right: 5px"></div>

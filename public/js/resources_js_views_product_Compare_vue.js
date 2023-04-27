@@ -84,7 +84,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   mounted: function mounted() {
-    $(document).trigger('changed_'), this.getCompareProducts(this.$route.params.id); //get product for compare about its category id
+    this.getCompareProducts(this.$route.params.id); //get product for compare about its category id
 
     this.setSearchText('');
   },
@@ -136,7 +136,7 @@ var _hoisted_1 = {
   "class": "shop-details-top-size-box"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Size: ");
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Розмір: ");
 
 var _hoisted_3 = {
   key: 0
@@ -153,7 +153,7 @@ var _hoisted_7 = {
 };
 
 var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Qty:", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Кількість:", -1
   /* HOISTED */
   );
 });
@@ -296,25 +296,31 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   "class": "overflow-hidden"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<section class=\"breadcrumb-area\" style=\"background-image:url(assets/images/inner-pages/breadcum-bg.png);\" data-v-0ce54876><div class=\"container\" data-v-0ce54876><div class=\"row\" data-v-0ce54876><div class=\"col-xl-12\" data-v-0ce54876><div class=\"breadcrumb-content text-center wow fadeInUp animated\" data-v-0ce54876><h2 data-v-0ce54876>Compare</h2><div class=\"breadcrumb-menu\" data-v-0ce54876><ul data-v-0ce54876><li data-v-0ce54876><a href=\"index.html\" data-v-0ce54876><i class=\"flaticon-home pe-2\" data-v-0ce54876></i>Home</a></li><li data-v-0ce54876><i class=\"flaticon-next\" data-v-0ce54876></i></li><li class=\"active\" data-v-0ce54876>Compare</li></ul></div></div></div></div></div></section>", 1);
-
-var _hoisted_3 = {
-  "class": "compare pt-120 pb-120"
+var _hoisted_2 = {
+  "class": "compare pt-60 pb-120"
 };
-var _hoisted_4 = {
+var _hoisted_3 = {
   "class": "container"
 };
-var _hoisted_5 = {
+var _hoisted_4 = {
   "class": "row"
 };
-var _hoisted_6 = {
-  "class": "col-xl-12 wow fadeInUp animated"
+var _hoisted_5 = {
+  "class": "col-xl-12 fadeInUp animated"
 };
-var _hoisted_7 = {
+var _hoisted_6 = {
   key: 0,
   "class": "compare-table-box"
 };
+
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+    "class": "name-page"
+  }, "Порівняння товарів", -1
+  /* HOISTED */
+  );
+});
+
 var _hoisted_8 = {
   "class": "compare-table-outer"
 };
@@ -325,13 +331,13 @@ var _hoisted_10 = {
   "class": "compare-header"
 };
 var _hoisted_11 = {
-  "class": "compare-product-img-1"
+  "class": "compare-product-img-1 img-compare"
 };
 var _hoisted_12 = ["src"];
 var _hoisted_13 = ["colspan"];
 
 var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Product ", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Товар ", -1
   /* HOISTED */
   );
 });
@@ -340,7 +346,7 @@ var _hoisted_15 = [_hoisted_14];
 var _hoisted_16 = ["colspan"];
 
 var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Brand ", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Бренд ", -1
   /* HOISTED */
   );
 });
@@ -352,7 +358,7 @@ var _hoisted_19 = {
 var _hoisted_20 = ["colspan"];
 
 var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Sex ", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Пол ", -1
   /* HOISTED */
   );
 });
@@ -364,7 +370,7 @@ var _hoisted_23 = {
 var _hoisted_24 = ["colspan"];
 
 var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Description", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Опис", -1
   /* HOISTED */
   );
 });
@@ -373,7 +379,7 @@ var _hoisted_26 = [_hoisted_25];
 var _hoisted_27 = ["colspan"];
 
 var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Season ", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Сезон", -1
   /* HOISTED */
   );
 });
@@ -382,7 +388,7 @@ var _hoisted_29 = [_hoisted_28];
 var _hoisted_30 = ["colspan"];
 
 var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Price", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Ціна", -1
   /* HOISTED */
   );
 });
@@ -391,7 +397,7 @@ var _hoisted_32 = [_hoisted_31];
 var _hoisted_33 = ["colspan"];
 
 var _hoisted_34 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Material ", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Матеріал", -1
   /* HOISTED */
   );
 });
@@ -400,7 +406,7 @@ var _hoisted_35 = [_hoisted_34];
 var _hoisted_36 = ["colspan"];
 
 var _hoisted_37 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Color", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Колір", -1
   /* HOISTED */
   );
 });
@@ -409,7 +415,7 @@ var _hoisted_38 = [_hoisted_37];
 var _hoisted_39 = ["colspan"];
 
 var _hoisted_40 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, " Country ", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Країна", -1
   /* HOISTED */
   );
 });
@@ -421,7 +427,7 @@ var _hoisted_42 = {
 var _hoisted_43 = ["colspan"];
 
 var _hoisted_44 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Add to cart", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Додати у кошик", -1
   /* HOISTED */
   );
 });
@@ -432,7 +438,7 @@ var _hoisted_47 = ["id"];
 var _hoisted_48 = ["colspan"];
 
 var _hoisted_49 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Rating", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Рейтинг", -1
   /* HOISTED */
   );
 });
@@ -462,7 +468,7 @@ var _hoisted_57 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ProductPopupMin = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ProductPopupMin");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Start Breadcrumb Style2"), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End Breadcrumb Style2"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Start Compare"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_ctx.compareProduct.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.compareProduct, function (product) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Start Compare"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_ctx.compareProduct.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.compareProduct, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("th", {
       key: "url".concat(product.id)
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -596,7 +602,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, ["prevent"]),
       href: "#popupCompare".concat(product.id),
       "class": "addcart btn--primary style2 popup_link"
-    }, "Add To Cart", 8
+    }, "Додати у кошик", 8
     /* PROPS */
     , _hoisted_46), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       id: "popupCompare".concat(product.id),
@@ -632,7 +638,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_54)])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_57, "Нет товаров для сравнения"))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End Order Compare")])]);
+  ))])])])])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_57, "Немає товарів для порівняння"))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End Order Compare")])]);
 }
 
 /***/ }),
@@ -676,7 +682,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mfp-close[data-v-0ce54876]{\r\n        opacity: 1;\r\n        border: 1px solid black;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mfp-close[data-v-0ce54876]{\r\n        opacity: 1;\r\n        border: 1px solid black;\n}\n.img-compare[data-v-0ce54876]{\r\n        width:50%;\r\n        min-width:100px;\r\n        margin:5px auto;\n}\n.name-page[data-v-0ce54876]{\r\n        margin:0 auto 10px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

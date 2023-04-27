@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Добавить транспортную компанию</h1>
+                <h1 class="m-0">Додати транспортну компанію</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -25,13 +25,13 @@
             <form action="{{ route('delivery_company.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title" placeholder="Наименование"/>
+                    <input type="text" class="form-control" name="title" placeholder="Назва компанії"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="price" placeholder="Стоимость"/>
+                    <input type="text" class="form-control" name="price" placeholder="Вартість"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Добавить"/>
+                    <input type="submit" class="btn btn-primary" value="Додати"/>
                 </div>
             </form>
             </div>

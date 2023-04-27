@@ -1,15 +1,15 @@
 <template>
     <div v-if="getLikeCount > 0" class="wishlist-table-box">
-        <h4>Избранные товары</h4>
+        <h4>Улюблені товари</h4>
         <div class="wishlist-table-outer">
             <table class="wishlist-table">
                 <thead class="wishlist-header">
                     <tr>
-                        <th>Image</th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Delete</th>
+                        <th>Фото</th>
+                        <th>Товар</th>
+                        <th>Ціна</th>
+                        <th>Кількість</th>
+                        <th>Видалити</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +25,7 @@
                         </td>
                         <td style="width:30%" class="add-to-cart-btn">  
                             <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupLike${product.id}`" 
-                                class="addcart btn--primary style2 popup_link">Add To Cart</a>
+                                class="addcart btn--primary style2 popup_link">Додати у кошик</a>
                             <div :id="`popupLike${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width">
                                 <ProductPopupMin />
                             </div>
@@ -38,7 +38,7 @@
             </table>
         </div>
     </div>
-    <div v-else>Нет понравившихся товаров</div>
+    <div v-else>Немає улюблених товарів</div>
 </template>
 
 <script>

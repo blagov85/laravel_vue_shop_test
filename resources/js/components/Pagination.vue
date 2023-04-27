@@ -1,6 +1,6 @@
 <template>
     <div class="row" v-if="pagination && pagination.last_page > 1">
-        <div class="col-12 d-flex justify-content-center wow fadeInUp animated">
+        <div class="col-12 d-flex justify-content-center fadeInUp animated">
             <ul class="pagination text-center">
                 <li v-if="pagination.current_page !== 1" class="next"><a href="#0" @click.prevent = "getProducts(pagination.current_page-1)">
                     <i class="flaticon-left-arrows" aria-hidden="true"></i></a>

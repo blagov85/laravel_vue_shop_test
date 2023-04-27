@@ -23,4 +23,8 @@ class UserPolicy
     {
         return auth()->user()->isAdmin();
     }
+    public function userShowEditUpdatePolicy(User $userActive, User $user)
+    {
+        return ((auth()->user()->id == $user->id) || auth()->user()->isAdmin());
+    }
 }

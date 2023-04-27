@@ -140,7 +140,7 @@ const compare = ({
             let idCompare = [];
             let productsCompareFullInfo = [];
             let compare = state.compare;
-            //get id of products in slected category
+            //get id of products in selected category
             if(idCategory == null){
                 compare.forEach(item =>{
                     idCompare.push(item.id);

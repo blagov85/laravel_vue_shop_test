@@ -6,7 +6,7 @@
                 <table class="wishlist-table">
                     <thead class="wishlist-header">
                         <tr>
-                            <th>Номер замовлення</th>
+                            <th>Номер</th>
                             <th>Дата</th>
                             <th>Статус</th>
                             <th>Сума</th>
@@ -35,7 +35,7 @@
                 </table>
             </div>
         </div>
-        <div v-else>Нет заказов</div>
+        <div v-else>Немає замовлень</div>
     </div>
 </template>
 
@@ -44,7 +44,7 @@
     import OrderInfo from './OrderInfo';
 
     export default {
-        name: "LikeList",
+        name: "OrderList",
         components: {
             OrderInfo
         },

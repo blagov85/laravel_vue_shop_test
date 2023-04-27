@@ -64,7 +64,7 @@ class ProductService
         $result = [];
         $titleMaterials = $product->materials->pluck('title')->toArray();
         $result['tags'] = $product->tags->pluck('title')->toArray();
-        $result['colors'] = $product->colors->pluck('title')->toArray();
+        $result['colors'] = $product->colors->pluck('value')->toArray();
         $titlesSize = $product->countProductsSizes->pluck('title')->toArray();
         $seasons = $product->seasons->pluck('title')->toArray();
         $materialsPercent = [];

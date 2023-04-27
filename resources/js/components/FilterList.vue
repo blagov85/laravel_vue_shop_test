@@ -5,8 +5,8 @@
             <i class="flaticon-cross"></i>
         </button>
         <div class="sidebar-holder">
-            <div class="single-sidebar-box mt-30  fadeInUp animated ">
-                <h4>Select Brands</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp  ">
+                <h4>Бренд</h4>
                 <div class="checkbox-item">
                     <form>
                         <div v-for="brand in filterList.brands" v-bind:key="brand.id" class="form-group"> 
@@ -15,8 +15,8 @@
                     </form>
                 </div>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated ">
-                <h4>Select Categories</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp  ">
+                <h4>Категорія</h4>
                 <div class="checkbox-item">
                     <form>
                         <div v-for="category in filterList.categories" v-bind:key="category.id" class="form-group"> 
@@ -25,8 +25,8 @@
                     </form>
                 </div>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated ">
-                <h4>Select Sex</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp  ">
+                <h4>Пол</h4>
                 <div class="checkbox-item">
                     <form>
                         <div v-for="sexOne in filterList.sex" v-bind:key="sexOne.id" class="form-group"> 
@@ -35,16 +35,16 @@
                     </form>
                 </div>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated">
-                <h4>Color Option </h4>
+            <div class="single-sidebar-box mt-30  fadeInUp ">
+                <h4>Колір</h4>
                 <ul class="color-option">
                     <li v-for="color in filterList.colors" v-bind:key="color.id"> 
-                        <a @click.prevent="addColor(color.id)" :id="`color${color.id}`" href="#0" class="color-option-single" :style="`background: #${color.title}`"> <span>{{ color.title }}</span> </a> 
+                        <a @click.prevent="addColor(color.id)" :id="`color${color.id}`" href="#0" class="color-option-single" :style="`background: #${color.value}`"> <span>{{ color.title }}</span> </a> 
                     </li>
                 </ul>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated">
-                <h4>Filter By Price</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp ">
+                <h4>Ціна</h4>
                 <div class="slider-box">
                     <div id="price-range" class="slider"></div>
                     <div class="output-price"> <label for="priceRange">Price:</label> <input
@@ -52,45 +52,45 @@
                     </div> 
                 </div>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated">
-                <h4>Sizes</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp ">
+                <h4>Розмір</h4>
                 <ul class="popular-tag">
                     <li v-for="size in filterList.sizes" v-bind:key="size.id">
                         <a @click.prevent="addSize(size.id)" :id="`size${size.id}`" href="#0">{{ size.title }}</a></li>
                 </ul>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated">
-                <h4>Seasons</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp ">
+                <h4>Сезон</h4>
                 <ul class="popular-tag">
                     <li v-for="season in filterList.seasons" v-bind:key="season.id">
                         <a @click.prevent="addSeason(season.id)" :id="`season${season.id}`" href="#0">{{ season.title }}</a></li>
                 </ul>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated">
-                <h4>Materials</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp ">
+                <h4>Матеріал</h4>
                 <ul class="popular-tag">
                     <li v-for="material in filterList.materials" v-bind:key="material.id">
                         <a @click.prevent="addMaterial(material.id)" :id="`material${material.id}`" href="#0">{{ material.title }}</a></li>
                 </ul>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated">
-                <h4>Countries</h4>
+            <div class="single-sidebar-box mt-30  fadeInUp ">
+                <h4>Країна</h4>
                 <ul class="popular-tag">
                     <li v-for="country in filterList.countries" v-bind:key="country.id">
                         <a @click.prevent="addCountry(country.id)" :id="`country${country.id}`" href="#0">{{ country.title }}</a></li>
                 </ul>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated">
-                <h4>Tags </h4>
+            <div class="single-sidebar-box mt-30  fadeInUp ">
+                <h4>Тег</h4>
                 <ul class="popular-tag">
                     <li v-for="tag in filterList.tags" v-bind:key="tag.id">
                         <a @click.prevent="addTag(tag.id)" :id="`tag${tag.id}`" href="#0">{{ tag.title }}</a></li>
                 </ul>
             </div>
-            <div class="single-sidebar-box mt-30  fadeInUp animated pb-0 border-bottom-0 ">
+            <div class="single-sidebar-box mt-30  fadeInUp  pb-0 border-bottom-0 ">
                 <div class="slider-box">
-                    <button @click.prevent="filterProducts" class="filterbtn"
-                            type="submit"> Filter 
+                    <button @click.prevent="filterProducts" class="filterbtn" type="submit">
+                        Фільтр 
                     </button>
                 </div>
             </div>
@@ -246,8 +246,6 @@
                             return null;
                         }
                         //  Price Filter 
-                        console.log("filter list");
-                        console.log(this.filterList);
                         if ($("#price-range").length) {
                             $("#price-range").slider({
                             range: true,

@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Редактировать пол</h1>
+                <h1 class="m-0">Редагувати стать</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,10 +26,10 @@
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title" value="{{ $sex->title }}" placeholder="Наименование"/>
+                    <input type="text" class="form-control" name="title" value="{{ $sex->title }}" placeholder="Назва статі"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Редактировать"/>
+                    <input type="submit" class="btn btn-primary" value="Редагувати"/>
                 </div>
             </form>
             </div>

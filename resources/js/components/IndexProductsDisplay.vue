@@ -3,11 +3,11 @@
         <div class="col-xl-12">
             <div
                 class="shop-grid-page-top-info p-0 justify-content-md-between justify-content-center">
-                <div class="left-box wow fadeInUp animated">
-                    <p>Showing {{ this.pagination.from }}–{{ this.pagination.to }} of {{ this.pagination.total }} Results</p>
+                <div class="left-box ">
+                    <p>Показ {{ this.pagination.from }}–{{ this.pagination.to }} з {{ this.pagination.total }}</p>
                 </div>
                 <div
-                    class="right-box justify-content-md-between justify-content-center wow fadeInUp animated">
+                    class="right-box justify-content-md-between justify-content-center">
                     <div class="short-by">
                         <div class="select-box">
                             <select class="wide" v-model="filterKey" @change="getProducts()">

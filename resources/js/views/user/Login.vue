@@ -1,63 +1,42 @@
 <template>
     <div>
     <main class="overflow-hidden ">
-        <!--Start Breadcrumb Style2-->
-        <section class="breadcrumb-area" style="background-image: url(assets/images/inner-pages/breadcum-bg.png);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="breadcrumb-content text-center wow fadeInUp animated">
-                            <h2>Login</h2>
-                            <div class="breadcrumb-menu">
-                                <ul>
-                                    <li><a href="index.html"><i class="flaticon-home pe-2"></i>Home</a></li>
-                                    <li> <i class="flaticon-next"></i> </li>
-                                    <li class="active">Login</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--End Breadcrumb Style2-->
         <!--Start Login Page-->
-        <section class="login-page pt-120 pb-120 wow fadeInUp animated">
+        <section class="login-page pt-120 pb-120 fadeInUp">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-6 col-lg-8 col-md-9">
                         <div class="login-register-form"
                             style="background-image: url('/assets/images/inner-pages/login-bg.png');">
                             <div class="top-title text-center ">
-                                <h2>Login</h2>
-                                <p>Don't have an account yet? 
-                                    <router-link :to="{name: 'user.registration'}">Sign up for free</router-link>
+                                <h2>Вхід</h2>
+                                <p>Ще не маєте аккаунт? 
+                                    <router-link :to="{name: 'user.registration'}">Зареєструватися</router-link>
                                 </p>
                             </div>
                             <form class="common-form" @submit.prevent="login()">
                                 <div class="form-group"> 
-                                    <input type="text" v-model="email" class="form-control" placeholder="Your Email Address"> 
+                                    <input type="text" v-model="email" class="form-control" placeholder="Ваш Email"> 
                                 </div>
                                 <div class="form-group eye">
                                     <div class="icon icon-1"><i class="flaticon-hidden"></i></div> 
-                                    <input type="password" v-model="password" id="password-field" class="form-control" placeholder="Password">
+                                    <input type="password" v-model="password" id="password-field" class="form-control" placeholder="Пароль">
                                     <div class="icon icon-2 "><i class="flaticon-visibility"></i></div>
                                 </div>
                                 <div class="checkk ">
                                     <div class="form-check p-0 m-0"> 
                                         <input type="checkbox" v-model="remember" id="remember"> 
-                                        <label class="p-0" for="remember"> Remember Me</label> 
+                                        <label class="p-0" for="remember">Запам’ятати мене</label> 
                                     </div>
-                                    <router-link :to="{name: 'user.password.request'}" class="forgot">Forgot Password?</router-link> 
+                                    <router-link :to="{name: 'user.password.request'}" class="forgot">Забули пароль?</router-link> 
                                 </div> 
                                 <div class="error" v-if="errors.length > 0">
                                     <ul v-for="(value, key) in errors" :key="key">
                                         <li>{{ value }}</li>
                                     </ul>
                                 </div>
-                                <button type="submit" class="btn--primary style2">Login </button>
+                                <button type="submit" class="btn--primary style2">Вхід</button>
                             </form>
-                            <div>remember is {{ remember }}</div>
                         </div>
                     </div>
                 </div>

@@ -7,14 +7,14 @@
                         <div class="stars-inner" :style="{width: percentRating + '%'}"></div>
                     </div>
                     <span class="ps-1">({{ Number.isInteger(product.rating) ? product.rating + '.0' : product.rating }})</span>
-                    <span class="ps-2">BASED ON {{ product.count_rating }} REVIEW</span> 
+                    <span class="ps-2">{{ product.count_rating }} відгуків</span> 
                 </div>
             </div>
             <a v-if="getToken()" @click.prevent="feedbackProductNull();setFeedbackParentId(null)" href="#popupReview" class="btn--primary style2 popup_link">
-                Написать отзыв
+                Написати відгук
             </a>
             <router-link v-else :to="{name: 'user.login'}" class="btn--primary style2">
-                Написать отзыв
+                Написати відгук
             </router-link>            
         </div>
         <div id="popupReview" class="product-gird__quick-view-popup mfp-hide popup-width">
@@ -33,10 +33,10 @@
                     <p>{{ feedback.message }}</p>
                 </div> 
                 <a v-if="getToken()" @click.prevent="feedbackProductNull();setFeedbackParentId(feedback.id)" href="#popupReview" class="right-box popup_link">
-                    Написать ответ
+                    Написати відповідь
                 </a>
                 <router-link v-else :to="{name: 'user.login'}" class="right-box">
-                    Написать ответ
+                    Написати відповідь
                 </router-link>
             </div>
             <div v-if="feedback.reply.length > 0" class="reply">

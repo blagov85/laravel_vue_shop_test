@@ -25,7 +25,10 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        $products = Product::where('group_id', $this->group_id)->get();
+        if($this->group_id){
+            $products = Product::where('group_id', $this->group_id)->where('id', '<>', $this->id)->get();
+        }
+        
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -47,7 +50,7 @@ class ProductResource extends JsonResource
             'tags' => TagResource::collection($this->tags),
             'colors' => ColorResource::collection($this->colors),
             'product_images' => ProductImageResource::collection($this->productImages),
-            'group_products' => ProductMinResource::collection($products),
+            'group_products' => ($this->group_id) ? ProductMinResource::collection($products) : null,
             'like' => (Auth::user() !== null) ? $this->likedUsers->contains(Auth::user()->id) : 'false',
             'count_likes' => $this->liked_users_count,
             'feedback' => ProductFeedbackResource::collection($this->feedback),

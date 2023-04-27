@@ -1,31 +1,11 @@
 <template>
     <div>
     <main class="overflow-hidden ">
-        <!--Start Breadcrumb Style2-->
-        <section class="breadcrumb-area" style="background-image: url(assets/images/inner-pages/breadcum-bg.png);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="breadcrumb-content text-center wow fadeInUp animated">
-                            <h2>ResetPassword</h2>
-                            <div class="breadcrumb-menu">
-                                <ul>
-                                    <li><a href="index.html"><i class="flaticon-home pe-2"></i>Home</a></li>
-                                    <li> <i class="flaticon-next"></i> </li>
-                                    <li class="active">Login</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--End Breadcrumb Style2-->
         <!--Start Login Page-->
         <section class="login-page pt-120 pb-120">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xl-6 col-lg-8 col-md-9 wow fadeInUp animated">
+                    <div class="col-xl-6 col-lg-8 col-md-9 fadeInUp animated">
                         <div class="login-register-form"
                             style="background-image: url('/assets/images/inner-pages/login-bg.png');">
                             <div class="top-title text-center ">
@@ -66,7 +46,6 @@
 export default {
     name: "ResetPassword",
     mounted(){
-        $(document).trigger('changed_')
         this.getMail()
     },
     data() {
@@ -107,7 +86,7 @@ export default {
                             this.errors.push(serverError(error));
                         })
                         .finally(x => {
-                            $(document).trigger('changed_')
+
                         });
             })
         },

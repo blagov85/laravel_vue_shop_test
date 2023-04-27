@@ -1,7 +1,7 @@
 <template>
     <!--size-->
     <div class="shop-details-top-size-box">
-        <h4>Size: <span v-if="popupCountOfSizeObj">({{ popupCountOfSizeObj.title }})</span></h4>
+        <h4>Розмір: <span v-if="popupCountOfSizeObj">({{ popupCountOfSizeObj.title }})</span></h4>
         <div class="shop-details-top-size-list-box">
             <ul class="shop-details-top-size-list">
                 <li v-for="countOfSize in popupProduct.counts" v-bind:key="countOfSize.id">
@@ -12,7 +12,7 @@
     </div>
     <!--endsize-->
     <div class="add-product">
-        <h6>Qty:</h6>
+        <h6>Кількість:</h6>
         <div class="button-group">
             <div class="qtySelector text-center">
                 <span class="decreaseQty" @click.prevent="decreaseCountPopup()"><i class="flaticon-minus"></i></span>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import { mapState, mapMutations, mapActions } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
 
     export default {
         name: "CounterProductSize",

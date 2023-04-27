@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->foreignId('brand_id')->default(1)->index()->constrained('brands')->after('preview_image');
-            $table->foreignId('sex_id')->default(1)->index()->constrained('sex')->after('brands');
-            $table->foreignId('country_id')->default(1)->index()->constrained('countries')->after('sex');
+            $table->foreignId('sex_id')->default(1)->index()->constrained('sex')->after('brand_id');
+            $table->foreignId('country_id')->default(1)->index()->constrained('countries')->after('sex_id');
         });
     }
 

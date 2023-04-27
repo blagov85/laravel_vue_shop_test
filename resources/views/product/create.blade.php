@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Добавить продукт</h1>
+                <h1 class="m-0">Додати товар</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,13 +26,13 @@
                 @csrf
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Наименование"/>
+                    <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Назва товару"/>
                     @error('title')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Описание"/>
+                    <input type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Опис"/>
                     @error('description')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -45,12 +45,12 @@
                     @enderror
                 </div>
                   <div class="form-group">
-                      <input type="number" class="form-control" name="price" value="{{ old('price') }}" placeholder="Цена"/>
+                      <input type="number" class="form-control" name="price" value="{{ old('price') }}" placeholder="Вартість"/>
                       @error('price')
                       <div class="text-danger">{{ $message }}</div>
                       @enderror
                   </div>
-                <p>Количество на складе<p>
+                <p>Кількість на складі<p>
                 <div class="d-flex justify-content-between">
                   @foreach($sizes as $key => $size)
                     <div class="form-group">
@@ -72,10 +72,10 @@
                   <div class="input-group">
                     <div class="custom-file">
                       <input type="file" name="preview_image" class="custom-file-input" id="select_preview_image">
-                      <label class="custom-file-label" for="select_preview_image">Выберите файл</label>
+                      <label class="custom-file-label" for="select_preview_image">Выберіть файл</label>
                     </div>
                     <div class="input-group-append">
-                      <span class="input-group-text">Загрузить</span>
+                      <span class="input-group-text">Завантажити</span>
                     </div>
                   </div>
                   @error('preview_image')
@@ -92,10 +92,10 @@
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" name="product_images[]" class="custom-file-input" id="select_product_image_1">
-                        <label class="custom-file-label" for="select_product_image_1">Выберите файл</label>
+                        <label class="custom-file-label" for="select_product_image_1">Выберіть файл</label>
                       </div>
                       <div class="input-group-append">
-                        <span class="input-group-text">Загрузить</span>
+                        <span class="input-group-text">Завантажити</span>
                       </div>
                     </div>
                   </div>
@@ -108,10 +108,10 @@
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" name="product_images[]" class="custom-file-input" id="select_product_image_2">
-                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                        <label class="custom-file-label" for="exampleInputFile">Выберіть файл</label>
                       </div>
                       <div class="input-group-append">
-                        <span class="input-group-text">Загрузить</span>
+                        <span class="input-group-text">Завантажити</span>
                       </div>
                     </div>
                   </div>
@@ -123,10 +123,10 @@
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" name="product_images[]" class="custom-file-input" id="select_product_image_3">
-                        <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
+                        <label class="custom-file-label" for="exampleInputFile">Выберіть файл</label>
                       </div>
                       <div class="input-group-append">
-                        <span class="input-group-text">Загрузить</span>
+                        <span class="input-group-text">Завантажити</span>
                       </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                 <!--others-->
                 <div class="form-group">
                   <select name="category_id" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Выберите категорию</option>
+                    <option selected="selected" disabled>Выберіть категорію</option>
                     @foreach($categories as $category)
                     <option {{ old('category_id') == $category->id ? ' selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
                     @endforeach
@@ -147,7 +147,7 @@
                 </div>
                 <div class="form-group">
                   <select name="brand_id" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Выберите бренд</option>
+                    <option selected="selected" disabled>Выберіть бренд</option>
                     @foreach($brands as $brand)
                     <option {{ old('brand_id') == $brand->id ? ' selected' : '' }} value="{{ $brand->id }}">{{ $brand->title }}</option>
                     @endforeach
@@ -158,7 +158,7 @@
                 </div>
                 <div class="form-group">
                   <select name="sex_id" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Выберите пол</option>
+                    <option selected="selected" disabled>Выберіть стать</option>
                     @foreach($sex as $sexOne)
                     <option {{ old('sex_id') == $sexOne->id ? ' selected' : '' }} value="{{ $sexOne->id }}">{{ $sexOne->title }}</option>
                     @endforeach
@@ -169,7 +169,7 @@
                 </div>
                 <div class="form-group">
                   <select name="country_id" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Выберите страну</option>
+                    <option selected="selected" disabled>Выберіть країну</option>
                     @foreach($countries as $country)
                     <option {{ old('country_id') == $country->id ? ' selected' : '' }} value="{{ $country->id }}">{{ $country->title }}</option>
                     @endforeach
@@ -179,7 +179,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                  <select name="materials[]" class="materials" multiple="multiple" data-placeholder="Выберите материал" style="width: 100%;">
+                  <select name="materials[]" class="materials" multiple="multiple" data-placeholder="Выберіть матеріал" style="width: 100%;">
                     @if( old('materials') )
                       @foreach($materials as $material)
                         @unless( in_array($material->id, old('materials')) )
@@ -205,7 +205,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                  <select name="percent_materials[]" class="percent_materials" multiple="multiple" data-placeholder="Выберите процент материала" style="width: 100%;">
+                  <select name="percent_materials[]" class="percent_materials" multiple="multiple" data-placeholder="Выберіть процент матеріала" style="width: 100%;">
                     @foreach($percent_materials as $percent_material)
                     <option value="{{ $percent_material }}">{{ $percent_material }}</option>
                     @endforeach
@@ -220,7 +220,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                  <select name="seasons[]" class="seasons" multiple="multiple" data-placeholder="Выберите сезон" style="width: 100%;">
+                  <select name="seasons[]" class="seasons" multiple="multiple" data-placeholder="Выберіть сезон" style="width: 100%;">
                     @foreach($seasons as $season)
                     <option {{ is_array( old('seasons')) && in_array($season->id, old('seasons')) ? ' selected' : '' }} value="{{ $season->id }}">{{ $season->title }}</option>
                     @endforeach
@@ -231,7 +231,7 @@
                 </div>
                 <div class="form-group">
                   <select name="group_id" class="form-control select2" style="width: 100%;">
-                    <option selected="selected" disabled>Выберите группу</option>
+                    <option selected="selected" disabled>Выберіть групуу</option>
                     @foreach($groups as $group)
                     <option {{ old('group_id') == $group->id ? ' selected' : '' }} value="{{ $group->id }}">{{ $group->title }}</option>
                     @endforeach
@@ -241,7 +241,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                  <select name="tags[]" class="tags" multiple="multiple" data-placeholder="Выберите тег" style="width: 100%;">
+                  <select name="tags[]" class="tags" multiple="multiple" data-placeholder="Выберіть тег" style="width: 100%;">
                     @foreach($tags as $tag)
                     <option {{ is_array( old('tags')) && in_array($tag->id, old('tags')) ? ' selected' : '' }} value="{{ $tag->id }}">{{ $tag->title }}</option>
                     @endforeach
@@ -251,7 +251,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                  <select name="colors[]" class="colors" multiple="multiple" data-placeholder="Выберите цвет" style="width: 100%">
+                  <select name="colors[]" class="colors" multiple="multiple" data-placeholder="Выберіть колір" style="width: 100%">
                     @foreach($colors as $color)
                     <option {{ is_array( old('colors')) && in_array($color->id, old('colors')) ? ' selected' : '' }} value="{{ $color->id }}">{{ $color->title }}</option>
                     @endforeach
@@ -261,7 +261,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Добавить"/>
+                    <input type="submit" class="btn btn-primary" value="Додати"/>
                 </div>
             </form>
             @error('product_add_error')

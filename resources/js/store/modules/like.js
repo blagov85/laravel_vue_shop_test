@@ -54,11 +54,17 @@ const like = ({
                 .then(res => {
                     let changeLikeProduct = res.data.data; //get data of product
                     let oneProduct = rootState.productOneModule.product; //get product from page Show product (if exists) 
+                    let indexProducts = rootState.indexProductsModule.indexProducts; //get list products from recent products list (if exists) 
                     let recentProducts = rootState.productsModule.recentProducts; //get list products from recent products list (if exists) 
                     if (oneProduct){
                         //set properties like and count_likes for oneProduct
                         oneProduct.like = changeLikeProduct.like;
                         oneProduct.count_likes = changeLikeProduct.count_likes;
+                    }
+                    if (indexProducts.length > 0){
+                        //set propertes like and count_likes for indexProducts
+                        let payload = {'listProducts': indexProducts, 'changeLikeProduct': res.data.data}
+                        dispatch('setChangeProductsLike', payload);
                     }
                     if (recentProducts.length > 0){
                         //set propertes like and count_likes for recentProducts
@@ -80,7 +86,7 @@ const like = ({
                     commit('setIsChangeLiked', true);
                 })
                 .finally(x => {
-                    $(document).trigger('changed_')
+                    //$(document).trigger('changed_')
                 });
         },
         //function for change properties like and count_likes for product with id in list

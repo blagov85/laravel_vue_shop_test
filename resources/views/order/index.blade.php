@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-12">
-                  <h1 class="m-0">Заказы</h1>
+                  <h1 class="m-0">Замовлення</h1>
               </div><!-- /.col -->
               <div class="col-sm-12">
                   <ol class="breadcrumb float-sm-right">
@@ -15,7 +15,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="region_id" class="form-control select2">
-                            <option selected="selected" value="">Регион</option>
+                            <option selected="selected" value="">Регіон</option>
                             @if(empty($data['region_id']))
                               @foreach($regions as $region)
                                 <option value="{{ $region->id }}">{{ $region->title }}</option>
@@ -34,7 +34,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="delivery_company_id" class="form-control select2">
-                            <option selected="selected" value="">Компания доставки</option>
+                            <option selected="selected" value="">Компанія доставки</option>
                             @if(empty($data['delivery_company_id']))
                               @foreach($companies as $company)
                                 <option value="{{ $company->id }}">{{ $company->title }}</option>
@@ -53,7 +53,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="status_id" class="form-control select2">
-                            <option selected="selected" value="">Статус заказа</option>
+                            <option selected="selected" value="">Статус замовлення</option>
                             @if(empty($data['status_id']))
                               @foreach($statuses as $status)
                                 <option value="{{ $status->id }}">{{ $status->title }}</option>
@@ -72,7 +72,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="payment_id" class="form-control select2">
-                            <option selected="selected" value="">Статус оплаты</option>
+                            <option selected="selected" value="">Статус оплати</option>
                             @if(empty($data['payment_id']))
                               @foreach($payments as $payment)
                                 <option value="{{ $payment->id }}">{{ $payment->title }}</option>
@@ -116,7 +116,7 @@
                       </li>
                       <input type="hidden" name="page" value="1">
                       <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Применить"/>
+                        <input type="submit" class="btn btn-primary" value="Застосувати"/>
                       </div>
                     </form>
                   </ol>
@@ -154,7 +154,7 @@
                       <th width="15%">Дата</th>
                       <th width="20%">Статус</th>
                       <th width="20%">Оплата</th>
-                      <th width="20%">Регион</th>
+                      <th width="20%">Регіон</th>
                       <th width="10%">Сума</th>
                     </tr>
                   </thead>

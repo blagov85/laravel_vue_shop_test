@@ -1,20 +1,20 @@
 <template>
     <div>
         <div class="card-body" v-if="user">
-            <h4>Данные пользователя</h4>
+            <h4>Дані користувача</h4>
             <div class="form-group">
                 <h5>Email: {{ this.user.email }}</h5>
             </div>
             <div class="form-group">
-                <h5>Имя: {{ this.user.name }}</h5>
+                <h5>Ім'я: {{ this.user.name }}</h5>
             </div>
             <div class="form-group">
-                <label for="exampleInputPatronymic">Отчество</label>
-                <input type="text" class="form-control" v-model="user.patronymic" id="exampleInputPatronymic" placeholder="Введите отчество">
+                <label for="exampleInputPatronymic">По-батькові</label>
+                <input type="text" class="form-control" v-model="user.patronymic" id="exampleInputPatronymic">
             </div>
             <div class="form-group">
-                <label for="exampleInputSurname">Фамилия</label>
-                <input type="text" class="form-control" v-model="user.surname" id="exampleInputSurname" placeholder="Введите фамилию">
+                <label for="exampleInputSurname">Прізвище</label>
+                <input type="text" class="form-control" v-model="user.surname" id="exampleInputSurname">
             </div>
             <div class="form-group single-sidebar-box pb-0 border-bottom-0">
                 <h5>Пол</h5>
@@ -22,17 +22,17 @@
                     <form>
                         <div class="form-group radio-male"> 
                             <input type="radio" value="1" v-model="user.gender" id="sex-male"> 
-                            <label for="sex-male">Мужской</label> 
+                            <label for="sex-male">Чоловік</label> 
                         </div>
                         <div class="form-group"> 
                             <input type="radio" value="2" v-model="user.gender" id="sex-female"> 
-                            <label for="sex-female">Женский</label> 
+                            <label for="sex-female">Жінка</label> 
                         </div>
                     </form>
                 </div>
             </div>
             <div class="form-group">
-                <h5>Дата рождения</h5>
+                <h5>Дата народження</h5>
                 <div class="birth">
                     <select v-model="user.birth.day" class="birth_margin">
                         <option v-for="itemDay in dayList" v-bind:key="itemDay" 
@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label for="phone">Телефон</label>
-                <input @keyUp="getLength()" type="text" class="form-control" id="phone"  v-model="user.phone" placeholder="Введите телефон">
+                <input @keyUp="getLength()" type="text" class="form-control" id="phone"  v-model="user.phone">
                 <span v-if="phoneError != ''">{{ this.phoneError }}</span>
             </div>
             <div class="form-group">
@@ -59,16 +59,15 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleInputSettlement">Населенный пункт</label>
-                <textarea class="form-control" v-model="user.settlement" id="exampleInputSettlement" 
-                    placeholder="Введите адрес"></textarea>
+                <label for="exampleInputSettlement">Населений пункт</label>
+                <textarea class="form-control" v-model="user.settlement" id="exampleInputSettlement"></textarea>
             </div>
             <div class="form-group">
-                <input type="submit" @click.prevent="updateData()" class="btn btn-primary" value="Изменить данные"/>
+                <input type="submit" @click.prevent="updateData()" class="btn btn-primary" value="Змінити дані"/>
             </div>
             <h6 v-if="changeDataUser != ''">{{ this.changeDataUser }}</h6>
         </div>
-        <div v-else>NO USER</div>
+        <div v-else>Немає користувача</div>
     </div>
 </template>
 
@@ -78,7 +77,6 @@
     export default {
         name: "UserData",
         mounted() {
-            $(document).trigger('changed_'),
             this.loadUserData()
         },
         data(){

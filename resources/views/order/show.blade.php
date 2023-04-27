@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Показать заказ</h1>
+                <h1 class="m-0">Інформація про замовлення</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,13 +26,13 @@
             <div class="card">
               <div class="card-header d-flex p-3">
                 <div class="mr-3">
-                  <a href="{{ route('order.edit', $order->id) }}" class="btn btn-primary">Редактировать</a>
+                  <a href="{{ route('order.edit', $order->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
                 <form action="{{ route('order.delete', $order->id) }}" method="post">
                   @csrf
                   @method('delete')
                   <div class="form-group">
-                    <input type="submit" class="btn btn-danger" value="Удалить"/>
+                    <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
                  <!--<div class="card-tools">
@@ -100,7 +100,7 @@
                         <td>
                           <div class="form-group">
                             <select name="payment_id" class="form-control select2">
-                              <option selected="selected" disabled>Выберите статус оплаты</option>
+                              <option selected="selected" disabled>Выберіть статус оплати</option>
                               @foreach($payments as $payment)
                               <option {{ $order->payment_id == $payment->id ? ' selected' : '' }} value="{{ $payment->id }}">{{ $payment->title }}</option>
                               @endforeach
@@ -112,11 +112,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="head">Статус заказа</td>
+                        <td class="head">Статус замовлення</td>
                         <td>
                           <div class="form-group">
                             <select name="status_id" class="form-control select2">
-                              <option selected="selected" disabled>Выберите статус заказа</option>
+                              <option selected="selected" disabled>Выберіть статус замовлення</option>
                               @foreach($statuses as $status)
                               <option {{ $order->status_id == $status->id ? ' selected' : '' }} value="{{ $status->id }}">{{ $status->title }}</option>
                               @endforeach
@@ -131,7 +131,7 @@
                       <td class="head"></td>
                       <td>
                         <div class="form-group">
-                          <input type="submit" class="btn btn-primary" value="Применить статусы"/>
+                          <input type="submit" class="btn btn-primary" value="Застосувати статуси"/>
                         </div>
                       </td>
                     </tr>

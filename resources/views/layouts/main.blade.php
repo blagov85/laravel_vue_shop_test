@@ -28,7 +28,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <p class="animation__shake">Магазин продуктов</p>
+    <p class="animation__shake">Магазин одягу</p>
   </div>
 
   <!-- Navbar -->
@@ -42,16 +42,10 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav">
-      <li>
-        <div class="form-group" style="text-align: center;margin-right:10px">
-          <a href="{{ route('change-password') }}">Изменить пароль</a>
-        </div>
-      </li>
       <li class="nav-item">
-        <form action="{{ route('logout') }}" method="post">
-          @csrf
-          <input class="btn btn-outline-primary" type="submit" value="Выйти">
-        </form>
+        <div class="nav-link" style="margin-right:10px">
+          <a href="{{ route('user.show', Auth::user()->id) }}">{{ Auth::user()->name }}</a>
+        </div>
       </li>
     </ul>
   </nav>
@@ -60,8 +54,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <span class="brand-text font-weight-light">Магазин продуктов</span>
+    <a href="{{ route('main.index') }}" class="brand-link">
+      <span class="brand-text font-weight-light">Магазин одягу</span>
     </a>
 
     <!-- Sidebar -->
@@ -74,7 +68,7 @@
           <li class="nav-item">
           <a href="{{ route('order.index') }}" class="nav-link">
               <i class="nav-icon fas fa-shopping-bag"></i>
-              <p>Заказы</p>
+              <p>Замовлення</p>
             </a>
           </li>
           @endcan
@@ -82,7 +76,7 @@
           <li class="nav-item">
             <a href="{{ route('product.index') }}" class="nav-link">
             <i class="nav-icon fas fa-tshirt"></i>
-              <p>Продукты</p>
+              <p>Товари</p>
             </a>
           </li>
           @endcan
@@ -90,7 +84,7 @@
           <li class="nav-item">
             <a href="{{ route('category.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Категории</p>
+              <p>Категорії</p>
             </a>
           </li>
           @endcan
@@ -106,7 +100,7 @@
           <li class="nav-item">
             <a href="{{ route('color.index') }}" class="nav-link">
             <i class="nav-icon fas fa-palette"></i>
-              <p>Цвета</p>
+              <p>Кольори</p>
             </a>
           </li>
           @endcan
@@ -114,7 +108,7 @@
           <li class="nav-item">
             <a href="{{ route('user.index') }}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
-              <p>Пользователи</p>
+              <p>Користувачі</p>
             </a>
           </li>
           @endcan
@@ -122,7 +116,7 @@
           <li class="nav-item">
             <a href="{{ route('role.index') }}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
-              <p>Роли</p>
+              <p>Ролі</p>
             </a>
           </li>
           @endcan
@@ -130,7 +124,7 @@
           <li class="nav-item">
             <a href="{{ route('group.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Группы</p>
+              <p>Групи</p>
             </a>
           </li>
           @endcan
@@ -138,7 +132,7 @@
           <li class="nav-item">
             <a href="{{ route('size.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Размеры</p>
+              <p>Розміри</p>
             </a>
           </li>
           @endcan
@@ -146,7 +140,7 @@
           <li class="nav-item">
             <a href="{{ route('brand.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Бренды</p>
+              <p>Бренди</p>
             </a>
           </li>
           @endcan
@@ -154,7 +148,7 @@
           <li class="nav-item">
             <a href="{{ route('material.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Материалы</p>
+              <p>Материали</p>
             </a>
           </li>
           @endcan
@@ -162,7 +156,7 @@
           <li class="nav-item">
             <a href="{{ route('country.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Страны</p>
+              <p>Країни</p>
             </a>
           </li>
           @endcan
@@ -170,7 +164,7 @@
           <li class="nav-item">
             <a href="{{ route('season.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Сезоны</p>
+              <p>Сезони</p>
             </a>
           </li>
           @endcan
@@ -178,7 +172,7 @@
           <li class="nav-item">
             <a href="{{ route('sex.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Пол</p>
+              <p>Стать</p>
             </a>
           </li>
           @endcan
@@ -186,7 +180,7 @@
           <li class="nav-item">
             <a href="{{ route('feedback.index') }}" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
-              <p>Новые отзывы</p>
+              <p>Нові відгуки</p>
             </a>
           </li>
           @endcan

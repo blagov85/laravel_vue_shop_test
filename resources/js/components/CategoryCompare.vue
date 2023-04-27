@@ -2,7 +2,7 @@
     <div v-if="compareCategory.length > 0" class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-lg-12">
-                <h3>Списки сравнения</h3>
+                <h3>Списки порівняння</h3>
                 <div v-for="category in compareCategory" v-bind:key="category.id" class="compare-category">
                     <router-link :to="{name: 'products.compareId', params: {id: category.id}}" class="category-name" :key="$route.fullPath">
                         <span class="mfp-close choose-category">

@@ -8,7 +8,7 @@
             </router-link>
             <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupForSize${product.id}`" 
                     class="addcart btn--primary style2 popup_link">
-                Add To Cart 
+                Додати в кошик
             </a>
             <div class="products-grid__usefull-links">
                 <ul>
@@ -16,22 +16,23 @@
                         <a v-if="token" @click.prevent="likeProduct(product)" href="#0">
                             <i v-if="product.like == true" class="fas fa-heart"></i> 
                             <i v-else class="flaticon-heart"></i> 
-                            <span>wishlist</span>
+                            <span>бажане</span>
                         </a>
                         <router-link v-else :to="{name: 'user.login'}">
                             <i class="flaticon-heart"></i>
+                            <span>бажане</span>
                         </router-link>
                     </li>
                     <li>
                         <a href="#" @click.prevent="addToCompare(product);getCompareCategory()"> 
                             <i class="flaticon-left-and-right-arrows"></i>
-                            <span>compare</span> 
+                            <span>порівняння</span> 
                         </a> 
                     </li>
                     <li>
                         <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popup${product.id}`" class="popup_link"> 
                             <i class="flaticon-visibility"></i>
-                            <span> quick view</span>
+                            <span>швидкий перегляд</span>
                         </a>
                     </li>
                 </ul>

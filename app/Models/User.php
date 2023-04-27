@@ -24,6 +24,7 @@ class User extends Authenticatable
     const ROLE_WRITER = 2;
     const ROLE_GUEST = 3;
     const ROLE_MANAGER = 4;
+    const ROLE_CUSTOMER = 5;
 
     static function getGenders(){
         return [
@@ -71,6 +72,10 @@ class User extends Authenticatable
 
     public function isManager(){
         return $this->role_id === self::ROLE_MANAGER;
+    }
+
+    public function isCustomer(){
+        return $this->role_id === self::ROLE_CUSTOMER;
     }
 
     /**

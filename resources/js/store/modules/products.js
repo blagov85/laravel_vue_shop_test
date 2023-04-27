@@ -3,16 +3,12 @@ const products = ({
     state () {
         return {
             recentProducts: []
-            //likedddProduct: null
         }
       },
     mutations: {
         setRecentProducts(state, recentProducts){
             state.recentProducts = recentProducts;
-        },
-        // setLikeProduct(state, likeProduct){
-        //     state.likedddProduct = likeProduct;
-        // }
+        }
     },
     actions: {
         getRecentProducts({commit}, id){
@@ -24,15 +20,6 @@ const products = ({
                     $(document).trigger('changed_')
                 });
         }
-        // likeProduct({commit}, id){
-        //     axios.get(`/api/product/${id}/like`)
-        //         .then(res => {
-        //             commit('setLikeProduct', res.data.data);
-        //         })
-        //         .finally(x => {
-        //             $(document).trigger('changed_')
-        //         });
-        // } 
     }
 })
 

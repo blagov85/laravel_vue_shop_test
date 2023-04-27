@@ -15,7 +15,7 @@ use App\Http\Resources\Product\IndexProductResource;
 class IndexRecentController extends Controller
 {
     public function __invoke(Product $product){
-        $recentProducts = Product::where('category_id', $product->category_id)->orderBy('created_at', 'desc')->take(6)->get();
+        $recentProducts = Product::where('category_id', $product->category_id)->where('id','<>',$product->id)->orderBy('created_at', 'desc')->take(6)->get();
         return IndexProductResource::collection($recentProducts);
     }
 }

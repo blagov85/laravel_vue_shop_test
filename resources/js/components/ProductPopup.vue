@@ -40,16 +40,17 @@
                     <p class="text"> {{ popupProduct.description }} </p>
                     <div class="price">
                         <h2> {{ popupProduct.price }} <del v-if="popupProduct.old_price"> {{ popupProduct.old_price }}</del></h2>
-                        <h6> In stuck</h6>
                     </div>
                     <div class="color-varient"> 
-                        <h6>Color</h6>
+                        <h6>Колір</h6>
                         <template v-for="color in popupProduct.colors" v-bind:key="color.id">
-                            <div class="d-inline-block mr-0.25" :style="`background: #${color.title}; width:20px; height:20px; margin-right:10px`"></div>
-                        </template> 
+                            <a class="color-name inactive-link" :style="`background: #${color.value};`" :class="[color.value == 'FFFFFF' ? 'border-color' : '']">
+                                <span>{{ color.title }}</span>
+                            </a>
+                        </template>
                     </div>
-                    <div class="color-varient"> 
-                        <h6>Similar products</h6>
+                    <div v-if="popupProduct.group_products != null" class="color-varient"> 
+                        <h6>Схожі товари</h6>
                         <template v-for="groupProduct in popupProduct.group_products" v-bind:key="groupProduct.id">
                             <a @click.prevent="popupProductNull();getPopupProduct(groupProduct.id)" href="#0" class="color-name" style="background: none"> 
                                 <img :src="groupProduct.image_url" alt=""> 
@@ -118,5 +119,11 @@
     .mfp-close{
         opacity: 1;
         border: 1px solid black;
+    }
+    .inactive-link {
+        cursor: default;
+    }
+    .border-color{
+        border: 1px solid #161FCA;
     }
 </style>

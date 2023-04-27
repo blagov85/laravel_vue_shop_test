@@ -23728,7 +23728,7 @@ var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "icon"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "flaticon-power"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Welcome to Karte Online Shop")], -1
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Вітаємо в інтернет – магазині Karte")], -1
 /* HOISTED */
 );
 
@@ -24018,8 +24018,27 @@ var _hoisted_120 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElemen
 var _hoisted_121 = {
   "class": "side-cart d-flex flex-column justify-content-between"
 };
+var _hoisted_122 = {
+  "class": "footer-default footer-3"
+};
+var _hoisted_123 = {
+  "class": "footer_bottom position-relative"
+};
+var _hoisted_124 = {
+  "class": "container"
+};
+var _hoisted_125 = {
+  "class": "footer_bottom_content"
+};
+var _hoisted_126 = {
+  "class": "copyright wow fadeInUp animated"
+};
 
-var _hoisted_122 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<footer class=\"footer-default footer-3\"><div class=\"footer-default__shap_1 position-absolute\"><img src=\"/assets/images/shape/footer-shape-1.png\" alt=\"\"></div><!--Start Footer--><div class=\"footer-default__main-footer position-relative\"><div class=\"container\"><div class=\"row\"><div class=\"col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-30 wow fadeInUp animated\"><div class=\"footer-default__single-box\"><div class=\"company-info\"><div class=\"footer-title\"><h4> Office</h4></div><div class=\"text1\"><p>29 Holles Place, Dublin 2 D02 YY46</p></div><div class=\"text2\"><p>68 Jay Street, Suite 902 New Side <br> Brooklyn, NY 11201</p></div><div class=\"text3\"><p>New York, United States</p></div></div></div></div><div class=\"col-xl-2 col-lg-6 col-md-6 col-sm-12 mt-30 wow fadeInUp animated\"><div class=\"footer-default__single-box\"><div class=\"footer-title\"><h4> Useful Links </h4></div><ul class=\"footer-links\"><li><a href=\"my-account.html\">Account</a></li><li><a href=\"login.html\">Sign In</a></li><li><a href=\"cart.html\">View Cart</a></li><li><a href=\"wishlist.html\">My WishList</a></li><li><a href=\"compare.html\">Compare Products</a></li></ul></div></div><div class=\"col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-30 wow fadeInUp animated\"><div class=\"footer-default__single-box\"><div class=\"footer-title\"><h4> Information </h4></div><ul class=\"footer-links\"><li><a href=\"about-us.html\">About us</a></li><li><a href=\"contact.html\">Contact Us </a></li><li><a href=\"faq.html\">Faq</a></li><li><a href=\"blog.html\">Latest Posts</a></li><li><a href=\"order-track.html\">Order Track</a></li></ul></div></div><div class=\"col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-30 wow fadeInUp animated\"><div class=\"footer-default__single-box\"><div class=\"footer-title\"><h4> Newsletter </h4></div><div class=\"footer-newsletter\"><p class=\"text\">Enter your email to receive our latest updates about our products &amp; promotions. </p><form action=\"#0\" class=\"footer-default__subscrib-form\"><div class=\"footer-input-box\"><input type=\"email\" placeholder=\"Email address\" name=\"email\"> <button type=\"submit\" class=\"subscribe_btn\"> Subscribe </button></div></form><div class=\"newsletter-bottom d-flex align-items-center\"><div class=\"footer-title-box\"><p>Follow Us:</p></div><div class=\"footer__medio-boxx medio-boxx d-flex align-items-center\"><ul><li><a href=\"https://www.facebook.com/\" target=\"_blank\" class=\"active\"><i class=\"flaticon-facebook-app-symbol\"></i></a></li><li><a href=\"https://www.youtube.com/\" target=\"_blank\"><i class=\"flaticon-youtube\"></i></a></li><li><a href=\"https://twitter.com/\"><i class=\"flaticon-twitter\" target=\"_blank\"></i></a></li><li><a href=\"https://www.instagram.com/\"><i class=\"flaticon-instagram\" target=\"_blank\"></i></a></li></ul></div></div></div></div></div></div></div></div><!-- footer-bottom Footer--><div class=\"footer_bottom position-relative\"><div class=\"container\"><div class=\"footer_bottom_content\"><div class=\"copyright wow fadeInUp animated\"><p>© 2022 <a href=\"index.html\">Karte.</a> All Rights Reserved.</p></div><div class=\"footer-payment wow fadeInUp animated\" style=\"margin-right:3%;\"><a href=\"https://www.visa.com.ua/uk_UA\"><img src=\"/assets/images/home-four/method-1.jpg\" alt=\"payment\"></a><a href=\"https://www.mastercard.ua/uk-ua.html\"><img src=\"/assets/images/home-four/method-2.jpg\" alt=\"payment\"></a><a href=\"https://support.apple.com/uk-ua\"><img src=\"/assets/images/home-four/method-3.jpg\" alt=\"payment\"></a><a href=\"https://www.paypal.com/\"><img src=\"/assets/images/home-four/method-4.jpg\" alt=\"payment\"></a></div></div></div></div></footer>", 1);
+var _hoisted_127 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("© 2023 ");
+
+var _hoisted_128 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Karte");
+
+var _hoisted_129 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"footer-payment wow fadeInUp animated\" style=\"margin-right:3%;\"><a href=\"https://www.visa.com.ua/uk_UA\"><img src=\"/assets/images/home-four/method-1.jpg\" alt=\"payment\"></a><a href=\"https://www.mastercard.ua/uk-ua.html\"><img src=\"/assets/images/home-four/method-2.jpg\" alt=\"payment\"></a><a href=\"https://support.apple.com/uk-ua\"><img src=\"/assets/images/home-four/method-3.jpg\" alt=\"payment\"></a><a href=\"https://www.paypal.com/\"><img src=\"/assets/images/home-four/method-4.jpg\" alt=\"payment\"></a></div>", 1);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
@@ -24058,7 +24077,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.searchValue = $event;
     }),
     "class": "form-control",
-    placeholder: "Search for products"
+    placeholder: "Знайти товари"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.searchValue]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [$options.searchValue !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
@@ -24208,7 +24227,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.searchValue = $event;
     }),
     "class": "form-control",
-    placeholder: "Search for products"
+    placeholder: "Знайти товари"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.searchValue]]), $options.searchValue !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
@@ -24319,7 +24338,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.searchValue = $event;
     }),
     "class": "form-control",
-    placeholder: "Search for products"
+    placeholder: "Знайти товари"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.searchValue]]), $options.searchValue !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
@@ -24396,7 +24415,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])])]), _hoisted_120, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_121, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SideCart)])]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
     key: _ctx.$route.fullPath
-  })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  Footer Three start "), _hoisted_122]);
+  })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  Footer Three start "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", _hoisted_122, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_123, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_124, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_125, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_126, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [_hoisted_127, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_128];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])]), _hoisted_129])])])])]);
 }
 
 /***/ }),
@@ -24431,7 +24459,7 @@ var _hoisted_3 = {
 };
 
 var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Списки сравнения", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Списки порівняння", -1
   /* HOISTED */
   );
 });
@@ -25364,7 +25392,7 @@ var compare = {
       commit('setIdCategoryActive', idCategory);
       var idCompare = [];
       var productsCompareFullInfo = [];
-      var compare = state.compare; //get id of products in slected category
+      var compare = state.compare; //get id of products in selected category
 
       if (idCategory == null) {
         compare.forEach(function (item) {
@@ -25536,9 +25564,7 @@ var feedback = {
         rating: state.rating,
         status: 'new',
         parent_id: state.feedbackParentId
-      }).then(function (res) {})["finally"](function (x) {
-        $(document).trigger('changed_');
-      });
+      }).then(function (res) {})["finally"](function (x) {});
     }
   }
 };
@@ -25754,6 +25780,8 @@ var like = {
 
         var oneProduct = rootState.productOneModule.product; //get product from page Show product (if exists) 
 
+        var indexProducts = rootState.indexProductsModule.indexProducts; //get list products from recent products list (if exists) 
+
         var recentProducts = rootState.productsModule.recentProducts; //get list products from recent products list (if exists) 
 
         if (oneProduct) {
@@ -25762,13 +25790,22 @@ var like = {
           oneProduct.count_likes = changeLikeProduct.count_likes;
         }
 
-        if (recentProducts.length > 0) {
-          //set propertes like and count_likes for recentProducts
+        if (indexProducts.length > 0) {
+          //set propertes like and count_likes for indexProducts
           var payload = {
-            'listProducts': recentProducts,
+            'listProducts': indexProducts,
             'changeLikeProduct': res.data.data
           };
           dispatch('setChangeProductsLike', payload);
+        }
+
+        if (recentProducts.length > 0) {
+          //set propertes like and count_likes for recentProducts
+          var _payload = {
+            'listProducts': recentProducts,
+            'changeLikeProduct': res.data.data
+          };
+          dispatch('setChangeProductsLike', _payload);
         }
 
         var likeProducts = state.likeProducts;
@@ -25785,8 +25822,7 @@ var like = {
 
         commit('setLikeProducts', likeProducts);
         commit('setIsChangeLiked', true);
-      })["finally"](function (x) {
-        $(document).trigger('changed_');
+      })["finally"](function (x) {//$(document).trigger('changed_')
       });
     },
     //function for change properties like and count_likes for product with id in list
@@ -26012,8 +26048,7 @@ var productOne = {
       axios.get("/api/product/".concat(id)).then(function (res) {
         var product = res.data.data;
         commit('setProduct', product);
-      })["finally"](function (x) {
-        $(document).trigger('changed_');
+      })["finally"](function (x) {//$(document).trigger('changed_')
       });
     }
   }
@@ -26037,17 +26072,13 @@ var products = {
   namespaced: true,
   state: function state() {
     return {
-      recentProducts: [] //likedddProduct: null
-
+      recentProducts: []
     };
   },
   mutations: {
     setRecentProducts: function setRecentProducts(state, recentProducts) {
       state.recentProducts = recentProducts;
-    } // setLikeProduct(state, likeProduct){
-    //     state.likedddProduct = likeProduct;
-    // }
-
+    }
   },
   actions: {
     getRecentProducts: function getRecentProducts(_ref, id) {
@@ -26057,16 +26088,7 @@ var products = {
       })["finally"](function (x) {
         $(document).trigger('changed_');
       });
-    } // likeProduct({commit}, id){
-    //     axios.get(`/api/product/${id}/like`)
-    //         .then(res => {
-    //             commit('setLikeProduct', res.data.data);
-    //         })
-    //         .finally(x => {
-    //             $(document).trigger('changed_')
-    //         });
-    // } 
-
+    }
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (products);

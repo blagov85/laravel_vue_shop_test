@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'employee']], function(){
     
     Route::get('/', App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
@@ -194,7 +194,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     });
 
 });
-
+Route::get('/attention', App\Http\Controllers\CheckEmployeeMiddlewareController::class)->name('attention');
 Auth::routes();
 Auth::routes(['verify' => true]);
 

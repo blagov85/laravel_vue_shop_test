@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Создать цвет</h1>
+                <h1 class="m-0">Додати колір</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -25,10 +25,13 @@
             <form action="{{ route('color.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title" placeholder="Наименование"/>
+                    <input type="text" class="form-control" name="title" placeholder="Назва кольору"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Добавить"/>
+                    <input type="text" class="form-control" name="value" placeholder="Значення (без #)"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Додати"/>
                 </div>
             </form>
             </div>

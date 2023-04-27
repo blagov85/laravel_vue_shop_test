@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Продукты</h1>
+                <h1 class="m-0">Товари</h1>
             </div><!-- /.col -->
             <div class="col-sm-12">
                 <ol class="breadcrumb float-sm-right">
@@ -34,7 +34,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="category_id" class="form-control select2">
-                            <option selected="selected" value="">Категория</option>
+                            <option selected="selected" value="">Категорія</option>
                             @if(empty($data['category_id']))
                               @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -53,7 +53,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="sex_id" class="form-control select2">
-                            <option selected="selected" value="">Пол</option>
+                            <option selected="selected" value="">Стать</option>
                             @if(empty($data['sex_id']))
                               @foreach($sex as $sexOne)
                                 <option value="{{ $sexOne->id }}">{{ $sexOne->title }}</option>
@@ -72,7 +72,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="color_id" class="form-control select2">
-                            <option selected="selected" value="">Цвет</option>
+                            <option selected="selected" value="">Колір</option>
                             @if(empty($data['color_id']))
                               @foreach($colors as $color)
                                 <option value="{{ $color->id }}">{{ $color->title }}</option>
@@ -91,7 +91,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="size_id" class="form-control select2">
-                            <option selected="selected" value="">Размер</option>
+                            <option selected="selected" value="">Розмір</option>
                             @if(empty($data['size_id']))
                               @foreach($sizes as $size)
                                 <option value="{{ $size->id }}">{{ $size->title }}</option>
@@ -129,7 +129,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="material_id" class="form-control select2">
-                            <option selected="selected" value="">Материал</option>
+                            <option selected="selected" value="">Матеріал</option>
                             @if(empty($data['material_id']))
                               @foreach($materials as $material)
                                 <option value="{{ $material->id }}">{{ $material->title }}</option>
@@ -148,7 +148,7 @@
                       <li style="padding-right:5px">
                         <div class="form-group">
                           <select name="country_id" class="form-control select2">
-                            <option selected="selected" value="">Размер</option>
+                            <option selected="selected" value="">Країна</option>
                             @if(empty($data['country_id']))
                               @foreach($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->title }}</option>
@@ -205,7 +205,7 @@
                       </li>
                       <input type="hidden" name="page" value="1">
                       <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Применить"/>
+                        <input type="submit" class="btn btn-primary" value="Застосувати"/>
                       </div>
                   </form>
                 </ol>
@@ -222,8 +222,8 @@
             <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('product.create') }}" class="btn btn-primary">Добавить</a>
-                <div class="card-tools">
+                <a href="{{ route('product.create') }}" class="btn btn-primary">Додати</a>
+                <!-- <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
@@ -233,7 +233,7 @@
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -241,13 +241,13 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Наименование</th>
+                      <th>Назва</th>
                       <th>Бренд</th>
-                      <th>Пол</th>
+                      <th>Стать</th>
                       <th>Сезон</th>
-                      <th>Цена</th>
-                      <th>Категория</th>
-                      <th>Группа</th>
+                      <th>Вартість</th>
+                      <th>Категорія</th>
+                      <th>Група</th>
                     </tr>
                   </thead>
                   <tbody>

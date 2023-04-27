@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="row w-50 personal-data">
-            <h5>Контактные данные</h5>
+            <h5>Контактні дані</h5>
             <div class="form-group">
-                <label for="exampleInputName">Имя</label>
+                <label for="exampleInputName">Им'я</label>
                 <input type="text" class="form-control" v-model="name" id="exampleInputName" placeholder="Введите имя">
             </div>
             <div class="form-group">
-                <label for="exampleInputSurname">Фамилия</label>
+                <label for="exampleInputSurname">Прізвище</label>
                 <input type="text" class="form-control" v-model="surname" id="exampleInputSurname" placeholder="Введите фамилию">
             </div>
             <div class="form-group">
@@ -26,19 +26,19 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleInputCity">Город</label>
+                <label for="exampleInputCity">Населений пункт</label>
                 <input type="text" class="form-control" v-model="settlement" id="exampleInputCity" placeholder="Введите город">
             </div>
         </div>
         <br>
         <div class="row mt--30">
-            <div class="col-xl-6 col-lg-7 wow fadeInUp animated">
+            <div class="col-xl-6 col-lg-7 fadeInUp animated">
                 <div class="cart-total-box mt-30">
                     <div class="table-outer">
                         <table class="cart-table2">
                             <tbody>
                                 <tr class="line-top">
-                                    <td class="shipping"> Служба доставки </td>
+                                    <td class="shipping">Служба доставки</td>
                                     <td class="selact-box1">
                                         <ul v-if="deliveryCompanies.length > 0" class="shop-select-option-box-1">
                                             <li v-for="deliveryCompany in deliveryCompanies" :key="deliveryCompany.id"> 
@@ -52,7 +52,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="shipping"> Номер отделения </td>
+                                    <td class="shipping">Номер відділення</td>
                                     <td class="selact-box1">
                                         <div class="form-group w-50">
                                             <input type="number" class="form-control" v-model="departmentDC">
@@ -64,12 +64,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-5 wow fadeInUp animated">
+            <div class="col-xl-6 col-lg-5 fadeInUp animated">
                 <div class="cart-check-out mt-30">
                     <ul class="cart-check-out-list">
                         <li>
                             <div class="left">
-                                <p>Сумма заказа</p>
+                                <p>Сума замовлення</p>
                             </div>
                             <div class="right">
                                 <p>{{ totalSumCart }}</p>
@@ -85,10 +85,10 @@
                         </li>
                         <li>
                             <div class="left">
-                                <p>Total Price:</p>
+                                <p>Загальна сума:</p>
                             </div>
                             <div class="right">
-                                <p>${{ totalSumCart + deliveryPrice }}</p>
+                                <p>{{ totalSumCart + deliveryPrice }} грн</p>
                             </div>
                         </li>
                     </ul>
@@ -102,7 +102,7 @@
                     <li>{{ value }}</li>
                 </ul>
             </div>
-            <input type="submit" @click.prevent="storeOrder()" class="btn btn-primary btn-order" value="Оформить"/>
+            <input type="submit" @click.prevent="storeOrder()" class="btn btn-primary btn-order" value="Оформити"/>
         </div>
     </div>
 </template>
@@ -296,9 +296,9 @@
                     (this.deliveryCompanyId === null) ||
                     (this.departmentDC === '')
                 ){
-                    clientErrors.push("Все поля должны быть заполнены");
+                    clientErrors.push("Всі поля мають буди заповнені");
                 }else if (!this.validateEmail(this.email)){
-                    clientErrors.push("Поле email должно содержать название электронной почты");
+                    clientErrors.push("Поле email повинно містити адресу електронної пошти");
                 }
                 return clientErrors;
             },

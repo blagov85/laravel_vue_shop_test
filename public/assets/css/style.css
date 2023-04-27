@@ -841,7 +841,7 @@ h6, .h6 {
 .btn--primary.style2,
 .btn--secondary,
 .btn--secondary.style2 {
-    padding: 0px 30px 0px;
+    padding: 0px 16px 0px;
   }
 }
 /*==============================================
@@ -2100,7 +2100,7 @@ Menu Css
 }
 
 .side-cart-closer.active {
-  width: calc(100vw + 280px);
+  width: calc(100vw + 180px);
 }
 
 .side-cart.active {
@@ -2262,7 +2262,11 @@ Menu Css
   -webkit-transform: translateX(0px);
           transform: translateX(0px);
 }
-
+@media (max-width: 399px) {
+  .side-cart-closer {
+    right: 280px;
+  }
+}
 @media (min-width: 400px) {
   .side-cart {
     width: 350px;
@@ -2499,6 +2503,9 @@ Menu Css
    header-style-3 start
 =============================================
 ***/
+.header-style-3 {
+  border-bottom: 1px solid #ededed;
+}
 .header-style-3 .holder {
   max-width: 1000px;
   margin-left: 45px;
@@ -2530,7 +2537,7 @@ Menu Css
   border-bottom: 1px solid #ededed;
 }
 .header-style-3 .border-rit {
-  border-right: 1px solid #ededed;
+  border-right: 1px solid #ededed;;
 }
 .header-style-3 .border-btm {
   border-bottom: 1px solid #ededed;
@@ -5737,14 +5744,28 @@ products-grid start
     padding-top: 6px;
   }
 }
-@media (min-width: 360px){
+@media (min-width: 320px){
   .product-gird__quick-view-popup {
     display: block;
   }
 }
-@media (max-width: 768px){
+@media (max-width: 991px){
+  .popup-width{
+    width:80%;
+  }
+}
+@media (max-width: 574px){
   .popup-width{
     width:100%;
+  }
+}
+@media (max-width: 520px){
+  .popup-right-content .button-group {
+    flex-direction: column;
+  }
+  .popup-right-content .button-group .qtySelector {
+    margin-right: 0;
+    margin-bottom: 20px;
   }
 }
 @media (min-width: 992px) {
@@ -10847,7 +10868,7 @@ pagination start
   font-size: 15px;
   font-weight: 400;
   text-transform: capitalize;
-  padding: 18px 30px 18px;
+  padding: 18px 20px 18px;
   border: 0px solid #ededed;
 }
 
@@ -10858,7 +10879,7 @@ pagination start
 .cart-table tbody tr td {
   padding: 20px;
   border: 0px solid #ededed;
-  font-size: 16px;
+  font-size: 14px;
   color: #555555;
 }
 
@@ -10872,15 +10893,15 @@ pagination start
 }
 
 .cart-table tbody tr .title {
-  padding-left: 20px;
+  padding-left: 5px;
 }
 .cart-table tbody tr .thumb {
   max-width: 100px;
 }
 .cart-table tbody tr .thumb img {
   min-width: 100px;
-  width: 100%;
-  margin-right: 20px;
+  width: 50%;
+  /* margin-right: 20px; */
 }
 
 .cart-table tbody tr h5 {
@@ -10939,7 +10960,7 @@ pagination start
 
 @media (min-width: 768px) {
   .cart-table tbody tr td {
-    padding: 30px 30px 30px;
+    padding: 20px 20px 20px;
   }
 
   .cart-table {

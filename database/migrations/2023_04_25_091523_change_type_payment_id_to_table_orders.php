@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('role')->change();
-            $table->renameColumn('role','role_id');
+        Schema::table('orders', function (Blueprint $table) {
+            //$table->foreignId('payment_id')->index()->constrained('payments')->change();
+            //$table->unsignedInteger('payment_id')->change();
+            //$table->foreign('payment_id')->references('id')->on('payments');
+            $table->dropColumn('payment_id');
         });
     }
 
@@ -26,8 +28,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('role','role_id');
+        Schema::table('orders', function (Blueprint $table) {
+            //
         });
     }
 };

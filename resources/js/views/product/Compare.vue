@@ -1,38 +1,19 @@
 <template>
     <div>
         <main class="overflow-hidden ">
-        <!--Start Breadcrumb Style2-->
-        <section class="breadcrumb-area" style="background-image: url(assets/images/inner-pages/breadcum-bg.png);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="breadcrumb-content text-center wow fadeInUp animated">
-                            <h2>Compare</h2>
-                            <div class="breadcrumb-menu">
-                                <ul>
-                                    <li><a href="index.html"><i class="flaticon-home pe-2"></i>Home</a></li>
-                                    <li> <i class="flaticon-next"></i> </li>
-                                    <li class="active">Compare</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--End Breadcrumb Style2-->
         <!--Start Compare-->
-        <section class="compare pt-120 pb-120">
+        <section class="compare pt-60 pb-120">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-12 wow fadeInUp animated">
+                    <div class="col-xl-12 fadeInUp animated">
                         <div v-if="compareProduct.length > 0" class="compare-table-box">
+                            <h4 class="name-page">Порівняння товарів</h4>
                             <div class="compare-table-outer">
                                 <table class="compare-table">
                                     <thead class="compare-header">
                                         <tr>
                                             <th v-for="product in compareProduct" v-bind:key="`url${product.id}`">
-                                                <div class="compare-product-img-1"> 
+                                                <div class="compare-product-img-1 img-compare" > 
                                                     <img :src="product.image_url" alt="">
                                                 </div>
                                             </th>
@@ -41,7 +22,7 @@
                                     <tbody>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5> Product </h5>
+                                                <h5> Товар </h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -51,7 +32,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5> Brand </h5>
+                                                <h5> Бренд </h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -61,7 +42,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5> Sex </h5>
+                                                <h5> Пол </h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -71,7 +52,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5>Description</h5>
+                                                <h5>Опис</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -81,7 +62,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5> Season </h5>
+                                                <h5>Сезон</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -91,7 +72,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5>Price</h5>
+                                                <h5>Ціна</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -101,7 +82,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5> Material </h5>
+                                                <h5>Матеріал</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -111,7 +92,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5>Color</h5>
+                                                <h5>Колір</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,7 +102,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5> Country </h5>
+                                                <h5>Країна</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -131,13 +112,13 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5>Add to cart</h5>
+                                                <h5>Додати у кошик</h5>
                                             </td>
                                         </tr>
                                         <tr >
                                             <td v-for="product in compareProduct" v-bind:key="`cart${product.id}`" >
                                                 <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupCompare${product.id}`" 
-                                                    class="addcart btn--primary style2 popup_link">Add To Cart</a>
+                                                    class="addcart btn--primary style2 popup_link">Додати у кошик</a>
                                                 
                                                 <div :id="`popupCompare${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width" style="width:50%">
                                                     <ProductPopupMin />
@@ -146,7 +127,7 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5>Rating</h5>
+                                                <h5>Рейтинг</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -170,7 +151,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div v-else>Нет товаров для сравнения</div>
+                        <div v-else>Немає товарів для порівняння</div>
                     </div>
                 </div> 
             </div>
@@ -192,7 +173,6 @@ export default {
             ProductPopupMin //get data popup one product (nested CounterProductSize)
         },
     mounted(){
-        $(document).trigger('changed_'),
         this.getCompareProducts(this.$route.params.id) //get product for compare about its category id
         this.setSearchText('')
         
@@ -254,5 +234,13 @@ export default {
     .mfp-close{
         opacity: 1;
         border: 1px solid black;
+    }
+    .img-compare{
+        width:50%;
+        min-width:100px;
+        margin:5px auto;
+    }
+    .name-page{
+        margin:0 auto 10px;
     }
 </style>

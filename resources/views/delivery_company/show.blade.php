@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Показать транспортную компанию</h1>
+                <h1 class="m-0">Інформація про транспортну компанію</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <!-- <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">Главная</li>
-                </ol>
+                </ol> -->
             </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,13 +26,13 @@
             <div class="card">
               <div class="card-header d-flex p-3">
                 <div class="mr-3">
-                  <a href="{{ route('delivery_company.edit', $deliveryCompany->id) }}" class="btn btn-primary">Редактировать</a>
+                  <a href="{{ route('delivery_company.edit', $deliveryCompany->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
                 <form action="{{ route('delivery_company.delete', $deliveryCompany->id) }}" method="post">
                   @csrf
                   @method('delete')
                   <div class="form-group">
-                    <input type="submit" class="btn btn-danger" value="Удалить"/>
+                    <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
               </div>
@@ -45,11 +45,11 @@
                       <td>{{ $deliveryCompany->id }}</td>
                     </tr>
                     <tr>
-                      <td>Наименование</td>
+                      <td>Назва</td>
                       <td>{{ $deliveryCompany->title }}</a></td>
                     </tr>
                     <tr>
-                      <td>Стоимость</td>
+                      <td>Вартість</td>
                       <td>{{ $deliveryCompany->price }}</a></td>
                     </tr>
                    </tbody>
