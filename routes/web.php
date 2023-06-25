@@ -185,14 +185,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'employee']
         Route::get('/', App\Http\Controllers\Feedback\IndexController::class)->name('feedback.index');
         Route::post('/{filter?}', App\Http\Controllers\Feedback\IndexController::class)->name('feedback.index');
         Route::patch('/', App\Http\Controllers\Feedback\UpdateController::class)->name('feedback.update');
-    //     Route::get('/create', App\Http\Controllers\Season\CreateController::class)->name('season.create');
-    //     Route::post('/', App\Http\Controllers\Season\StoreController::class)->name('season.store');
-    //     Route::get('/{season}', App\Http\Controllers\Season\ShowController::class)->name('season.show');
-    //     Route::get('/{season}/edit', App\Http\Controllers\Season\EditController::class)->name('season.edit');
-    //     Route::patch('/{season}', App\Http\Controllers\Season\UpdateController::class)->name('season.update');
-    //     Route::delete('/{season}', App\Http\Controllers\Season\DeleteController::class)->name('season.delete');
     });
 
+    Route::any('{page}', function(){
+        return view('404.index');
+    })->where('page', '.*');
 });
 Route::get('/attention', App\Http\Controllers\CheckEmployeeMiddlewareController::class)->name('attention');
 Auth::routes();

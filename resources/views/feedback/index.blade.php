@@ -81,8 +81,8 @@
                           <label for="active_id">Опублікувати</label>
                         </div>
                         <div>
-                          <input type="radio"  name="action[{{ $feedback->id }}]" value="deactive" id="deactive_id"/>
-                          <label for="deactive_id">Не публікувати</label>
+                          <input type="radio"  name="action[{{ $feedback->id }}]" value="delete" id="deactive_id"/>
+                          <label for="deactive_id">Видалити</label>
                         </div>
                       </td>
                     </tr>

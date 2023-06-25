@@ -23,12 +23,12 @@
                                     <input type="password" v-model="password" id="password-field" class="form-control" placeholder="Пароль">
                                     <div class="icon icon-2 "><i class="flaticon-visibility"></i></div>
                                 </div>
-                                <div class="checkk ">
+                                <div class="checkk">
                                     <div class="form-check p-0 m-0"> 
                                         <input type="checkbox" v-model="remember" id="remember"> 
                                         <label class="p-0" for="remember">Запам’ятати мене</label> 
                                     </div>
-                                    <router-link :to="{name: 'user.password.request'}" class="forgot">Забули пароль?</router-link> 
+                                    <router-link :to="{name: 'user.password.request'}" class="forgot">Забули пароль?</router-link>
                                 </div> 
                                 <div class="error" v-if="errors.length > 0">
                                     <ul v-for="(value, key) in errors" :key="key">
@@ -89,6 +89,9 @@ export default {
                         let token = res.config.headers['X-XSRF-TOKEN'];
                         localStorage.setItem('x_xsrf_token', token);
                         this.setToken(token);
+                        return token;
+                    })
+                    .then( token => {
                         this.getUserName();
                         this.getProductsLike();
                         if(this.$route.query.pathFrom) {

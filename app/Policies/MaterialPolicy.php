@@ -21,6 +21,11 @@ class MaterialPolicy
 
     public function materialPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function materialDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

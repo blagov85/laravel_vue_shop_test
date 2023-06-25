@@ -21,6 +21,11 @@ class SeasonPolicy
 
     public function seasonPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function seasonDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

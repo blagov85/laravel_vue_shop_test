@@ -54,6 +54,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           _this.setToken(token);
 
+          return token;
+        }).then(function (token) {
           _this.getUserName();
 
           _this.getProductsLike();

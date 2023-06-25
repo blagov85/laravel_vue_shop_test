@@ -10,7 +10,7 @@
                     <span class="ps-2">{{ product.count_rating }} відгуків</span> 
                 </div>
             </div>
-            <a v-if="getToken()" @click.prevent="feedbackProductNull();setFeedbackParentId(null)" href="#popupReview" class="btn--primary style2 popup_link">
+            <a v-if="token" @click.prevent="feedbackProductNull();setFeedbackParentId(null)" href="#popupReview" class="btn--primary style2 popup_link">
                 Написати відгук
             </a>
             <router-link v-else :to="{name: 'user.login'}" class="btn--primary style2">
@@ -32,7 +32,7 @@
                     </div>
                     <p>{{ feedback.message }}</p>
                 </div> 
-                <a v-if="getToken()" @click.prevent="feedbackProductNull();setFeedbackParentId(feedback.id)" href="#popupReview" class="right-box popup_link">
+                <a v-if="token" @click.prevent="feedbackProductNull();setFeedbackParentId(feedback.id)" href="#popupReview" class="right-box popup_link">
                     Написати відповідь
                 </a>
                 <router-link v-else :to="{name: 'user.login'}" class="right-box">
@@ -65,14 +65,14 @@
             ...mapState('productOneModule',[
                 'product'
             ]),
+            ...mapState('accountModule',[
+                'token'
+            ]),
             percentRating(){ //get %
                 return utils.percentRatingStar(this.product.rating)
             }
         },
         methods: {
-            ...mapActions('accountModule',[
-                'getToken'
-            ]),
             ...mapActions('feedbackModule',[
                 'feedbackProductNull'
             ]),

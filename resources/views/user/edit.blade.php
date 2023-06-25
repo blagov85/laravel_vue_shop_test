@@ -78,6 +78,7 @@
                         <option {{ old('gender') == 2 || $user->gender == 2 ? ' selected' : '' }} value="2">Жінка</option>
                     </select>
                 </div>
+                @can('user-policy', App\Models\User::class)
                 <div class="form-group">
                   <select name="role_id" class="form-control select2" style="width: 100%;">
                     <option selected="selected" disabled>Выберіть роль</option>
@@ -89,6 +90,12 @@
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                @else
+                <div class="form-group">
+                    <input type="hidden" name="role_id" value="{{ $user->role_id }}"/>
+                    Роль - {{ $user->role->title }}
+                </div>
+                @endcan
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Редагувати"/>
                 </div>

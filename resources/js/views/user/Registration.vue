@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex';
 export default {
     name: "Registration",
     mounted(){
@@ -65,6 +66,12 @@ export default {
         }
     },
     methods: {
+        ...mapMutations('accountModule',[
+            'setToken'
+        ]),
+        ...mapActions('accountModule',[
+            'getUserName'
+        ]),
         store(){
             this.errors = [];
             this.errors = this.formError();
@@ -81,7 +88,10 @@ export default {
                             role_id: 5
                         })
                         .then(res => {
-                            localStorage.setItem('x_xsrf_token', res.config.headers['X-XSRF-TOKEN']);
+                            let token = res.config.headers['X-XSRF-TOKEN'];
+                            localStorage.setItem('x_xsrf_token', token);
+                            this.setToken(token);
+                            this.getUserName();
                             this.$router.push({name: 'products.index'});
                         })
                         .catch(error => {

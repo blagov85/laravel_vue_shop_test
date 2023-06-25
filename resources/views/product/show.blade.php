@@ -28,6 +28,7 @@
                 <div class="mr-3">
                   <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
+                @can('product-delete-policy', App\Models\Product::class)
                 <form action="{{ route('product.delete', $product->id) }}" method="post">
                   @csrf
                   @method('delete')
@@ -35,6 +36,7 @@
                     <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
+                @endcan
                  <!--<div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -49,7 +51,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-hover">
                   <tbody>
                     <tr>
                       <td>ID</td>
@@ -85,7 +87,7 @@
                       <td>Головне зображення</td>
                       <td>
                         <div class="р-10 mb-2">
-                          <img style="width:50%; height:50%;" src="{{ asset('storage/'.$product->preview_image) }}" alt="preview_image">
+                          <img style="width:40%;height:40%" src="{{ asset('storage/'.$product->preview_image) }}" alt="preview_image">
                         </div>
                       </td>
                     </tr>
@@ -94,7 +96,7 @@
                       <td>
                         <div style="display: flex; flex-direction: row; justify-content: space-around;">
                           @foreach($product->productImages as $image)  
-                              <img style="width:30%; height:30%;" src="{{ asset('storage/'.$image->file_path) }}" alt="product_image" />
+                              <img style="width:30%;height:30%" src="{{ asset('storage/'.$image->file_path) }}" alt="product_image" />
                           @endforeach
                         </div>
                       </td>
@@ -120,11 +122,17 @@
                     <tr>
                       <td>Кількість на складі</td>
                       <td>
-                        @foreach($sizesCount as $key=> $sizesCount)
-                          <div>
-                            {{ $key }} - {{ $sizesCount }}
-                          </div>
-                        @endforeach
+                        @if($sizesCount != null)
+                          @foreach($sizesCount as $key=> $sizesCount)
+                            <div>
+                              {{ $key }} - {{ $sizesCount }}
+                            </div>
+                          @endforeach
+                        @else
+                            <div>
+                              0
+                            </div>
+                        @endif
                       </td>
                     </tr>
                     <tr>

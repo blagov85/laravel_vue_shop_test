@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class DeleteController extends Controller
 {
     public function __invoke(Category $category){
-        $this->authorize('category-policy', [Category::class]);
+        $this->authorize('category-delete-policy', [Category::class]);
         $category->delete();
         return redirect()->route('category.index');
     }

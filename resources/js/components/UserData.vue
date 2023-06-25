@@ -119,8 +119,8 @@
                     .then(res => {
                         let user = res.data.data;
                         this.setUser(user);
-                        if(this.user.region_id === ''){
-                            this.user.region_id = 0;
+                        if(this.user.region_id == null){
+                            this.user.region_id = "0";
                         }
                     })
                     .finally(x => {
@@ -132,16 +132,20 @@
             },
             
             updateData(){
-                if(this.user.phone.length <= 5){
-                    this.user.phone = '';
-                } else if(this.user.phone.length < 19){
-                    this.phoneError = 'Введите номер телефона';
-                    setTimeout(() => this.phoneError = '', 2000);
-                    return null;
+                if(this.user.phone){
+                    if(this.user.phone.length <= 5){
+                        this.user.phone = null;
+                    } else if(this.user.phone.length < 19){
+                        this.phoneError = 'Введіть номер телефону';
+                        setTimeout(() => this.phoneError = '', 2000);
+                        return null;
+                    }
                 }
+                
                 let birthDate = `${this.user.birth.year}-${this.user.birth.month}-${this.user.birth.day}`;
-                if(this.user.region_id === 0){
-                    this.user.region_id = '';
+                let region_id = this.user.region_id;
+                if(region_id == 0){
+                    region_id = null;
                 }
                 this.axios.post('/api/user/update', {
                     patronymic: this.user.patronymic,
@@ -149,7 +153,7 @@
                     birth_date: birthDate,
                     gender: this.user.gender,
                     phone: this.user.phone,
-                    region_id: this.user.region_id,
+                    region_id: region_id,
                     settlement: this.user.settlement
                 })
                 .then(res => {

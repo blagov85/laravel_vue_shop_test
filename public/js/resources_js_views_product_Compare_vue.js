@@ -230,11 +230,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _ctx.popupProductSizeNull();
     }, ["prevent"])),
     "class": "btn--primary mfp-close"
-  }, " Add to Cart ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, "Додати до кошика")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     onClick: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"])),
     "class": "btn--primary"
-  }, " Add to Cart "))])])], 64
+  }, "Додати до кошика"))])])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -427,7 +427,7 @@ var _hoisted_42 = {
 var _hoisted_43 = ["colspan"];
 
 var _hoisted_44 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Додати у кошик", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Кошик", -1
   /* HOISTED */
   );
 });
@@ -602,7 +602,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, ["prevent"]),
       href: "#popupCompare".concat(product.id),
       "class": "addcart btn--primary style2 popup_link"
-    }, "Додати у кошик", 8
+    }, "Додати до кошика", 8
     /* PROPS */
     , _hoisted_46), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       id: "popupCompare".concat(product.id),

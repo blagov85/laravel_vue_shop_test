@@ -486,7 +486,7 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "row w-50 personal-data"
+  "class": "row personal-data"
 };
 
 var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
@@ -881,7 +881,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.personal-data[data-v-263121e2]{\n        margin:0 auto;\n        margin-top:20px;\n}\n#region[data-v-263121e2]{\n        border-radius: 4px;\n}\n.btn-order[data-v-263121e2]{\n        margin-top:20px;\n}\n.line-top[data-v-263121e2]{\n        border-top:1px solid #eeeeee;\n}\n.shipping[data-v-263121e2]{\n        width:10%;\n}\n.price-delivery[data-v-263121e2]{\n        width:10%;\n}\n.select-delivery[data-v-263121e2]{\n        display: inline-block;\n        width:80%;\n}\n.error[data-v-263121e2]{\n        color:red;\n        margin-bottom: 20px;\n}   \n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.personal-data[data-v-263121e2]{\n        width: 50%;\n        margin:0 auto;\n        margin-top:20px;\n}\n@media (max-width: 992px) {\n.personal-data[data-v-263121e2]{\n            width: 100%;\n}\n}\n#region[data-v-263121e2]{\n        border-radius: 4px;\n}\n.btn-order[data-v-263121e2]{\n        margin-top:20px;\n}\n.line-top[data-v-263121e2]{\n        border-top:1px solid #eeeeee;\n}\n.shipping[data-v-263121e2]{\n        width:10%;\n}\n.price-delivery[data-v-263121e2]{\n        width:10%;\n}\n.select-delivery[data-v-263121e2]{\n        display: inline-block;\n        width:80%;\n}\n.error[data-v-263121e2]{\n        color:red;\n        margin-bottom: 20px;\n}   \n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

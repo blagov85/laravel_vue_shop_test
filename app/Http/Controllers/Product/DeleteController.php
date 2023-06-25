@@ -8,7 +8,7 @@ use App\Http\Controllers\Product\BaseController;
 class DeleteController extends BaseController
 {
     public function __invoke(Product $product){
-        $this->authorize('product-policy', [Product::class]);
+        $this->authorize('product-delete-policy', [Product::class]);
         try{
             $this->service->delete($product);
         }catch(Exception $exception){

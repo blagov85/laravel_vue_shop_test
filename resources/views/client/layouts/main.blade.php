@@ -13,7 +13,7 @@
     <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <meta http-equiv="Pragma" content="no-cache" />
     <!-- Title For This Document -->
-    <title> Karte - Multipurpose E-Commerce Html Template</title>
+    <title>Clothing Store Shop</title>
     <!-- Favicon For This Document -->
     <link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon-32x32.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">

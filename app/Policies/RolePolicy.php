@@ -21,6 +21,11 @@ class RolePolicy
 
     public function rolePolicy()
     {
-        return auth()->user()->isAdmin();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin();
+    }
+
+    public function roleDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

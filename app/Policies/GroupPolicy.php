@@ -21,6 +21,11 @@ class GroupPolicy
 
     public function groupPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function groupDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

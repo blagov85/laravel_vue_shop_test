@@ -47,7 +47,7 @@ class StoreRequest extends FormRequest
             'tags' => 'nullable|array',
             'tags.*' => 'nullable|integer|exists:tags,id',
             'colors' => 'required|array',
-            'colors.*' => 'nullable|integer|exists:colors,id',
+            'colors.*' => 'required|integer|exists:colors,id',
             'product_images' => 'nullable|array',
             'product_images.*' => 'nullable|file'
         ];

@@ -21,6 +21,6 @@ class FeedbackPolicy
 
     public function feedbackPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter() || auth()->user()->isManager();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter() || auth()->user()->isManager();
     }
 }

@@ -6,7 +6,8 @@ const feedback = ({
             textFeedback: '',
             rating: null, //rating of product in feedback
             chooseRating: [false, false, false, false, false], //list of stars after click on star
-            changeRating: [false, false, false, false, false] //list of stars after move on star
+            changeRating: [false, false, false, false, false], //list of stars after move on star
+            feedbackAnswer: ''
         }
       },
     mutations: {
@@ -24,15 +25,19 @@ const feedback = ({
         },
         setChangeRating(state, changeRating){
             state.changeRating = changeRating;
+        },
+        setFeedbackAnswer(state, feedbackAnswer){
+            state.feedbackAnswer = feedbackAnswer;
         }
     },
     actions: {
         feedbackProductNull({ commit }){
             let nullList = [false, false, false, false, false];
-            commit('setTextFeedback','');
-            commit('setRating',null);
-            commit('setChooseRating',nullList);
-            commit('setChangeRating',nullList);
+            commit('setTextFeedback', '');
+            commit('setRating', null);
+            commit('setChooseRating', nullList);
+            commit('setChangeRating', nullList);
+            commit('setFeedbackAnswer', '');
         },
         fixStars({ state, commit }){ //lose of focus on star
             let chooseRating = state.chooseRating;
@@ -58,7 +63,7 @@ const feedback = ({
             commit('setRating', itemStar); //reting = figure from parameters
         },
         //add new feedback (or answer) to db
-        feedbackProduct({ state }, id){
+        feedbackProduct({ state, commit }, id){
             axios.post(`/api/product/${id}/feedback`,{
                 message: state.textFeedback,
                 rating: state.rating,
@@ -66,6 +71,11 @@ const feedback = ({
                 parent_id: state.feedbackParentId
             })
                 .then(res => {
+                    if(res.data.answer){
+                        commit('setFeedbackAnswer', res.data.answer);
+                    }else if(res.data.error){
+                        commit('setFeedbackAnswer', res.data.error);
+                    }
                     
                 })
                 .finally(x => {

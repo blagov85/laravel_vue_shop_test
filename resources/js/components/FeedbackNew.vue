@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-lg-12">
-                <div class="product-drescription">
+                <div v-if="feedbackAnswer == ''" class="product-drescription">
                     <div class="review-from-box mt-30">
                         <h6 v-if="feedbackParentId">Написати відповідь</h6>
                         <h6 v-else>Написати відгук</h6>
@@ -27,7 +27,7 @@
                                     </div>
                                 </div>
                             </div> 
-                            <button v-if="textFeedback !== ''" type="submit" @click.prevent="feedbackProduct(product.id)" class="mfp-close btn--primary style2">
+                            <button v-if="textFeedback !== ''" type="submit" @click.prevent="feedbackProduct(product.id)" class="btn--primary style2">
                                 Надіслати {{ feedbackParentId ? 'Відповідь' : 'Відгук' }}   
                             </button>
                             <button v-else type="submit" @click.prevent="" class="btn--primary style2">
@@ -35,6 +35,12 @@
                             </button>
                         </form>
                     </div>
+                </div>
+                <div v-else class="answer-server-feedback">
+                    <span style="font-weight:500">{{ feedbackAnswer }}</span>
+                    <button type="submit" @click.prevent="" class="mfp-close btn--primary style2 button-center">
+                        OK   
+                    </button>
                 </div>
             </div>
         </div>
@@ -61,7 +67,8 @@
                 'feedbackParentId',
                 'rating',
                 'chooseRating',
-                'changeRating'
+                'changeRating',
+                'feedbackAnswer'
             ]),
             textFeedback: {
                 get() {
@@ -115,5 +122,14 @@
     opacity: 1;
     border: 1px solid black;
     width: 170px;
+}
+
+.answer-server-feedback{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+.button-center{
+    margin-top: 20px;
 }
 </style>

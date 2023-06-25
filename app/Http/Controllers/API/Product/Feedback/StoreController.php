@@ -25,10 +25,19 @@ class StoreController extends Controller
             $data['user_id'] = Auth::user()->id;
             Feedback::create($data);
             DB::commit();
+            if($data['parent_id'] == null){
+                return response([
+                    'answer' => 'Дякуємо! Ваш відгук буде опубліковано після перевірки!'
+                ], 200);
+            }
+            return response([
+                'answer' => 'Дякуємо! Ваша відповідь на відгук буде опублікована після перевірки!'
+            ], 200);
         }catch(Exception $exception){
             DB::rollback();
-            abort(500);
+            return response([
+                'error' => 'Помилка додавання відгуку або відповіді на відгук!'
+            ], 500);
         }
-        return "OK";
     }
 }

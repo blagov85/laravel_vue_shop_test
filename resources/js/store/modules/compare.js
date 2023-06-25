@@ -11,13 +11,22 @@ const compare = ({
     },
     getters: {
         getCompareCount(state){ //count in compare
-            return state.compare.length;
+            if(state.compare != null){
+                return state.compare.length;
+            }
+            return 0;
         },
-        getCompareCategoryCount(state){ //count category in compare 
-            return state.compareCategory.length;
+        getCompareCategoryCount(state){ //count category in compare
+            if(state.compareCategory != null){
+                return state.compareCategory.length;
+            } 
+            return 0;
         },
         getCompareProductCount(state){ //count products in selected category
-            return state.compareProduct.length;
+            if(state.compareProduct != null){
+                return state.compareProduct.length;
+            }
+            return 0;
         }
     },
     mutations: {
@@ -67,12 +76,15 @@ const compare = ({
         },
         getCompareCategory({ state, commit }){
             let compareCategory = [];
-            let compare = state.compare;
+            let compare = [];
             let category = {
                 id: null,
                 title: null,
                 count: 0
             }; 
+            if(state.compare != null){
+                compare = state.compare;
+            }
             if(compare.length > 0){
                 compare.forEach((item, index) =>{
                     if(index == 0){
@@ -140,6 +152,9 @@ const compare = ({
             let idCompare = [];
             let productsCompareFullInfo = [];
             let compare = state.compare;
+            if(!compare){
+                return false;
+            }
             //get id of products in selected category
             if(idCategory == null){
                 compare.forEach(item =>{

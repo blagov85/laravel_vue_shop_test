@@ -2,8 +2,8 @@
     <div>
         <div class="top">
             <div class="content d-flex justify-content-between align-items-center">
-                <h6 v-if="getCartCount > 0" class="text-uppercase" >There are {{ getCartCount }} goods in cart</h6>
-                <h6 v-else class="text-uppercase">Your Cart is empty</h6> 
+                <h6 v-if="getCartCount > 0" class="text-uppercase" >У кошику {{ getCartCount }} {{ goods }}</h6>
+                <h6 v-else class="text-uppercase">Кошик пустий</h6> 
                 <span class="cart-close text-uppercase">X</span>
             </div>
             <div v-if="getCartCount > 0" class="cart_items">
@@ -31,11 +31,11 @@
         </div>
         <div v-if="getCartCount > 0" class="bottom">
             <div class="total-ammount d-flex justify-content-between align-items-center">
-                <h6 class="text-uppercase">Total:</h6>
+                <h6 class="text-uppercase">Сума:</h6>
                 <h6 class="ammount text-uppercase">{{ totalSumCart }}</h6>
             </div>
             <div class="button-box d-flex justify-content-between cart-close"> 
-                <router-link :to="{name: 'cart.index'}" class="btn_black"> View Cart</router-link> 
+                <router-link :to="{name: 'cart.index'}" class="btn_black">До кошика</router-link> 
             </div>
         </div>
     </div>
@@ -53,7 +53,22 @@
             ]),
             ...mapGetters('cartModule',[
                 'getCartCount'
-            ])
+            ]),
+            goods(){
+                if((typeof this.getCartCount !== 'undefined') && (this.getCartCount > 0)){
+                    let division_10 = this.getCartCount % 10;
+                    if((this.getCartCount == 1) || (division_10 == 1) && (this.getCartCount >= 21)){
+                        return 'товар'
+                    }else if((this.getCartCount >= 2) && (this.getCartCount <= 4)  || ((division_10 >= 2) && (division_10 <= 4) && (this.getCartCount >= 22))){
+                        return 'товари'
+                    }else{
+                        return 'товарів'
+                    }
+                }else{
+                    return '';
+                }
+                
+            }
         },
         methods: {
             ...mapActions('cartModule',[

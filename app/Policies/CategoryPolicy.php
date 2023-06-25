@@ -21,6 +21,11 @@ class CategoryPolicy
 
     public function categoryPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function categoryDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

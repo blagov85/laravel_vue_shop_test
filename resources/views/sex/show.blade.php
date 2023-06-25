@@ -28,6 +28,7 @@
                 <div class="mr-3">
                   <a href="{{ route('sex.edit', $sex->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
+                @can('sex-delete-policy', App\Models\Sex::class)
                 <form action="{{ route('sex.delete', $sex->id) }}" method="post">
                   @csrf
                   @method('delete')
@@ -35,6 +36,7 @@
                     <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
+                @endcan
                  <!--<div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">

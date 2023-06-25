@@ -25,6 +25,7 @@ class User extends Authenticatable
     const ROLE_GUEST = 3;
     const ROLE_MANAGER = 4;
     const ROLE_CUSTOMER = 5;
+    const ROLE_SUPER_ADMIN = 6;
 
     static function getGenders(){
         return [
@@ -78,13 +79,15 @@ class User extends Authenticatable
         return $this->role_id === self::ROLE_CUSTOMER;
     }
 
+    public function isSuperAdmin(){
+        return $this->role_id === self::ROLE_SUPER_ADMIN;
+    }
+
     /**
      * Override the mail body for reset password notification mail.
      */
     public function sendPasswordResetNotification($token)
     {
-        //dd(request());
-        //$this->notify(new \App\Notifications\MailResetPasswordNotification($token));
         if(request()->is('api/*')){
             $this->notify(new \App\Notifications\MailResetPasswordNotification($token));
         }else{

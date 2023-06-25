@@ -29,7 +29,7 @@
                 <div class="mr-3">
                   <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
-                @if(Auth::user()->isAdmin() && (Auth::user()->id != $user->id))
+                @if(Auth::user()->isSuperAdmin() && (Auth::user()->id != $user->id))
                   <form action="{{ route('user.delete', $user->id) }}" method="post" style="m-0">
                     @csrf
                     @method('delete')
@@ -66,43 +66,51 @@
                     </tr>
                     <tr>
                       <td>Ім'я</td>
-                      <td>{{ $user->name }}</a></td>
+                      <td>{{ $user->name }}</td>
                     </tr>
                     <tr>
                       <td>Прізвище</td>
-                      <td>{{ $user->surname }}</a></td>
+                      <td>{{ $user->surname }}</td>
                     </tr>
                     <tr>
                       <td>По-батькові</td>
-                      <td>{{ $user->patronymic }}</a></td>
+                      <td>{{ $user->patronymic }}</td>
                     </tr>
                     <tr>
                       <td>Email</td>
-                      <td>{{ $user->email }}</a></td>
+                      <td>{{ $user->email }}</td>
                     </tr>
                     <tr>
                       <td>Дата народження</td>
-                      <td>{{ $user->birth_date }}</a></td>
+                      <td>{{ $user->birth_date }}</td>
                     </tr>
                     <tr>
                       <td>Телефон</td>
-                      <td>{{ $user->phone }}</a></td>
+                      <td>{{ $user->phone }}</td>
                     </tr>
                     <tr>
                       <td>Стать</td>
-                      <td>{{ $user->genderTitle }}</a></td>
+                      <td>
+                        @if($user->gender)
+                          {{ $user->genderTitle }}
+                        @endif
+                      </td>
                     </tr>
                     <tr>
                       <td>Регіон</td>
-                      <td>{{ $user->region->title }}</a></td>
+                      <td>
+                        @if($user->region_id)
+                          {{ $user->region->title }}
+                        @endif
+                      </td>
                     </tr>
                     <tr>
                       <td>Населений пункт</td>
-                      <td>{{ $user->settlement }}</a></td>
+                      <td>{{ $user->settlement }}</td>
                     </tr>
                     <tr>
                       <td>Роль</td>
-                      <td>{{ $user->role->title }}</a></td>
+                      <td>{{ $user->role->title }}</td>
                     </tr>
                    </tbody>
                 </table>

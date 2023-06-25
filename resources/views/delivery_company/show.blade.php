@@ -28,6 +28,7 @@
                 <div class="mr-3">
                   <a href="{{ route('delivery_company.edit', $deliveryCompany->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
+                @can('delivery-company-delete-policy', App\Models\DeliveryCompany::class)
                 <form action="{{ route('delivery_company.delete', $deliveryCompany->id) }}" method="post">
                   @csrf
                   @method('delete')
@@ -35,6 +36,7 @@
                     <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
+                @endcan
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">

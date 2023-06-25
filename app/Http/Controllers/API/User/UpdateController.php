@@ -15,6 +15,6 @@ class UpdateController extends Controller
         $data = $request->validated();
         $data['birth_date'] = Carbon::createFromFormat('Y-m-d', $data['birth_date'])->format('Y-m-d');
         Auth::user()->update($data);
-        return "Данные успешно изменены";
+        return "Дані користувача успішно змінені";
     }
 }

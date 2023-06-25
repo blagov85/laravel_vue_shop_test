@@ -19,8 +19,8 @@
                 <input type="number" class="qtyValue" v-model="popupCountForCart" /> 
                 <span class="increaseQty" @click.prevent="increaseCountPopup()"> <i class="flaticon-plus"></i> </span> 
             </div>
-            <button v-if="popupCountOfSizeObj" @click.prevent = "addToCart({'product': popupProduct, 'countOfSizeObj': popupCountOfSizeObj, 'countForCart': popupCountForCart});popupProductSizeNull()" class="btn--primary mfp-close"> Add to Cart </button>
-            <button v-else @click.prevent = "" class="btn--primary"> Add to Cart </button>
+            <button v-if="popupCountOfSizeObj" @click.prevent = "addToCart({'product': popupProduct, 'countOfSizeObj': popupCountOfSizeObj, 'countForCart': popupCountForCart});popupProductSizeNull()" class="btn--primary mfp-close">Додати до кошика</button>
+            <button v-else @click.prevent = "" class="btn--primary">Додати до кошика</button>
         </div>
     </div>
 </template>

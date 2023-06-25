@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row w-50 personal-data">
+        <div class="row personal-data">
             <h5>Контактні дані</h5>
             <div class="form-group">
                 <label for="exampleInputName">Им'я</label>
@@ -325,8 +325,14 @@
     
 <style scoped>
     .personal-data{
+        width: 50%;
         margin:0 auto;
         margin-top:20px;
+    }
+    @media (max-width: 992px) {
+        .personal-data{
+            width: 100%;
+        }
     }
     #region{
         border-radius: 4px;

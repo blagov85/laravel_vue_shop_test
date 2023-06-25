@@ -112,13 +112,13 @@
                                         </tr>
                                         <tr>
                                             <td :colspan="getCompareProductCount">
-                                                <h5>Додати у кошик</h5>
+                                                <h5>Кошик</h5>
                                             </td>
                                         </tr>
                                         <tr >
                                             <td v-for="product in compareProduct" v-bind:key="`cart${product.id}`" >
                                                 <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupCompare${product.id}`" 
-                                                    class="addcart btn--primary style2 popup_link">Додати у кошик</a>
+                                                    class="addcart btn--primary style2 popup_link">Додати до кошика</a>
                                                 
                                                 <div :id="`popupCompare${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width" style="width:50%">
                                                     <ProductPopupMin />

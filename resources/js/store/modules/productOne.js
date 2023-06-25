@@ -16,10 +16,19 @@ const productOne = ({
             axios.get(`/api/product/${id}`)
                 .then(res => {
                     let product = res.data.data;
+                    let images = product.product_images;
+                    let imagesProduct = [];
+                    imagesProduct.push(product.image_url);
+                    if(images != null){
+                        for (let image of images) {
+                            imagesProduct.push(image.url);
+                        }
+                    }
+                    product.allImages = imagesProduct;
                     commit('setProduct', product);
                 })
                 .finally(x => {
-                    //$(document).trigger('changed_')
+                    $(document).trigger('changed_')
                 }); 
         },
     }

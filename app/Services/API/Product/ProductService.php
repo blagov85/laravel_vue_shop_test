@@ -160,6 +160,7 @@ class ProductService
         foreach($colorsProd as $color){
             $colors[] = $color;
         }
+        $tags = [];
         foreach($tagsProd as $tag){
             $tags[] = $tag;
         }
@@ -171,7 +172,11 @@ class ProductService
         usort($seasons, fn($a, $b) => $a->id <=> $b->id);
         usort($sizes, fn($a, $b) => $a->id <=> $b->id);
         usort($colors, fn($a, $b) => $a->id <=> $b->id);
-        usort($tags, fn($a, $b) => $a->id <=> $b->id);
+        //dd($product->tags);
+        if(count($tags)){
+            usort($tags, fn($a, $b) => $a->id <=> $b->id);
+        }
+        
 
         // $result['categories'] = $categories;
         // $result['brands'] = $brands;

@@ -91,9 +91,12 @@ const like = ({
         },
         //function for change properties like and count_likes for product with id in list
         setChangeProductsLike({ commit }, payload){
-            let product = payload.listProducts.find(prod => prod.id === payload.changeLikeProduct.id);
-            product.like = payload.changeLikeProduct.like;
-            product.count_likes = payload.changeLikeProduct.count_likes;
+            let product = null;
+            product = payload.listProducts.find(prod => prod.id === payload.changeLikeProduct.id);
+            if(product){
+                product.like = payload.changeLikeProduct.like;
+                product.count_likes = payload.changeLikeProduct.count_likes;
+            }
         },
         //if click on icon like, get list of like products from server
         checkLoadLike({ state, dispatch }){

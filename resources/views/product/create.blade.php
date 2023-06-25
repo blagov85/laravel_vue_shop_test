@@ -65,8 +65,8 @@
                 </div>
                 <!--img preview-->
                 <div class="col-md-12 mb-2">
-                  <img id="preview_image" src="https://www.daveraine.com/img/products/no-image.jpg"
-                      alt="preview image" style="max-height: 250px;">
+                  <img id="preview_image" src="{{ asset('images/no-image.png') }}"
+                      alt="preview image" style="max-height: 250px;border:1px solid black">
                 </div>
                 <div class="form-group">
                   <div class="input-group">
@@ -85,8 +85,8 @@
                     
                 <!--imgs product-->
                 <div class="col-md-12 mb-2">
-                  <img id="product_image_1" src="https://www.daveraine.com/img/products/no-image.jpg"
-                      alt="preview image 1" style="max-height: 150px;">
+                  <img id="product_image_1" src="{{ asset('images/no-image.png') }}"
+                      alt="preview image 1" style="max-height: 150px;border:1px solid black">
                 </div>
                 <div class="form-group">
                     <div class="input-group">
@@ -100,8 +100,8 @@
                     </div>
                   </div>
                 <div class="col-md-12 mb-2">
-                  <img id="product_image_2" src="https://www.daveraine.com/img/products/no-image.jpg"
-                      alt="preview image 2" style="max-height: 150px;">
+                  <img id="product_image_2" src="{{ asset('images/no-image.png') }}"
+                      alt="preview image 2" style="max-height: 150px;border:1px solid black">
                 </div>
                 <div class="form-group">
                     <img src>  
@@ -116,8 +116,8 @@
                     </div>
                   </div>
                 <div class="col-md-12 mb-2">
-                  <img id="product_image_3" src="https://www.daveraine.com/img/products/no-image.jpg"
-                      alt="preview image 3" style="max-height: 150px;">
+                  <img id="product_image_3" src="{{ asset('images/no-image.png') }}"
+                      alt="preview image 3" style="max-height: 150px;border:1px solid black">
                 </div>
                 <div class="form-group">
                     <div class="input-group">

@@ -57,7 +57,7 @@
                     @foreach($users as $user)
                     <tr>
                       <td>{{ $user->id }}</td>
-                      @if(Auth::user()->isAdmin())
+                      @if(Auth::user()->isSuperAdmin() || Auth::user()->isAdmin())
                         <td><a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a></td>
                         <td><a href="{{ route('user.show', $user->id) }}">{{ $user->surname }}</a></td>
                         <td><a href="{{ route('user.show', $user->id) }}">{{ $user->patronymic }}</a></td>

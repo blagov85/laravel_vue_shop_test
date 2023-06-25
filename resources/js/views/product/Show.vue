@@ -12,8 +12,8 @@
                         <div v-if="product.product_images" class="col-xl-6 col-lg-6 mt-30 fadeInUp">
                             <div  class="single-product-box one">
                                 <div class="big-product single-product-one slider-for">
-                                    <div v-for="image in product.product_images" v-bind:key="image.id">
-                                        <div class="single-item"> <img :src="image.url" alt="">
+                                    <div v-for="image in product.allImages" v-bind:key="image">
+                                        <div class="single-item"> <img :src="image" alt="">
                                             <div v-if="product.old_price" class="ptag"> <span class="one">-{{ percentDiscount }}% </span> </div> 
                                             <a v-if="token" @click.prevent="likeProduct(product)" href="#0" 
                                                 v-bind:class="[product.like == true ? 'love-active' : 'love']">
@@ -27,8 +27,8 @@
                                 </div>
                                 <div class="navholder">
                                     <div class="product-slicknav single-product-one-nav slider-nav">
-                                        <div v-for="image in product.product_images" v-bind:key="image.id"> 
-                                            <span class="single-item"><img :src="image.url" alt=""></span>          
+                                        <div v-for="image in product.allImages" v-bind:key="image"> 
+                                            <span class="single-item"><img :src="image" alt=""></span>          
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                         <li>Бренд: <span>{{ product.brand.title }}</span></li>
                                         <li>Пол: <span>{{ product.sex.title }}</span></li>
                                         <li>Категорія: <span>{{ product.category.title }}</span></li>
-                                        <li>Тег: <span>{{ tags }}</span></li>
+                                        <li v-if="tags != ''">Тег: <span>{{ tags }}</span></li>
                                         <li>Матеріал: <span>{{ materials }}</span></li>
                                         <li>Сезон: <span>{{ seasons }}</span></li>
                                         <li>Країна: <span>{{ product.country.title }}</span></li>
@@ -75,7 +75,7 @@
                                         </li>
                                     </ul>
                                     <div class="shop-details-top-size-box">
-                                        <h4>Size: <span v-if="countOfSizeObj">({{ countOfSizeObj.title }})</span></h4>
+                                        <h4>Розмір: <span v-if="countOfSizeObj">({{ countOfSizeObj.title }})</span></h4>
                                         <div class="shop-details-top-size-list-box">
                                             <ul class="shop-details-top-size-list">
                                                 <li v-for="countSize in product.counts" v-bind:key="countSize.id">
@@ -83,6 +83,10 @@
                                                 </li>
                                             </ul>
                                             <p class="shop-details-top-size-guide"><a href="#popupSizeInfo" class="popup_link">Таблиця розмірів</a></p>
+                                        </div>
+                                        <div class="shop-details-top-order-now"> <i class="flaticon-point"></i>
+                                            <p v-if="countOfSizeObj">Залишилось {{ countOfSizeObj.count }} од.</p>
+                                            <p v-else>Виберіть розмір</p>
                                         </div>
                                     </div>
                                     <div class="product-quantity">
@@ -97,10 +101,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="shop-details-top-order-now"> <i class="flaticon-point"></i>
-                                        <p v-if="countOfSizeObj">Order Now, Only {{ countOfSizeObj.count }} Left !</p>
-                                        <p v-else>Виберіть розмір</p>
-                                    </div>
+                                    <br>
                                     <div v-if="countOfSizeObj" class="shop-details-top-cart-box-btn"> 
                                         <button v-if="countOfSizeObj" @click.prevent = "addToCart({'product': product, 'countOfSizeObj': countOfSizeObj, 'countForCart': countForCart});productSizeNull()" class="btn--primary"> Додати у кошик </button>
                                         <button v-else @click.prevent = "" class="btn--primary"> Add to Cart </button>
@@ -189,6 +190,7 @@
             <!-- productdrescription-tab End -->
             <!-- recent-products Start -->
             <SliderProduct title="Нещодавно додані" :products="recentProducts" />
+
         </main>
     </div>
 </template>
@@ -214,7 +216,8 @@ export default {
     mounted(){
         this.getProduct(this.$route.params.id), //get data of product about its id
         this.getRecentProducts(this.$route.params.id), //get list recent products about product's category id
-        this.setSearchText('') 
+        this.setSearchText(''),
+        console.log("productooo")
     },
     beforeUnmount(){
         this.setRecentProducts([]);

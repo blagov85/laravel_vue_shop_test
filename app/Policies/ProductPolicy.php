@@ -21,6 +21,11 @@ class ProductPolicy
 
     public function productPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter() || auth()->user()->isManager();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter() || auth()->user()->isManager();
+    }
+
+    public function productDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

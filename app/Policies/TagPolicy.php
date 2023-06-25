@@ -21,6 +21,11 @@ class TagPolicy
 
     public function tagPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function tagDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

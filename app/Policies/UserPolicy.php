@@ -21,10 +21,14 @@ class UserPolicy
 
     public function userPolicy()
     {
-        return auth()->user()->isAdmin();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin();
+    }
+    public function userDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
     public function userShowEditUpdatePolicy(User $userActive, User $user)
     {
-        return ((auth()->user()->id == $user->id) || auth()->user()->isAdmin());
+        return (auth()->user()->id == $user->id) || auth()->user()->isSuperAdmin() || auth()->user()->isAdmin();
     }
 }

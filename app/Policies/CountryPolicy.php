@@ -21,6 +21,11 @@ class CountryPolicy
 
     public function countryPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function countryDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

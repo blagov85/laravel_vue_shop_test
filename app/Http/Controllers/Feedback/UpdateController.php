@@ -12,13 +12,26 @@ class UpdateController extends Controller
     public function __invoke(Request $request){
         $this->authorize('feedback-policy', [Feedback::class]);
         $filter = $request->input('action');
-        $ids = [];
+        $idsUpdate = [];
+        $idsDelete = [];
         foreach ($filter as $i => $value){
             if($value == 'active'){
-                array_push($ids, $i);
+                array_push($idsUpdate, $i);
+            }
+            if($value == 'delete'){
+                array_push($idsDelete, $i);
             }
         }
-        Feedback::whereIn('id', $ids)->update(['status'=>'active']);
+        try{
+            DB::beginTransaction();
+            Feedback::whereIn('id', $idsUpdate)->update(['status'=>'active']);
+            Feedback::whereIn('id', $idsDelete)->delete();
+            DB::commit();
+        }catch(Exception $exception){
+            DB::rollback();
+            return back();
+        }
+        
         return redirect()->route('feedback.index');
     }
 }

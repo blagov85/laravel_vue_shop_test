@@ -28,6 +28,7 @@
                 <div class="mr-3">
                   <a href="{{ route('season.edit', $season->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
+                @can('season-delete-policy', App\Models\Season::class)
                 <form action="{{ route('season.delete', $season->id) }}" method="post">
                   @csrf
                   @method('delete')
@@ -35,6 +36,7 @@
                     <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
+                @endcan
                  <!--<div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">

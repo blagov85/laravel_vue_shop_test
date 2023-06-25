@@ -21,6 +21,11 @@ class ColorPolicy
 
     public function colorPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function colorDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

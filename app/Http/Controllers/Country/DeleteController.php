@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class DeleteController extends Controller
 {
     public function __invoke(Country $country){
-        $this->authorize('country-policy', [Country::class]);
+        $this->authorize('country-delete-policy', [Country::class]);
         $country->delete();
         return redirect()->route('country.index');
     }

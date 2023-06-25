@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class DeleteController extends Controller
 {
     public function __invoke(Brand $brand){
-        $this->authorize('brand-policy', [Brand::class]);
+        $this->authorize('brand-delete-policy', [Brand::class]);
         $brand->delete();
         return redirect()->route('brand.index');
     }

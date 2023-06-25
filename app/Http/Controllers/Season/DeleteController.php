@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class DeleteController extends Controller
 {
     public function __invoke(Season $season){
-        $this->authorize('season-policy', [Season::class]);
+        $this->authorize('season-delete-policy', [Season::class]);
         $season->delete();
         return redirect()->route('season.index');
     }

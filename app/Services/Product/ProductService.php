@@ -26,9 +26,9 @@ class ProductService
         $result = [];
         if($data){
             $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
-            $products = Product::filter($filter)->orderBy('id', 'desc')->paginate(5, ['*'], 'page', $data['page']);
+            $products = Product::filter($filter)->orderBy('id', 'desc')->paginate(15, ['*'], 'page', $data['page']);
         }else{
-            $products = Product::orderBy('id', 'desc')->paginate(5);
+            $products = Product::orderBy('id', 'desc')->paginate(15);
         }
         $result['products'] = $products;
         $result['brands'] = Brand::all();
@@ -72,10 +72,12 @@ class ProductService
         foreach($product->materials as $key => $material){
             $materialsPercent[$titleMaterials[$key]] = $material->pivot->percent;
         }
-        foreach($product->countProductsSizes as $key => $productCountSize){
-            $sizesCount[$titlesSize[$key]] = $productCountSize->pivot->count;
+        if($titlesSize != null){
+            foreach($product->countProductsSizes as $key => $productCountSize){
+                $sizesCount[$titlesSize[$key]] = $productCountSize->pivot->count;
+            }
+            $result['sizesCount'] = $sizesCount;
         }
-        $result['sizesCount'] = $sizesCount;
         $result['seasons'] = $seasons;
         $result['materialsPercent'] = $materialsPercent;
 
@@ -98,7 +100,13 @@ class ProductService
 
         $currentPercents = [];
         foreach($product->materials as $material){
-            array_push($currentPercents, $material->pivot->percent);
+            if(isset($material->pivot->percent)){
+                array_push($currentPercents, $material->pivot->percent);
+            }else{
+                $currentPercents = [];
+                break;
+            }
+            
         }
         
         $titlesSize = $product->countProductsSizes->pluck('title')->toArray();
@@ -136,6 +144,9 @@ class ProductService
             unset($data['materials']);
             $countMaterial = count($materialIds);
             if($countMaterial == 1){//select 1 material
+                if(isset($data['percent_materials'])){
+                    unset($data['percent_materials']);
+                }
                 $materialPercentArray[$materialIds[0]]['percent'] = 100;
             } else {//select several materials
                 if(isset($data['percent_materials'])){//select percent of material
@@ -148,20 +159,22 @@ class ProductService
                         }
                     }else{//select different count material and percent of material
                         for($i=0;$i<$countMaterial;$i++){
-                            $materialPercentArray[$materialIds[$i]]['percent'] = '';
+                            $materialPercentArray[$materialIds[$i]]['percent'] = null;
                         }
                     }
                 }else{//no select percent of material
                     for($i=0;$i<$countMaterial;$i++){
-                        $materialPercentArray[$materialIds[$i]]['percent'] = '';
+                        $materialPercentArray[$materialIds[$i]]['percent'] = null;
                     }
                 }
             }
         }  
         
         //end counts of sizes
-        $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
-        
+        if(isset($data['preview_image'])){
+            $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
+        }
+
         if (isset($data['seasons'])){
             $seasonIds = $data['seasons'];
             unset($data['seasons']);
@@ -239,8 +252,10 @@ class ProductService
             unset($data['materials']);
             $countMaterial = count($materialIds);
             if($countMaterial == 1){//select 1 material
+                if(isset($data['percent_materials'])){
+                    unset($data['percent_materials']);
+                }
                 $materialPercentArray[$materialIds[0]]['percent'] = 100;
-                unset($data['percent_materials']);
             } else {//select several materials
                 if(isset($data['percent_materials'])){//select percent of material
                     $percentCount = $data['percent_materials'];
@@ -252,12 +267,12 @@ class ProductService
                         }
                     }else{//select different count material and percent of material
                         for($i=0;$i<$countMaterial;$i++){
-                            $materialPercentArray[$materialIds[$i]]['percent'] = '';
+                            $materialPercentArray[$materialIds[$i]]['percent'] = null;
                         }
                     }
                 }else{//no select percent of material
                     for($i=0;$i<$countMaterial;$i++){
-                        $materialPercentArray[$materialIds[$i]]['percent'] = '';
+                        $materialPercentArray[$materialIds[$i]]['percent'] = null;
                     }
                 }
             }
@@ -265,16 +280,34 @@ class ProductService
         if (isset($materialPercentArray)){
             $product->materials()->sync($materialPercentArray);
         }
-
+        //dd($data['image_delete']);
+        if(isset($data['image_delete'])){
+            $imagesDelete = $data['image_delete'];
+            unset($data['image_delete']);
+        }
         if(isset($data['image_in_base'])){
             $imagesInBase = $data['image_in_base'];
             unset($data['image_in_base']);
+            if(isset($imagesDelete)){
+                foreach($imagesInBase as $key => $imageInBase){
+                    if(isset($imagesDelete[$key])){
+                        $productImageModel = $product->productImages()->where('file_path', $imagesInBase[$key])->first();
+                        if (Storage::disk('public')->exists($imagesInBase[$key])){
+                            Storage::disk('public')->delete($imagesInBase[$key]);
+                        }
+                        $productImageModel->delete(); 
+                    }
+                }
+            } 
         } 
 
         if(isset($data['product_images'])){
             $productImages = $data['product_images'];
             unset($data['product_images']);
             foreach($productImages as $key => $productImage){
+                if(isset($imagesDelete[$key])){
+                    continue;
+                }
                 if(isset($imagesInBase[$key])){
                     $productImageModel = $product->productImages()->where('file_path', $imagesInBase[$key])->first();
                     if (Storage::disk('public')->exists($imagesInBase[$key])){
@@ -327,6 +360,7 @@ class ProductService
         }
 
         foreach($product->productImages()->get() as $image){
+            dd($image->file_path);
             if (Storage::disk('public')->exists($image->file_path)){
                 Storage::disk('public')->delete($image->file_path);
             }

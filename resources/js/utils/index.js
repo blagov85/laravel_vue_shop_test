@@ -11,7 +11,12 @@ const utils = {
         if (arrayObjectData !== null){
             let arrayData = [];
             arrayObjectData.forEach((el,i) => {
-                arrayData[i] = el.title;
+                //if only for material
+                if(el.percent == null){
+                    arrayData[i] = el.title;
+                }else{
+                    arrayData[i] = el.title + ' - ' + el.percent + '%';
+                }  
             });
             let stringData = arrayData.join();
             stringData = stringData.replaceAll(',', ', ');

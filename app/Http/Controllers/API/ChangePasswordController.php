@@ -37,7 +37,7 @@ class ChangePasswordController extends Controller
 
         #Match The Old Password
         if(!Hash::check($request->old_password, auth()->user()->password)){
-            return response(['error' => "Старый пароль не верный"]);
+            return response(['error' => "Старий пароль не вірний"]);
         }
 
 
@@ -46,7 +46,7 @@ class ChangePasswordController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        return response(['message' => "Пароль успешно изменен"]);
+        return response(['message' => "Пароль успешно змінено"]);
         //return back()->with("status", "Password changed successfully!");
     }
 

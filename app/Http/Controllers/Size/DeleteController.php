@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class DeleteController extends Controller
 {
     public function __invoke(Size $size){
-        $this->authorize('size-policy', [Size::class]);
+        $this->authorize('size-delete-policy', [Size::class]);
         $size->delete();
         return redirect()->route('size.index');
     }

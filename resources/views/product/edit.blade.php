@@ -82,7 +82,7 @@
                   </div>
                 @else
                   <div class="mb-2">
-                    <img id="preview_image" src="https://www.daveraine.com/img/products/no-image.jpg"
+                    <img id="preview_image" src="{{ asset('images/no-image.png') }}"
                       alt="preview image" style="max-height: 250px; border:1px solid black"/>
                   </div>
                 @endif
@@ -102,12 +102,19 @@
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 <!--imgs product-->
+                @php
+                  $i = 0;
+                @endphp
                 @foreach($product->productImages as $i => $image)
                 <input type="hidden" name="hidden" value="{{ $i++ }}">
                 <input type="hidden" name="image_in_base[]" value="{{ $image->file_path }}">
                 <div class="col-md-12 mb-2">
                   <img id="product_image_{{ $i }}" src="{{ asset('storage/'.$image->file_path) }}"
                       alt="preview image {{ $i }}" style="max-height: 150px; border:1px solid black">
+                </div>
+                <div>
+                  <input type="checkbox" name="image_delete[{{ $i-1 }}]" id="delete-text-{{ $i }}"/>
+                  <label for="delete-text-{{ $i }}">Видалити</label>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
@@ -123,8 +130,12 @@
                 @endforeach
                 @for($i=$i+1; $i<=3; $i++)
                 <div class="col-md-12 mb-2">
-                  <img id="product_image_{{ $i }}" src="https://www.daveraine.com/img/products/no-image.jpg"
+                  <img id="product_image_{{ $i }}" src="{{ asset('images/no-image.png') }}"
                       alt="preview image {{ $i }}" style="max-height: 150px; border:1px solid black">
+                </div>
+                <div>
+                  <input type="checkbox" name="image_delete[{{ $i-1 }}]" id="delete-text-{{ $i }}"/>
+                  <label for="delete-text-{{ $i }}">Видалити</label>
                 </div>
                 <div class="form-group">
                     <div class="input-group">

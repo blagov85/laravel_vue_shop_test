@@ -52,7 +52,9 @@ class UpdateRequest extends FormRequest
             'product_images' => 'nullable|array',
             'product_images.*' => 'nullable|file',
             'image_in_base' => 'nullable|array',
-            'image_in_base.*' => 'nullable|string'
+            'image_in_base.*' => 'nullable|string',
+            'image_delete' => 'nullable|array',
+            'image_delete.*' => 'nullable|string'
         ];
     }
 }

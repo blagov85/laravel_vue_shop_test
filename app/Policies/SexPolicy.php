@@ -21,6 +21,11 @@ class SexPolicy
 
     public function sexPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function sexDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

@@ -68,20 +68,21 @@ const router = createRouter({
       path: '/user/reset-password/:token',
       name: 'user.password.request.token',
       component: () => import('../views/user/ResetPassword.vue'),
+    },
+    {
+      path: '/info-about-site',
+      name: 'info',
+      component: () => import('../views/info/Index.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: () => import('../views/404/Index.vue')
     }
-    // {
-    //   path: '*',
-    //   name: '404',
-    //   component: () => import('../views/product/Index.vue')
-    // }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  console.log("YYYY");
-  console.log(to.name);
-  console.log(from.name);
-
   const accessToken = localStorage.getItem('x_xsrf_token');  
 
   if((to.name === 'user.login' || to.name === 'user.registration' || 

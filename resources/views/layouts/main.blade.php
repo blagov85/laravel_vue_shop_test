@@ -115,7 +115,7 @@
           @can('role-policy', App\Models\Role::class)
           <li class="nav-item">
             <a href="{{ route('role.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
+            <i class="nav-icon fas fa-user-tag"></i>
               <p>Ролі</p>
             </a>
           </li>
@@ -123,7 +123,7 @@
           @can('group-policy', App\Models\Group::class)
           <li class="nav-item">
             <a href="{{ route('group.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-object-group"></i>
               <p>Групи</p>
             </a>
           </li>
@@ -131,7 +131,7 @@
           @can('size-policy', App\Models\Size::class)
           <li class="nav-item">
             <a href="{{ route('size.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-window-maximize"></i>
               <p>Розміри</p>
             </a>
           </li>
@@ -139,7 +139,7 @@
           @can('brand-policy', App\Models\Brand::class)
           <li class="nav-item">
             <a href="{{ route('brand.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-copyright"></i>
               <p>Бренди</p>
             </a>
           </li>
@@ -147,7 +147,7 @@
           @can('material-policy', App\Models\Material::class)
           <li class="nav-item">
             <a href="{{ route('material.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-recycle"></i>
               <p>Материали</p>
             </a>
           </li>
@@ -155,7 +155,7 @@
           @can('country-policy', App\Models\Country::class)
           <li class="nav-item">
             <a href="{{ route('country.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-globe"></i>
               <p>Країни</p>
             </a>
           </li>
@@ -163,7 +163,7 @@
           @can('season-policy', App\Models\Season::class)
           <li class="nav-item">
             <a href="{{ route('season.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-wind"></i>
               <p>Сезони</p>
             </a>
           </li>
@@ -171,7 +171,7 @@
           @can('sex-policy', App\Models\Sex::class)
           <li class="nav-item">
             <a href="{{ route('sex.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-genderless"></i>
               <p>Стать</p>
             </a>
           </li>
@@ -179,7 +179,7 @@
           @can('feedback-policy', App\Models\Feedback::class)
           <li class="nav-item">
             <a href="{{ route('feedback.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-comment-dots"></i>
               <p>Нові відгуки</p>
             </a>
           </li>
@@ -187,7 +187,7 @@
           @can('delivery-company-policy', App\Models\DeliveryCompany::class)
           <li class="nav-item">
             <a href="{{ route('delivery_company.index') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="nav-icon fas fa-truck"></i>
               <p>Доставка</p>
             </a>
           </li>

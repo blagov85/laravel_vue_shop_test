@@ -28,6 +28,7 @@
                 <div class="mr-3">
                   <a href="{{ route('size.edit', $size->id) }}" class="btn btn-primary">Редагувати</a>
                 </div>
+                @can('size-delete-policy', App\Models\Size::class)
                 <form action="{{ route('size.delete', $size->id) }}" method="post">
                   @csrf
                   @method('delete')
@@ -35,6 +36,7 @@
                     <input type="submit" class="btn btn-danger" value="Видалити"/>
                   </div>
                 </form>
+                @endcan
                  <!--<div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">

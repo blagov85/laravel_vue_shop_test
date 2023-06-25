@@ -39,7 +39,7 @@
     <div class="products-grid__content"> 
         <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupForSize${product.id}`"
                 class="products-grid__cart-btn btn--primary popup_link"> 
-            <span class="one">Додати у кошик</span>
+            <span class="one">Додати до кошика</span>
             <span class="two"> <i class="flaticon-shopping-cart"> </i> </span> 
         </a>
         <div class="ratting"> 
@@ -53,7 +53,7 @@
             </router-link>
         </h5>
         <div class="price d-flex align-content-center justify-content-center">
-            <p><del v-if="product.old_price"> {{ product.old_price }}</del> {{ product.price }}</p> 
+            <p><del v-if="product.old_price"> {{ product.old_price }}</del> {{ product.price }} грн</p> 
         </div>
     </div>
     <div :id="`popupForSize${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width" style="width:50%">

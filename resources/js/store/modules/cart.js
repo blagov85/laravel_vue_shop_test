@@ -16,7 +16,10 @@ const cart = ({
     },
     getters: { //count products in order
         getCartCount(state){
-            return state.cart.length;
+            if(state.cart != null){
+                return state.cart.length;
+            }
+            return 0;
         }
     },
     actions: {

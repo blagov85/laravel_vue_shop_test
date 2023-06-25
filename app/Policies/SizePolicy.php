@@ -21,6 +21,11 @@ class SizePolicy
 
     public function sizePolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function sizeDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

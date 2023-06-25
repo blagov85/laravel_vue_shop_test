@@ -73,8 +73,9 @@ class OrderService
             }
             if($data['user_id'] === null){
                 //add new user in db
-                $passwordGenerate = Str::random(8);
-                $password = Hash::make($passwordGenerate);
+                // $passwordGenerate = Str::random(8);
+                // $password = Hash::make($passwordGenerate);
+                $password = Hash::make("12345");
                 $user = User::create([
                     'email' => $data['email'],
                     'name' => $data['name'],
@@ -82,7 +83,7 @@ class OrderService
                     'role_id' => 5
                 ]);
                 $data['user_id'] = $user['id'];
-                Mail::to($data['email'])->send(new PasswordMail($passwordGenerate));
+                //Mail::to($data['email'])->send(new PasswordMail($passwordGenerate));
             }
         }
         $data['products'] = json_encode($data['products']);

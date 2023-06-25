@@ -21,6 +21,11 @@ class DeliveryCompanyPolicy
 
     public function deliveryCompanyPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function deliveryCompanyDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

@@ -21,6 +21,6 @@ class OrderPolicy
 
     public function orderPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isManager();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isManager();
     }
 }

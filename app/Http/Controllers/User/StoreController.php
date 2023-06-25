@@ -14,7 +14,8 @@ class StoreController extends Controller
         $this->authorize('user-policy', [User::class]);
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
-        $data['birth_date'] = Carbon::createFromFormat('d/m/Y', $data['birth_date'])->format('Y-m-d');
+        if(isset($data['birth_date']))
+            $data['birth_date'] = Carbon::createFromFormat('d/m/Y', $data['birth_date'])->format('Y-m-d');
         User::firstOrCreate([
             'email' => $data['email']
         ], $data);

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('product_sizes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->index()->constrained('products');
-            $table->foreignId('size_id')->index()->constrained('products');
+            $table->foreignId('size_id')->index()->constrained('sizes');
             $table->integer('count');
             $table->timestamps();
         });

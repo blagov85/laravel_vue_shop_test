@@ -25,7 +25,7 @@
                         </td>
                         <td style="width:30%" class="add-to-cart-btn">  
                             <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupLike${product.id}`" 
-                                class="addcart btn--primary style2 popup_link">Додати у кошик</a>
+                                class="addcart btn--primary style2 popup_link">Додати до кошика</a>
                             <div :id="`popupLike${product.id}`" class="product-gird__quick-view-popup mfp-hide popup-width">
                                 <ProductPopupMin />
                             </div>

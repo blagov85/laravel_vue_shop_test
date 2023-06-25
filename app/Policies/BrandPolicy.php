@@ -21,6 +21,11 @@ class BrandPolicy
 
     public function brandPolicy()
     {
-        return auth()->user()->isAdmin() || auth()->user()->isWriter();
+        return auth()->user()->isSuperAdmin() || auth()->user()->isAdmin() || auth()->user()->isWriter();
+    }
+
+    public function brandDeletePolicy()
+    {
+        return auth()->user()->isSuperAdmin();
     }
 }

@@ -8,7 +8,7 @@
             </router-link>
             <a @click.prevent="popupProductNull();getPopupProduct(product.id)" :href="`#popupForSize${product.id}`" 
                     class="addcart btn--primary style2 popup_link">
-                Додати в кошик
+                Додати до кошика
             </a>
             <div class="products-grid__usefull-links">
                 <ul>
@@ -50,7 +50,7 @@
                 <router-link :to="{name: 'product.show', params: {id: product.id}}"> {{ product.title }} 
                 </router-link>
             </h5>
-            <p><del v-if="product.old_price">{{ product.old_price }}</del> {{ product.price }}</p>
+            <p><del v-if="product.old_price">{{ product.old_price }}</del> {{ product.price }} грн</p>
         </div>
     </div>
 </template>
